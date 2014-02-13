@@ -1,0 +1,63 @@
+\section*{Appendix}
+\label{sec:appendix}
+
+\begin{table}[!hbt]
+%\footnotesize
+%\scriptsize
+%\small
+\centering
+\caption{$P1$, $P2$, $P3$, $P4$ and $P5$ are the number of vertices pruned in steps Pruning 1, 2, 3, 4, and 5 of Algorithm 1. An asterisk (*) indicates that the algorithm did not terminate within 25,000 seconds for that instance. $\omega$ denotes the maximum clique size.}
+%Comparison between algorithms in \cite{pardalos} (CP), \cite{ostergard} (cliquer) and our new exact and
+%heuristic algorithms.
+%An asterisk (*) indicates that the algorithm did not terminate within 25,000 seconds for that problem instance.
+%For the graph {\it rmat\_sd2\_5}, none of the algorithms computed the maximum clique size in a reasonable time;
+%the entry is marked $N$, denoting ``Not Known''.
+%The last two columns of the table show the numbers of vertices pruned in steps Pruning 1
+%and Pruning 3 of Algorithm 1.} 
+\label{tab:prunings}
+%@{\hspace{5pt}}
+%\begin{tabular}{l@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}|@{\hspace{10pt}}r@{\hspace{10pt}}r}
+%\begin{tabular}{lrrrrrr|rr}
+\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r}
+
+\toprule\toprule
+$G$ 				& $\omega$ 	& 	$P1$ 		&	$P2$		& 	$P3$ 		& 	$P4$ 		&	$P5$		\vspace{-4pt} \\
+				& 			&		 		& 		 		&				& 			 	&				\\ \hline \hline
+{\it cond-mat-2003} 	& 	25 		& 	29,407 		&	48,096		&	6,527 		&	2,600		& 	17,576		\\
+{\it email-Enron} 	& 	20 		& 	32,462 		&	155,344		&	4,060 		&	110,168		& 	8,835,739		\\ %8,835,739	
+{\it dictionary28} 	& 	26 		& 	52,139		& 	4,353		&	2,114		&	542			& 	107			\\	
+{\it Fault\_639}		&	18		&	36			&	13,987,719	&	126			&	10,767,992	&	1,116		\\
+{\it audikw\_1}		&	36		&	4,101		&	38,287,830	&	59,985		&	32,987,342	&	721,938		\\
+{\it bone010}		&	24		&	37,887		&	34,934,616	&	361,170		&	96,622,580	&	43,991,787	\\ %43,991,787
+{\it af\_shell10}		&	15		&	19			&	25,582,015	&	75			&	40,629,688 &	2,105		\\
+{\it as-Skitter}		&	67		&	1,656,570		&	6,880,534		&	981,810		& 26,809,527&	737,899,486	\\ %1,656,570	737,899,486
+{\it roadNet-CA}	&	4		&	1,487,640		&	1,079,025		&	370,206		&	320,118		&	4,302		\\ %1,487,640
+{\it kkt\_power}		&	11		&	1,166,311		&	4,510,661		&	401,129		&	1,067,824		&	1,978,595		\\ %1,166,311	 1,978,595
+\midrule
+{\it rmat\_er\_1}		&	3		&	780			&	1,047,599		&	915			&	118,461		&	8,722		\\
+{\it rmat\_er\_2}		&	3		&	2,019		&	2,094,751		&	2,351		&	235,037		&	23,908		\\
+{\it rmat\_er\_3}		&	3		&	4,349		&	4,189,290		&	4,960		&	468,086		&	50,741		\\
+{\it rmat\_er\_4}		&	3		&	9,032		&	8,378,261		&	10,271		&	933,750		&	106,200		\\
+{\it rmat\_er\_5}		&	3		&	18,155		&	16,756,493	&	20,622		&	1,865,415		&	212,838		\\
+\midrule
+{\it rmat\_sd1\_1}	&	6		&	39,281		&	1,004,660		&	23,898		&	151,838		&	542,245		\\
+{\it rmat\_sd1\_2}	&	6		&	90,010		&	2,004,059		&	56,665		&	284,577		&	1,399,314		\\ %1,399,314	
+{\it rmat\_sd1\_3}	&	6		&	176,583		&	4,013,151		&	106,543		&	483,436		&	2,677,437		\\ %2,677,437
+{\it rmat\_sd1\_4}	&	6		&	369,818		&	8,023,358		&	214,981		&	889,165		&	5,566,602		\\\ %5,566,602
+{\it rmat\_sd1\_5}	&	6		&	777,052		&	16,025,729	&	455,473		&	1,679,109		&	12,168,698	\\ %12,168,698
+\midrule
+{\it rmat\_sd2\_1}	&	26		&	110,951		&	853,116		&	88,424		&	1,067,824		&	614,813,037	\\ %614,813,037
+{\it rmat\_sd2\_2}	&	35		&	232,352		&	1,645,086		&	195,427		&			81,886,879	&	1,044,068,886	\\ %1,044,068,886
+{\it rmat\_sd2\_3}	&	39		&	470,302		&	3,257,233		&	405,856		&			45,841,352	&	1,343,563,239	\\ %1,343,563,239
+{\it rmat\_sd2\_4}	&	43		&	*			&	*			&	*			&		*		&	*			\\
+{\it rmat\_sd2\_5}	&	N		&	*			&	*			&	*			&		*		&	*			\\
+%\vspace*{\rowspace}
+\midrule
+{\it hamming6-4}	&	4		&	0			&	704			&	0			&	583			&	0			\\
+{\it johnson8-4-4}	&	14		&	0			&	1855			&	0			&	136,007		&	0			\\
+{\it keller4}		&	11		&	0			&	9435			&	0			&	8,834,190		&	0			\\
+{\it c-fat200-5}		&	58		&	0			&	8473			&	0			&	70449		&	0			\\
+{\it brock200\_2}	&	12		&	0			&	9876			&	0			&	349,427		&	0			\\
+\bottomrule\bottomrule
+\end{tabular}
+\end{table}

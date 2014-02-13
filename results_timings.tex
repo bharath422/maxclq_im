@@ -1,0 +1,61 @@
+\begin{table}[!hbt]
+
+\footnotesize
+\scriptsize
+%\small
+\centering
+\caption{Comparison of runtimes (in seconds) of algorithms \cite{pardalos} ({\it CP}),
+\cite{ostergard} ({\it cliquer}), \cite{konc2007improved} ({\it MCQD+CS})
+and our new exact algorithm ($\tau_{A1}$) for the graphs in the testbed. 
+ $P1$, $P2$, $P3$ and $P5$ are the number of vertices/branches pruned in steps Pruning 1, 2, 3 and 5 of our exact algorithm (K stands for $10^3$, M for $10^6$ and B for $10^9$). 
+$\omega$ denotes the maximum clique size in the graph, $\omega_{A2}$ denotes the clique size returned by our heuristic and $\tau_{A2}$ shows its runtime.}
+\label{tab:timings}
+\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r}
+
+\toprule\toprule
+           &  & & &  $\tau_{MCQD}$ & &	&	&	&	&& \\
+Graph           	& $\omega$ & $\tau_{CP}$    & $\tau_{cliquer}$  & $_{+CS}$  &  $\tau_{A1}$		& 	$P1$ 		&	$P2$		& 	$P3$ 		&	$P5$		 & $\omega_{A2}$ &  $\tau_{A2}$ \\
+\hline \hline
+%Graph 			& $\omega$ & $\tau_{CP}$ 	& $\tau_{cliquer}$	& $\tau_{MCQD+CS}$	& $\tau_{new-exact}$ & $\omega_{new-heuristic}$& $\tau_{new-heuristic}$\\ \hline \hline
+%\vspace{-4pt} \\
+%				& 		& 		 		& 				& $_{-exact}$ 	 	& $_{-heuristic}$ 	& $_{-heuristic}$	\\ \hline \hline
+{\it cond-mat-2003} 	& 	25 	& 	4.875 		&  	11.17		&	2.41		&	{\bf 0.011}		& 	29K 			&	48K			&	6,527 		& 	17K			&	25 		& 	$<$0.01 	\\
+{\it email-Enron} 	& 	20 	& 	7.005		& 	15.08 		&	3.70		& 	{\bf 0.998}		& 	32K 			&	155K		&	4,060 		& 	8M			&	18 		& 	0.261	\\ %8,835,739	
+{\it dictionary28} 	& 	26 	& 	7.700 		&	32.74 		&	7.69		&	{\bf $<$0.01}	& 	52K			& 	4,353		&	2,114		& 	107			&	26 		&	$<$0.01	\\	
+{\it Fault\_639}		&	18	&	14571.20		&	4437.14		&	-		&	{\bf 20.03}		&	36			&	13M			&	126			&	1,116		&	18		&	5.80 		\\
+{\it audikw\_1}		&	36	&	*			&	9282.49		&	-		&	{\bf 190.17}	&	4,101		&	38M			&	59K			&	721K		&	36		&	58.38 	\\
+{\it bone010}		&	24	&	*			&	10002.67		&	-		&	{\bf 393.11}	&	37K			&	34M			&	361K		&	44M			&	24		&	24.39 	\\ %43,991,787
+{\it af\_shell10}		&	15	&	*			&	21669.96		&	-		&	{\bf 50.99}		&	19			&	25M			&	75			&	2,105		&	15		&	10.67 	\\
+{\it as-Skitter}		&	67	&	24385.73		&	*			&	-		&	{\bf 3838.36}	&	1M			&	6M			&	981K		&	737M		&	66		&	27.08 	\\ %1,656,570	737,899,486
+{\it roadNet-CA}	&	4	&	*			&	*			&	-		&	{\bf 0.44}		&	1M			&	1M			&	370K		&	4,302		&	4		&	0.08 		\\ %1,487,640
+{\it kkt\_power}		&	11	&	*			&	*			&	-		&	{\bf 2.26}		&	1M			&	4M			&	401K		&	2M			&	11		&	1.83 		\\ %1,166,311	 1,978,595
+\midrule
+{\it rmat\_er\_1}		&	3	&	256.37		&	215.18		&	49.79	&	{\bf 0.38}		&	780			&	1M			&	915			&	8,722		&	3		&	0.12 		\\
+{\it rmat\_er\_2}		&	3	&	1016.70		&	865.18		&	-		&	{\bf 0.78}		&	2,019		&	2M			&	2,351		&	23K			&	3		&	0.24 		\\
+{\it rmat\_er\_3}		&	3	&	4117.35		&	3456.39		&	-		&	{\bf 1.87}		&	4,349		&	4M			&	4,960		&	50K			&	3		&	0.49 		\\
+{\it rmat\_er\_4}		&	3	&	16419.80		&	13894.52		&	-		&	{\bf 4.16}		&	9,032		&	8M			&	10K			&	106K		&	3		&	1.44 		\\
+{\it rmat\_er\_5}		&	3	&	*			&	*			&	-		&	{\bf 9.87}		&	18K			&	16M			&	20K			&	212K		&	3		&	2.57 		\\
+\midrule
+{\it rmat\_sd1\_1}	&	6	&	225.93		&	214.99		&	50.08	&	{\bf 1.39}		&	39K			&	1M			&	23K			&	542K		&	6		&	0.45 		\\
+{\it rmat\_sd1\_2}	&	6	&	912.44		&	858.80		&	-		&	{\bf 3.79}		&	90K			&	2M			&	56K			&	1M			&	6		&	0.98 		\\ %1,399,314	
+{\it rmat\_sd1\_3}	&	6	&	3676.14		&	3446.02		&	-		&	{\bf 8.17}		&	176K		&	4M			&	106K		&	2M			&	6		&	1.78 		\\ %2,677,437
+{\it rmat\_sd1\_4}	&	6	&	14650.40		&	13923.93		&	-		&	{\bf 25.61}		&	369K		&	8M			&	214K		&	5M			&	6		&	4.05 		\\ %5,566,602
+{\it rmat\_sd1\_5}	&	6	&	*			&	*			&	-		&	{\bf 46.89}		&	777K		&	16M			&	455K		&	12M			&	6		&	9.39 		\\ %12,168,698
+\midrule
+{\it rmat\_sd2\_1}	&	26	&	427.41		&	213.23		&	{\bf 48.17}	&	242.20		&	110K		&	853K		&	88K			&	614M		&	26		&	32.83 	\\ %614,813,037
+{\it rmat\_sd2\_2}	&	35	&	4663.62		&	{\bf 851.84}	&	-		&	3936.55		&	232K		&	1M			&	195K		&	1B			&	35		&	95.89 	\\ %1,044,068,886
+{\it rmat\_sd2\_3}	&	39	&	13626.23		&	{\bf 3411.14}	&	-		&	10647.84		&	470K		&	3M			&	405K		&	1B			&	37		&	245.51 	\\ %1,343,563,239
+{\it rmat\_sd2\_4}	&	43	&	*			&	{\bf 13709.52}	&	-		&	*			&	*			&	*			&	*			&	*			&	42		&	700.05 	\\
+{\it rmat\_sd2\_5}	&	N	&	*			&	*			&	-		&	*			&	*			&	*			&	*			&	*			&	51		&    1983.21 	\\
+%\vspace*{\rowspace}
+\midrule
+{\it hamming6-4}	&	4	&	{\bf $<$0.01}	&	{\bf $<$0.01}	&{\bf $<$0.01}	&	$<$0.01		&	0			&	704			&	0			&	0			&	4		&	$<$0.01 	\\
+{\it johnson8-4-4}	&	14	&	0.19			&	{\bf $<$0.01}	&{\bf $<$0.01}	&	0.23			&	0			&	1,855			&	0			&	0			&	14		&	$<$0.01 	\\
+{\it keller4}		&	11	&	22.19		&	0.15			&	{\bf 0.02}	&	23.35		&	0			&	9,435			&	0			&	0			&	11		&	$<$0.01 	\\
+{\it c-fat200-5}		&	58	&	0.60			&	0.33			&	{\bf 0.01}	&	0.93			&	0			&	8,473			&	0			&	0			&	58		&	0.04 		\\
+{\it brock200\_2}	&	12	&	0.98			&	0.02			&{\bf $<$0.01}	&	1.10			&	0			&	9,876			&	0			&	0			&	10		&	$<$0.01 	\\
+\bottomrule\bottomrule
+\end{tabular}
+%\vspace{-6pt}
+
+\end{table}

@@ -1,0 +1,63 @@
+
+\begin{table}[tbh]
+%\renewcommand\thetable{}
+%\vspace{\afterfigure}
+%\vspace{\afterfigure}
+%\vspace{\afterfigure}
+%\footnotesize
+%\scriptsize
+\small
+\centering
+\caption{Comparison of runtimes of algorithms \cite{pardalos} ({\it CP}), 
+\cite{ostergard} ({\it cliquer}) and \cite{konc2007improved} ({\it MCQD+CS})
+with that of our new exact algorithm ($\tau_{A1}$) for DIMACS graphs. 
+An asterisk (*) indicates that the algorithm did not terminate within 
+10,000 seconds for that instance. $\omega$ denotes the maximum clique size, $\omega_{A2}$ the maximum clique size found by our heuristic and $\tau_{A2}$, its runtime.}
+%$\mu$ denotes the maximum clique size, $\mu_{heu}$ the maximum clique size found by our heuristic.} 
+
+\label{tab:dimacs}
+%@{\hspace{5pt}}
+%\begin{tabular}{l@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}|@{\hspace{10pt}}r@{\hspace{10pt}}r}
+%\begin{tabular}{lrrrrrr|rr}
+\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{3pt}}r}
+%\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}@{\hspace{6pt}}r@{\hspace{3pt}}r}
+\toprule\toprule
+& &     &   &  & &$\tau_{MCQD}$ & &  & \\
+$G$        &   $\left|V\right|$    &   $\left|E\right|$    &   $\omega$    &$\tau_{CP}$&$\tau_{cliquer}$&$_{+CS}$&$\tau_{A1}$ & $\omega_{A2}$ & $\tau_{A2}$\\ \hline \hline
+%$G$		&	$\left|V\right|$	&	$\left|E\right|$	&	$\omega$	&$\tau_{CP}$&$\tau_{cliquer}$&$\tau_{MCQD+CS}$&$\tau_{new-exact}$ & $\omega_{new-heuristic}$ & $\tau_{new-heuristic}$\\ \hline \hline
+{\it brock200\_1}	&	200		&	14,834	&	21	&	*		&	10.37	&	0.75		&	*		&	18	&	0.02	\\
+{\it brock200\_2}	&	200		&	9,876	&	12	&	0.98		&	0.02		&	0.01		&	1.1		&	10	&	$<$0.01	\\
+{\it brock200\_3}	&	200		&	12,048	&	15	&	14.09	&	0.16		&	0.03		&	14.86	&	12	&	$<$0.01	\\
+{\it brock200\_4}	&	200		&	13,089	&	17	&	60.25	&	0.7		&	0.12		&	65.78	&	14	&	$<$0.01	\\
+{\it c-fat200-1}		&	200		&	1,534	&	12	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	12	&	$<$0.01	\\
+{\it c-fat200-2}		&	200		&	3,235	&	24	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	24	&	$<$0.01	\\
+{\it c-fat200-5}		&	200		&	8,473	&	58	&	0.6		&	0.33		&	0.01		&	0.93		&	58	&	0.04	\\
+{\it c-fat500-1}		&	500		&	4,459	&	14	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	14	&	$<$0.01	\\
+{\it c-fat500-2}		&	500		&	9,139	&	26	&	0.02		&	$<$0.01	&	0.01		&	0.01		&	26	&	0.01	\\
+{\it c-fat500-5}		&	500		&	23,191	&	64	&	3.07		&	$<$0.01	&	$<$0.01	&	*		&	64	&	0.11	\\
+{\it hamming6-2}	&	64		&	1,824	&	32	&	0.68		&	$<$0.01	&	$<$0.01	&	0.33		&	32	&	$<$0.01	\\
+{\it hamming6-4}	&	64		&	704		&	4	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	4	&	$<$0.01	\\
+{\it hamming8-2}	&	256		&	31,616	&	128	&	*		&	0.01		&	0.01		&	*		&	128	&	0.67	\\
+{\it hamming8-4}	&	256		&	20,864	&	16	&	*		&	$<$0.01	&	0.1		&	*		&	16	&	0.03	\\
+{\it hamming10-2}	&	1,024	&	518,656	&	512	&	*		&	0.31		&	-		&	*		&	512	&	95.24	\\
+{\it johnson8-2-4}	&	28		&	210		&	4	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	4	&	$<$0.01	\\
+{\it johnson8-4-4}	&	70		&	1,855	&	14	&	0.19		&	$<$0.01	&	$<$0.01	&	0.23		&	14	&	$<$0.01	\\
+{\it johnson16-2-4}	&	120		&	5,460	&	8	&	20.95	&	0.04		&	0.42		&	22.07	&	8	&	$<$0.01	\\
+{\it keller4}		&	171		&	9,435	&	11	&	22.19	&	0.15		&	0.02		&	23.35	&	11	&	$<$0.01	\\
+{\it MANN\_a9}		&	45		&	918		&	16	&	1.73		&	$<$0.01	&	$<$0.01	&	2.5		&	16	&	$<$0.01	\\
+{\it MANN\_a27}	&	378		&	70,551	&	126	&	*		&	*		&	3.3		&	*		&	125	&	1.74	\\
+{\it p\_hat300-1}	&	300		&	10,933	&	8	&	0.14		&	0.01		&	$<$0.01	&	0.14		&	8	&	$<$0.01	\\
+{\it p\_hat300-2}	&	300		&	21,928	&	25	&	831.52	&	0.32		&	0.03		&	854.59	&	24	&	0.03	\\
+{\it p\_hat500-1}	&	500		&	31,569	&	9	&	2.38		&	0.07		&	0.04		&	2.44		&	9	&	0.02	\\
+{\it p\_hat500-2}	&	500		&	62,946	&	36	&	*		&	159.96	&	1.2		&	*		&	34	&	0.14	\\
+{\it p\_hat700-1}	&	700		&	60,999	&	11	&	12.7		&	0.12		&	0.13		&	12.73	&	9	&	0.04	\\
+{\it p\_hat1000-1}	&	1,000	&	122,253	&	10	&	97.39	&	1.33		&	0.41		&	98.48	&	10	&	0.11	\\
+{\it san200\_0.7\_1}	&	200		&	13,930	&	30	&	*		&	0.99		&	$<$0.01	&	*		&	16	&	0.01	\\
+\bottomrule
+\bottomrule
+\end{tabular}
+%\vspace{\afterfigure}
+%\vspace{\afterfigure}
+\end{table}
+
+%\input{appendix_2}

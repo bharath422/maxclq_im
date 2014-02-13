@@ -1,0 +1,354 @@
+%\documentclass[printer]{gOMS2e}
+%\documentclass[runningheads,a4paper,singlecolumn]{llncs}
+\documentclass[printer]{article}
+
+%\documentclass[11pt]{article}
+
+%\doi{10.1080/1055.6788.2012.xxxxxx}
+%\issn{1029-4937}
+%\issnp{1055-6788}
+%\jvol{00} \jnum{00} \jyear{2012} \jmonth{November}
+
+%\markboth{Taylor \& Francis and I.T. Consultant}{Optimization Methods and Software}
+
+%\usepackage{hyperref}
+%\usepackage{ulem}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{sidecap}
+
+\usepackage{url}
+%\pagestyle{myheadings}       % it must be
+%\usepackage[dvips]{graphicx}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{subfigure}
+%\usepackage{epsfig}
+\usepackage{setspace}
+\usepackage{latexsym}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{wrapfig}
+\usepackage{sidecap}
+\usepackage{booktabs}
+
+\renewcommand{\baselinestretch}{1.05}             % Improves readability
+
+%\def\qed{\vrule height .9ex width .8ex depth -.1ex}
+
+\setlength{\subfigcapskip}{0pt}
+
+\def\floatpagefraction{0.99} 
+\def\clq{\mbox{\sc Clique}}
+\def\mclq{\mbox{\sc MaxClique}}
+\def\clqh{\mbox{\sc CliqueHeu}}
+\def\mclqh{\mbox{\sc MaxCliqueHeu}}
+\def\beforesubfigures{-0.55cm}
+\def\beforesectiontitle{-0.4cm}
+\def\aftersectiontitle{-0.2cm}
+\def\afterfigure{-0.2cm}
+%\def\scale{7.25cm}
+\def\scaleN{3.9cm}
+\def\scale{5cm}
+\def\rowspace{-1pt}
+\def\figlabelsize{\scriptsize}
+%\def\algospacing{0.85}
+\def\algospacing{1.0}
+
+\newcommand{\algorithmroutine}[1]{-- \textit{#1}}
+
+\begin{document}
+
+\title{Fast Algorithms for the Maximum Clique Problem on Massive Sparse Graphs}
+
+\author{Bharath Pattabiraman$^{\rm \ast \ddag}$, Md. Mostofa Ali Patwary$^{\rm \ast \ddag}$, \\ Assefaw H. Gebremedhin$^{\rm \dag}$, Wei-keng Liao$^{\rm \ast}$, and Alok Choudhary
+%\thanks{Email: $^{\rm \ast}$\{bpa342,mpatwary,wkliao,choudhar\}@eecs.northwestern.edu, $^{\rm \dag}$agebreme@purdue.edu\vspace{6pt}}
+\thanks{$^{\rm \ddag}$ Corresponding authors: \{bpa342,mpatwary\}@eecs.northwestern.edu \vspace{6pt}}
+\\
+$^{\rm \ast}${\em{Northwestern University, Evanston, IL 60208}} \\
+$^{\rm \dag}${\em Purdue University, West Lafayette, IN 47907}
+\\
+%\vspace{10pt}
+$^{\rm \ddag}$ Authors contributed equally \\ 
+%$^{\rm \ddag}$ Corresponding authors: \{bpa342,mpatwary\}@eecs.northwestern.edu\\ 
+}
+%\received{November 2012} }
+
+
+%\author{Bharath Pattabiraman%\inst{1}
+%\andMd. Mostofa Ali Patwary%\inst{1}
+%\and \\Assefaw H. Gebremedhin%\inst{2}
+%\and Wei-keng Liao%\inst{1}
+%\and Alok Choudhary%\inst{1}
+%$\\$^{\rm \ddag}$ Authors contributed equally \\ 
+%}
+
+%\institute{
+%Northwestern University, Evanston, IL.\\ \email{\{bpa342,mpatwary,wkliao,choudhar\}@eecs.northwestern.edu}
+%\and
+%Purdue University, West Lafayette, IN.\\ \email{agebreme@purdue.edu}
+%}
+
+%\authorrunning{Bharath Pattabiraman et al.} % abbreviated author list (for running head)
+%\tocauthor{Authors' Instructions}
+
+%\toctitle{Lecture Notes in Computer Science}
+
+\maketitle
+
+\date{}
+%\vspace{-4pt}
+
+\begin{abstract}
+%\vspace{\afterfigure}
+%\vspace{\afterfigure}
+
+\input{abs}
+%\keywords{maximum clique problem, branch-and-bound algorithms,  pruning, sparse graphs.}
+\end{abstract}
+
+%\vspace{-24pt}
+
+\input{introduction}
+
+\input{relatedwork}
+
+\input{algorithms}
+
+\input{experiments}
+
+\input{applications}
+
+%\vspace{-6pt}
+\input{conclusion}
+
+%\vspace{-6pt}
+\section*{Acknowledgements}
+%\vspace{-6pt}
+%This work is supported in part by NSF award numbers CCF-0621443, OCI-0724599, CCF-0833131, CNS-0830927, IIS-0905205, OCI-0956311, CCF-0938000, CCF-1043085, CCF-1029166, and OCI-1144061, and in part by DOE grants DE-FG02-08ER25848, DE-SC0001283, DE-SC0005309, DE-SC0005340, and DE-SC0007456. 
+This work is supported in part by the following grants: NSF awards CCF-0833131, CNS-0830927, IIS-0905205, CCF-0938000, CCF-1029166, and OCI-1144061; DOE awards DE-FG02-08ER25848, DE-SC0001283, DE-SC0005309, DESC0005340, and DESC0007456; AFOSR award FA9550-12-1-0458. 
+The work of Assefaw Gebremedhin is supported by the NSF
+award CCF-1218916 and by the DOE award DE-SC0010205.
+
+%\vspace{-2pt}
+%\bibliographystyle{gOMS}
+%\vspace{-4pt}
+%\bibliography{ref}
+
+%\vspace{-6pt}
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+%\vspace{-10pt}
+
+\bibitem{heu1}
+{D.~Andrade, M.~Resende, and R.~Werneck}, {\em Fast local search for the
+  maximum independent set problem}, Journal of Heuristics, 18 (2012),
+  pp.~525--547.
+
+\bibitem{Augustson:1970:AGT:321607.321608}
+J.G. Augustson and J. Minker, \emph{An analysis of some graph theoretical
+  cluster techniques}, J. ACM 17 (1970), pp. 571--588.
+
+\bibitem{babel1990branch}
+L. Babel and G. Tinhofer, \emph{A branch and bound algorithm for the maximum
+  clique problem}, Mathematical Methods of Operations Research 34 (1990), pp.
+  207--217.
+
+\bibitem{pajek2006}
+V. Batagelj and A. Mrvar, \emph{Pajek datasets}  (2006),
+  \urlprefix\url{http://vlado.fmf.uni-lj.si/pub/networks/data/}.
+
+\bibitem{RePEc:eee:csdana:v:48:y:2005:i:2:p:431-443}
+V. Boginski, S. Butenko, and P.M. Pardalos, \emph{Statistical analysis of
+  financial networks}, Computational Statistics \& Data Analysis 48 (2005), pp.
+  431--443.
+
+\bibitem{Bomze99themaximum}
+I.M. Bomze, M. Budinich, P.M. Pardalos, and M. Pelillo, \emph{The Maximum
+  Clique Problem}, in \emph{Handbook of Combinatorial Optimization}, Kluwer
+  Academic Publishers, 1999, pp. 1--74.
+
+\bibitem{Bonner:1964:CT:1662386.1662389}
+R.E. Bonner, \emph{On some clustering techniques}, IBM J. Res. Dev. 8 (1964),
+  pp. 22--32.
+
+\bibitem{brouwer}
+A.E. Brouwer, J.B. Shearer, N.J.A. Sloane, and W.D. Smith, \emph{A new table of
+  constant weight codes.}, IEEE Transactions on Information Theory  (1990), pp.
+  1334--1380.
+
+\bibitem{pardalos}
+R. Carraghan and P. Pardalos, \emph{An exact algorithm for the maximum clique
+  problem}, Oper. Res. Lett. 9 (1990), pp. 375--382.
+
+\bibitem{Chakrabarti:2006:GML:1132952.1132954}
+D. Chakrabarti and C. Faloutsos, \emph{Graph mining: Laws, generators, and
+  algorithms}, ACM Comput. Surv. 38 (2006).
+
+\bibitem{Davis97theuniversity}
+T.A. Davis and Y. Hu, \emph{The university of florida sparse matrix
+  collection}, ACM Transactions on Mathematical Software (TOMS) 38 (2011), pp.
+  1:1--1:25.
+
+\bibitem{Domingos:2001:MNV:502512.502525}
+P. Domingos and M. Richardson, \emph{Mining the network value of customers}, in
+  \emph{Proc. of the 7th ACM SIGKDD KDD'01}, KDD '01, San Francisco,
+  California, ACM, New York, NY, USA, 2001, pp. 57--66.
+
+%\bibitem{Edachery99graphclustering}
+%J. Edachery, A. Sen, F.J. Brandenburg, F.J. Br, and L.F. Informatik,
+%  \emph{Graph Clustering Using Distance-k Cliques}, in \emph{Proc. of Graph
+%  Drawing}, Springer-Verlag, 1999, pp. 98--106.
+
+\bibitem{Faloutsos:1999:PRI:316188.316229}
+M. Faloutsos, P. Faloutsos, and C. Faloutsos, \emph{On power-law relationships
+  of the Internet topology}, in \emph{Proc. of the conference on Applications,
+  technologies, architectures, and protocols for computer communication},
+  SIGCOMM '99, Cambridge, Massachusetts, United States, ACM, 1999, pp.
+  251--262.
+
+\bibitem{Ferronato20083922}
+M. Ferronato, C. Janna, G. Gambolati, \emph{Mixed constraint preconditioning in computational contact mechanics},
+  Computer Methods in Applied Mechanics and Engineering 197 (2008), pp. 3922 --
+  3931.
+
+\bibitem{Fortunato_2010}
+S. Fortunato, \emph{Community detection in graphs}, Physics Reports 486 (2010),
+  pp. 75--174.
+
+\bibitem{Garey:1979:CIG:578533}
+M.R. Garey and D.S. Johnson, W. H. Freeman \& Co., New York, NY, USA 1979.
+
+\bibitem{heu2}
+{A.~Grosso, M.~Locatelli, and W.~Pullan}, {\em Simple ingredients leading
+  to very efficient heuristics for the maximum clique problem}, Journal of
+  Heuristics, 14 (2008), pp.~587--612.
+
+\bibitem{Gutin2004}
+G. Gutin, Gross, J. L.; Yellen, J., Handbook of graph theory, Discrete
+  Mathematics \& Its Applications, CRC Press 2004.
+
+\bibitem{Horaud:1989:SCT:68871.68875}
+R. Horaud and T. Skordas, \emph{Stereo correspondence through feature grouping
+  and maximal cliques}, IEEE Trans. Pattern Anal. Mach. Intell. 11 (1989), pp.
+  1168--1180.
+
+\bibitem{dimacs}
+D. Johnson and M.A.~Trick, Editors, \emph{Cliques, coloring and satisfiability:
+  Second dimacs implementation challenge}, DIMACS Series on Discrete
+  Mathematics and Theoretical Computer Science 26 (1996).
+
+\bibitem{konc2007improved}
+J. Konc and D. Jane\v{z}i\v{c}, \emph{An improved branch and bound algorithm for the
+  maximum clique problem}, 
+  MATCH Commun. Math. Comput. Chem., 2007, 58, pp. 569Ð590.
+
+\bibitem{kumar:extracting}
+R. Kumar, P. Raghavan, S. Rajagopalan, and A. Tomkins, \emph{Extracting
+  Large-Scale Knowledge Bases from the Web.}, in \emph{VLDB'99}, 1999, pp.
+  639--650.
+
+\bibitem{Leskovec:2005:GOT:1081870.1081893}
+J. Leskovec, J. Kleinberg, and C. Faloutsos, \emph{Graphs over time:
+  densification laws, shrinking diameters and possible explanations}, in
+  \emph{Proceedings of the eleventh ACM SIGKDD international conference on
+  Knowledge discovery in data mining}, KDD '05, Chicago, Illinois, USA, ACM,
+  New York, NY, USA, 2005, pp. 177--187.
+
+\bibitem{Leydesdorff}
+L. Leydesdorff, \emph{On the normalization and visualization of author
+  co-citation data: Salton's cosine versus the jaccard index}, J. Am. Soc. Inf.
+  Sci. Technol. 59 (2008), pp. 77--85.
+
+\bibitem{AAAI101611}
+{C.-M. Li and Z.~Quan}, {\em An efficient branch-and-bound algorithm based
+  on maxsat for the maximum clique problem}, 2010.
+
+\bibitem{Newman06042004}
+M.E.J. Newman, \emph{Coauthorship networks and patterns of scientific
+  collaboration}, Proceedings of the National Academy of Sciences of the United
+  States of America 101 (2004), pp. 5200--5205.
+
+\bibitem{cliquer}
+S. Niskanen and P.R.J. \"{O}sterg{\aa}rd, \emph{Cliquer user's guide, version
+  1.0}, Tech. Rep. T48, Communications Laboratory, Helsinki University of
+  Technology, Espoo, Finland,  2003.
+
+\bibitem{ostergard}
+P.R.J. \"{O}sterg{\aa}rd, \emph{A fast algorithm for the maximum clique
+  problem}, Discrete Appl. Math. 120 (2002), pp. 197--207.
+
+\bibitem{cite-key}
+G. Palla, I. Derenyi, I. Farkas, and T. Vicsek, \emph{Uncovering the
+  overlapping community structure of complex networks in nature and society},
+  Nature 435 (2005), pp. 814--818.
+
+\bibitem{citeulike:4058448}
+P.M. Pardalos and J. Xue, \emph{{The maximum clique problem}}, Journal of
+  Global Optimization 4 (1994), pp. 301--328.
+
+\bibitem{1211348}
+M. Pavan and M. Pelillo, \emph{A new graph-theoretic approach to clustering and
+  segmentation}, in \emph{Proc. of the 2003 IEEE computer society conference on
+  Computer vision and pattern recognition}, CVPR'03, Madison, Wisconsin, IEEE
+  Computer Society, Washington, DC, USA, 2003, pp. 145--152.
+
+\bibitem{prosser2012}
+P. Prosser, \emph{Exact algorithms for maximum clique: A computational study},
+  arXiv preprint arXiv:1207.4616v1  (2012).
+
+\bibitem{5586496}
+S. Sadi, S. \"{O}\u{g}\"{u}d\"{u}c\"{u}, and A.S. Uyar, \emph{An efficient
+  community detection method using parallel clique-finding ants}, in
+  \emph{Proc. of IEEE Congress on Evol. Comp}, July, 2010, pp. 1--7.
+
+\bibitem{SanSegundo}
+P. San~Segundo, D. Rodr\'{\i}guez-Losada, and A. Jim\'{e}nez, \emph{An exact
+  bit-parallel algorithm for the maximum clique problem}, Comput. Oper. Res. 38
+  (2011), pp. 571--581.
+
+\bibitem{citeulike:7905505}
+E. Tomita and T. Seki, \emph{{An efficient branch-and-bound algorithm for
+  finding a maximum clique}}, in \emph{Proc. of the 4th international
+  conference on Discrete mathematics and theoretical computer science}, Dijon,
+  France, Springer-Verlag, Berlin, Heidelberg, 2003, pp. 278--289.
+
+\bibitem{walcom}
+{E.~Tomita, Y.~Sutani, T.~Higashi, S.~Takahashi, and M.~Wakatsuki}, {\em A
+  simple and faster branch-and-bound algorithm for finding a maximum clique},
+  in WALCOM: Algorithms and Computation, M.~Rahman and S.~Fujita, eds.,
+  vol.~5942 of Lecture Notes in Computer Science, Springer Berlin Heidelberg,
+  2010, pp.~191--203.
+  
+\bibitem{19566964}
+T. Matsunaga, C. Yonemori, E. Tomita, and M. Muramatsu, \emph{Clique-based data
+  mining for related genes in a biomedical database}, BMC Bioinformatics 10
+  (2009), p. 205.  
+  
+
+\bibitem{Turner88}
+J. Turner, \emph{Almost all k-colorable graphs are easy to color}, Journal of
+  Algorithms 9 (1988), pp. 63--82.
+
+\bibitem{vanRietbergen199569}
+B. van  Rietbergen, H. Weinans, R. Huiskes, and A. Odgaard, \emph{A new method
+  to determine trabecular bone elastic properties and loading using
+  micromechanical finite-element models}, Journal of Biomechanics 28 (1995),
+  pp. 69 -- 81.
+
+\bibitem{wang2009order}
+L. Wang, L. Zhou, J. Lu, and J. Yip, \emph{An order-clique-based approach for
+  mining maximal co-locations}, Information Sciences 179 (2009), pp.
+  3370--3382.
+  
+
+\end{thebibliography}
+
+
+\newpage
+%\appendices
+\input{appendix_2}
+\input{appendix_1}
+\end{document}

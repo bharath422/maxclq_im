@@ -1,0 +1,46 @@
+%\section{The Carraghan-Pardalos and  \"{O}sterg\.{a}rd Algorithms}
+\section{Related Previous Algorithms}
+\label{sec:relatedwork}
+%\vspace{-6pt}
+
+Given a simple undirected graph $G$, the maximum clique can clearly be obtained by enumerating 
+{\em all} of the cliques present in it and picking the largest of them.
+Carraghan and Pardalos \cite{pardalos} introduced a simple-to-implement
+algorithm that avoids enumerating all cliques and instead
+works with a significantly reduced partial enumeration.
+The reduction in enumeration is achieved via 
+a {\em pruning} strategy which reduces the search space tremendously.
+The algorithm works by
+performing at each step $i$, a {\em depth first search} from vertex $v_i$, 
+where the goal is to find the largest clique containing the vertex $v_i$.
+At each {\em depth} of the search, the algorithm compares the number of remaining
+vertices that could potentially constitute a clique containing vertex $v_i$
+against the size of the largest clique encountered thus far.
+If that number is found to be smaller, the algorithm backtracks (search is pruned).
+
+\"{O}sterg\.{a}rd \cite{ostergard} devised an algorithm that incorporated an additional 
+pruning strategy to the one by Carraghan and Pardalos.
+The opportunity for the new pruning strategy is created by {\em reversing} the order in which the search is done by
+the Carraghan-Pardalos algorithm. This allows for an additional pruning with the help of
+some auxiliary bookkeeping. 
+Experimental results in \cite{ostergard} showed that the \"{O}sterg\.{a}rd
+algorithm is faster than the Carraghan-Pardalos algorithm on random and 
+DIMACS benchmark graphs \cite{dimacs}.
+However, the new pruning strategy used in this algorithm is intimately tied to the order in which vertices are processed, introducing an inherent sequentiality into the algorithm.
+% which renders it unsuitable for easy parallelization.
+
+A number of existing branch-and-bound algorithms for maximum clique
+also use a vertex-coloring of the graph to obtain an upper bound on the maximum clique. 
+%A {\em vertex-coloring} of a graph is an assignment of colors to vertices such that  a pair of adjacent vertices receive different colors. Clearly, the number of colors used gives  an upper bound on the maximum clique of the graph, which can be used to reduce the search space. 
+A popular and recent algorithm based on this idea is 
+the algorithm of Tomita and Seiku \cite{citeulike:7905505} (known as MCQ). 
+More recently, Konc and Jane\v{z}i\v{c} \cite{konc2007improved} presented 
+an improved version of MCQ, known as MaxCliqueDyn (MCQD and MCQD+CS), that
+involves the use of tighter, computationally more expensive upper bounds 
+applied on a fraction of the search space.
+
+%They present two variations - 1) MCQ with improved 
+%approximate coloring algorithm ColorSort (MCQ+CS) and 2) MCQ with improved coloring and dynamic sorting 
+%of vertices (MCQD+CS)). The authors observe the latter to outperform MCQ on random and DIMACS benchmark graphs.
+
+%\vspace{-12pt}
