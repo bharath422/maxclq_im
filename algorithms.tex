@@ -74,8 +74,8 @@ denoted by $d(v_i)$.
 \Procedure {Clique}{$G=\left (V,E\right )$, $U$, $size$}
 
 \If{$U = \emptyset$}
-\If{$size > max$}
-\State $max \leftarrow size$
+\If{$size > max$} 
+\State $max \leftarrow size$ \label{critical}
 \EndIf
 \State {\bf return}
 \EndIf

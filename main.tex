@@ -23,7 +23,7 @@
 %\usepackage[dvips]{graphicx}
 \usepackage{graphicx}
 \usepackage{times}
-\usepackage{subfigure}
+%\usepackage{subfigure}
 %\usepackage{epsfig}
 \usepackage{setspace}
 \usepackage{latexsym}
@@ -33,11 +33,14 @@
 \usepackage{sidecap}
 \usepackage{booktabs}
 
+\usepackage{caption}
+\usepackage{subcaption}
+
 \renewcommand{\baselinestretch}{1.05}             % Improves readability
 
 %\def\qed{\vrule height .9ex width .8ex depth -.1ex}
 
-\setlength{\subfigcapskip}{0pt}
+%\setlength{\subfigcapskip}{0pt}
 
 \def\floatpagefraction{0.99} 
 \def\clq{\mbox{\sc Clique}}
@@ -118,6 +121,8 @@ $^{\rm \ddag}$ Authors contributed equally \\
 
 \input{experiments}
 
+\input{parallelization}
+
 \input{applications}
 
 %\vspace{-6pt}
@@ -196,6 +201,9 @@ T.A. Davis and Y. Hu, \emph{The university of florida sparse matrix
 P. Domingos and M. Richardson, \emph{Mining the network value of customers}, in
   \emph{Proc. of the 7th ACM SIGKDD KDD'01}, KDD '01, San Francisco,
   California, ACM, New York, NY, USA, 2001, pp. 57--66.
+
+\bibitem{Doreian1994267}
+P. Doreian and K.L. Woodard., \emph{Defining and locating cores and boundaries of social networks}, {\em Social Networks}, 16(4):267 -- 293, 1994.
 
 %\bibitem{Edachery99graphclustering}
 %J. Edachery, A. Sen, F.J. Brandenburg, F.J. Br, and L.F. Informatik,

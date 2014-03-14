@@ -170,6 +170,19 @@ for the step Pruning 1.
 %the graphs with high maximum clique size and high maximum degree.
 %as well. For instance, for as-Skitter reduction the search space is reduced dramatically due to pruning, and results in a very impressive performance.
 
+%\vspace{-10pt}
+%\vspace{-10pt}
+\begin{SCfigure}
+  \centering
+    \includegraphics[width=7.0cm]{maxclqplot.eps}
+%%\vspace{-30pt}
+  \caption{Runtime (normalized, mean) comparison between various algorithms. For each category of graph, first, all runtimes for each graph were normalized by the runtime of the slowest algorithm for that graph, and then the mean was calculated for each algorithm. Graphs were considered only if the runtimes for at least three algorithms was less than the 25,000 seconds limit set.}
+\label{fig-timeplot}
+\end{SCfigure}
+%\vspace{-10pt}
+%\vspace{-10pt}
+
+
 
 {\bf Synthetic Graphs. }
 For the synthetic graph types {\it rmat\_er} and {\it rmat\_sd1}, our algorithm clearly outperforms 
@@ -193,6 +206,24 @@ It is to be noted that the DIMACS graphs are intended to serve as challenging te
 Most of these have between 20 to 1024 vertices with an average edge density of roughly 0.6, 
 whereas, most real world graphs are often very large and sparse. Good examples are Internet topology graphs \cite{Faloutsos:1999:PRI:316188.316229}, the web graph \cite{kumar:extracting}, social network graphs \cite{Domingos:2001:MNV:502512.502525}, and the real-world graphs in our testbed. 
 
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.6]{compare_time_er.eps}
+    \includegraphics[scale=0.6]{compare_time_sd1.eps}
+    \includegraphics[scale=0.6]{compare_time_sd2.eps}
+    \includegraphics[scale=0.6]{compare_time_rw.eps}
+    
+%%\vspace{-30pt}
+ \caption{Run time plots of the new exact and heuristic algorithms. The third curve, labeled
+ {\em edges}, shows the quantity, number of edges in the graph divided by the clock 
+ frequency of the computing platform used in the experiment. 
+ }
+\label{fig-runtimeplots}
+\end{figure}
+
+
+
+
 %\vspace{-15pt}
 \subsubsection{The Heuristic}
 \label{sec:exp-heuristic}
@@ -210,18 +241,6 @@ the various algorithms across the five categories of graphs in the testbed.
 %are created as follows. First the runtime for each algorithm for each graph in a category is divided by the runtime of the slowest algorithm for that graph. Then the mean of these is taken as a resut for the category. Values enter into the mean calculation when runtimes are available for
 %at least three algorithms.
 
-%\vspace{-10pt}
-%\vspace{-10pt}
-\begin{SCfigure}
-  \centering
-    \includegraphics[width=7.0cm]{maxclqplot.eps}
-%%\vspace{-30pt}
-  \caption{Runtime (normalized, mean) comparison between various algorithms. For each category of graph, first, all runtimes for each graph were normalized by the runtime of the slowest algorithm for that graph, and then the mean was calculated for each algorithm. Graphs were considered only if the runtimes for at least three algorithms was less than the 25,000 seconds limit set.}
-\label{fig-timeplot}
-\end{SCfigure}
-%\vspace{-10pt}
-%\vspace{-10pt}
-
 
 To give a sense of runtime growth rates, we provide in Figure~\ref{fig-runtimeplots} plots of the 
 runtime of the new exact algorithm and the heuristic for the synthetic and real-world graphs 
@@ -234,22 +253,6 @@ It can be seen that the runtime of the heuristic by and large grows
 somewhat linearly with the size of a graph. The exact algorithm's runtime, which is orders of
 magnitude larger than the heuristic, exhibited a similar growth behavior for these test-cases
 (even though its worst-case complexity suggests exponential growth). 
-
-\begin{figure}
-  \centering
-    \includegraphics[scale=0.6]{compare_time_er.eps}
-    \includegraphics[scale=0.6]{compare_time_sd1.eps}
-    \includegraphics[scale=0.6]{compare_time_sd2.eps}
-    \includegraphics[scale=0.6]{compare_time_rw.eps}
-    
-%%\vspace{-30pt}
- \caption{Run time plots of the new exact and heuristic algorithms. The third curve, labeled
- {\em edges}, shows the quantity, number of edges in the graph divided by the clock 
- frequency of the computing platform used in the experiment. 
- }
-\label{fig-runtimeplots}
-\end{figure}
-
 
 %Finally, we comment on our experience in using the 
 %{\it MaxCliqueDyn} code.
