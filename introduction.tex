@@ -39,8 +39,9 @@ Tomita and Seki \cite{citeulike:7905505}, and later, Konc and Jane\v{z}i\v{c} \c
 use upper bounds computed using vertex coloring to enhance the branch-and-bound approach. 
 %Sewell (1998) presented a maximum clique algorithm designed for dense graphs.
 Other examples of branch-and-bound algorithms for the clique problem include 
-\cite{Bomze99themaximum,SanSegundo,babel1990branch}.
-Prosser \cite{prosser2012} in a recent work compares various exact algorithms 
+the works of Bomze et al~\cite{Bomze99themaximum}, Segundo et al~\cite{SanSegundo}
+and Babel and Tinhofer~\cite{babel1990branch}.
+Prosser~\cite{prosser2012} in a recent work compares various exact algorithms 
 for the maximum clique problem. %An attractive feature of the algorithms of \cite{pardalos} and \cite{ostergard} is their simplicity in terms of ease of implementation. However, their runtimes could  be infeasible for very large graphs.
 
 %only for graphs with up to a few thousand vertices and a corresponding number of edges. 
@@ -64,6 +65,9 @@ sparse graphs and of comparable runtime on denser graphs.
 We also present a hew heuristic, which runs several orders of magnitude faster than the exact algorithm while providing solutions that are optimal or near-optimal for most cases.
 We have made our implementations publicly available\footnote{\url{http://cucis.ece.northwestern.edu/projects/MAXCLIQUE/}}.
 Both the exact algorithm and the heuristic are well-suited for parallelization.
+We discuss a simple shared-memory parallelization and present performance results.
+We also include a discussion on how the algorithms can be used in
+detecting overlapping communities.
 %The algorithms are discussed in detail in Section~\ref{sec:algorithms}.
 
 %In Section~\ref{sec:experiments} we present an extensive experimental analysis comparing the performance of our algorithms with the algorithm of Carraghan and Pardalos \cite{pardalos}, the algorithm of \"{O}sterg\.{a}rd \cite{ostergard} and the algorithm of Konc and Jane\v{z}i\v{c} \cite{konc2007improved}.

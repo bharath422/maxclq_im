@@ -7,8 +7,10 @@
 \caption{Comparison of runtimes (in seconds) of algorithms \cite{pardalos} ({\it CP}),
 \cite{ostergard} ({\it cliquer}), \cite{konc2007improved} ({\it MCQD+CS})
 and our new exact algorithm ($\tau_{A1}$) for the graphs in the testbed. 
- $P1$, $P2$, $P3$ and $P5$ are the number of vertices/branches pruned in steps Pruning 1, 2, 3 and 5 of our exact algorithm (K stands for $10^3$, M for $10^6$ and B for $10^9$). 
-$\omega$ denotes the maximum clique size in the graph, $\omega_{A2}$ denotes the clique size returned by our heuristic and $\tau_{A2}$ shows its runtime.}
+ Columns $P1$, $P2$, $P3$ and $P5$ list the number of vertices/branches pruned in steps Pruning 1, 2, 3 and 5 of our exact algorithm (K stands for $10^3$, M for $10^6$ and B for $10^9$). 
+The column $\omega$ (second column) lists the maximum clique size in each graph, 
+the column $\omega_{A2}$ lists the clique size returned by our heuristic and the column
+$\tau_{A2}$ lists the heuristic's runtime.}
 \label{tab:timings}
 \begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r}
 
@@ -35,13 +37,13 @@ Graph           	& $\omega$ & $\tau_{CP}$    & $\tau_{cliquer}$  & $_{+CS}$  &  
 {\it rmat\_er\_3}		&	3	&	4117.35		&	3456.39		&	-		&	{\bf 1.87}		&	4,349		&	4M			&	4,960		&	50K			&	3		&	0.49 		\\
 {\it rmat\_er\_4}		&	3	&	16419.80		&	13894.52		&	-		&	{\bf 4.16}		&	9,032		&	8M			&	10K			&	106K		&	3		&	1.44 		\\
 {\it rmat\_er\_5}		&	3	&	*			&	*			&	-		&	{\bf 9.87}		&	18K			&	16M			&	20K			&	212K		&	3		&	2.57 		\\
-\midrule
+%\midrule
 {\it rmat\_sd1\_1}	&	6	&	225.93		&	214.99		&	50.08	&	{\bf 1.39}		&	39K			&	1M			&	23K			&	542K		&	6		&	0.45 		\\
 {\it rmat\_sd1\_2}	&	6	&	912.44		&	858.80		&	-		&	{\bf 3.79}		&	90K			&	2M			&	56K			&	1M			&	6		&	0.98 		\\ %1,399,314	
 {\it rmat\_sd1\_3}	&	6	&	3676.14		&	3446.02		&	-		&	{\bf 8.17}		&	176K		&	4M			&	106K		&	2M			&	6		&	1.78 		\\ %2,677,437
 {\it rmat\_sd1\_4}	&	6	&	14650.40		&	13923.93		&	-		&	{\bf 25.61}		&	369K		&	8M			&	214K		&	5M			&	6		&	4.05 		\\ %5,566,602
 {\it rmat\_sd1\_5}	&	6	&	*			&	*			&	-		&	{\bf 46.89}		&	777K		&	16M			&	455K		&	12M			&	6		&	9.39 		\\ %12,168,698
-\midrule
+%\midrule
 {\it rmat\_sd2\_1}	&	26	&	427.41		&	213.23		&	{\bf 48.17}	&	242.20		&	110K		&	853K		&	88K			&	614M		&	26		&	32.83 	\\ %614,813,037
 {\it rmat\_sd2\_2}	&	35	&	4663.62		&	{\bf 851.84}	&	-		&	3936.55		&	232K		&	1M			&	195K		&	1B			&	35		&	95.89 	\\ %1,044,068,886
 {\it rmat\_sd2\_3}	&	39	&	13626.23		&	{\bf 3411.14}	&	-		&	10647.84		&	470K		&	3M			&	405K		&	1B			&	37		&	245.51 	\\ %1,343,563,239
