@@ -63,11 +63,13 @@ algorithm of Carraghan and Pardalos \cite{pardalos}, the algorithm of \"{O}sterg
 We find our new exact algorithm to be up to orders of magnitude faster on large,
 sparse graphs and of comparable runtime on denser graphs.
 We also present a hew heuristic, which runs several orders of magnitude faster than the exact algorithm while providing solutions that are optimal or near-optimal for most cases.
-We have made our implementations publicly available\footnote{\url{http://cucis.ece.northwestern.edu/projects/MAXCLIQUE/}}.
+The algorithms are discussed in detail in Section~\ref{sec:algorithms} and the experimental evaluations and comparisons are presented in Section~\ref{sec:experiments}. 
+
 Both the exact algorithm and the heuristic are well-suited for parallelization.
-We discuss a simple shared-memory parallelization and present performance results.
-We also include a discussion on how the algorithms can be used in
-detecting overlapping communities.
+We discuss (Section~\ref{sec:parallelization}) a simple shared-memory parallelization and present performance 
+results showing its promise. We also include (Section~\ref{sec:applications})
+a small illustration on how the algorithms can be used in detecting overlapping communities in social networks.
+We have made our implementations publicly available\footnote{\url{http://cucis.ece.northwestern.edu/projects/MAXCLIQUE/}}.
 %The algorithms are discussed in detail in Section~\ref{sec:algorithms}.
 
 %In Section~\ref{sec:experiments} we present an extensive experimental analysis comparing the performance of our algorithms with the algorithm of Carraghan and Pardalos \cite{pardalos}, the algorithm of \"{O}sterg\.{a}rd \cite{ostergard} and the algorithm of Konc and Jane\v{z}i\v{c} \cite{konc2007improved}.

@@ -13,11 +13,22 @@ and {\it MCQD+CS}.
 For large sparse graphs, both synthetic and real-world, our new algorithm runs
 several orders of magnitude faster than the other three. 
 The heuristic, which runs many orders of magnitude faster than our exact algorithm and the others, gave optimal solution for 83\% of the test cases, and when it is sub-optimal, its accuracy ranged between 0.83 and 0.99.
+We also showed how the algorithms can be parallelized, and illustrated a simple application of the algorithms
+in detecting overlapping communities in social networks. 
 
-In this work, we did not compare the performance of our algorithm against those for which an implementation is not publicly available such as \cite{walcom,AAAI101611}. It would be interesting to implement these and compare in future work. Further, the MCQD implementation uses an adjacency matrix, whereas our algorithm uses an adjacency list to represent the graph. Although it is unlikely for the overall results to be drastically different with a change in the graph representation, it will be interesting to study to what degree the performance will change with
-the change in graph representation.
+Maximum clique detection is often avoided by practitioners from being used as a component in 
+network analysis algorithms on the grounds of its NP-hardness. The results shown here suggest that they need
+not be as maximum cliques can be detected rather quickly for most real-world networks that are characterized by sparsity and other structures well suited for branch-and-bound type algorithms.
+
+Our goal in this work was not to provide a comprehensive comparison of the performance of our algorithms
+with a large selection of existing algorithms, but rather with a representative selection among those
+that have publicly available implementations. There are a a number of algorithms that do not have
+publicly available implementation, such as \cite{walcom,AAAI101611}, and that would be interesting to
+compare against in future work. 
+%Further, the MCQD implementation uses an adjacency matrix, whereas our algorithm uses an adjacency list to represent the graph. Although it is unlikely for the overall results to be drastically different with a change in the graph representation, it will be interesting to study to what degree the performance will change with
+%the change in graph representation.
 %The exact algorithm was in general  found to be less successful on relatively dense graphs.
 %An interesting line of investigation would be to study ways to overcome this.
-The heuristic's performance is impressive as presented; still it is worthwhile
-to compare with other existing heuristics approaches such as \cite{heu1,heu2}. 
+%The heuristic's performance is impressive as presented; still it is worthwhile
+%to compare with other existing heuristics approaches such as \cite{heu1,heu2}. 
 %Another line for future work would be to characterize the class(es) of graphs for which the heuristic is expected to return near-optimal solution.

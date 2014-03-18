@@ -7,14 +7,11 @@ In this section we describe how our exact algorithm can be parallelized, and sho
 on a shared-memory platform. The heuristic can be parallelized following a similar procedure.
 
 %We here describe the parallelization procedure for both shared and distributed memory architecture. 
-As explained in Section \ref{sec:algorithms}, the $i$th iteration of the {\em for} loop, in both the exact and the heuristic algorithm, computes the size of the largest clique that contains the vertex $v_i$. Since our algorithm doesn't require a specific order in which vertices have to be processed, these iterations can be
-performed concurrently. 
-%In other words, the sizes of the largest cliques containing different vertices can be computed concurrently by different computational units. 
-However, in such a concurrent computation different computational units might discover maximum cliques of different sizes, and for the pruning steps to be most effective, the globally largest maximum clique size needs to be communicated to all processes. In a shared-memory programming model, the global maximum clique size can be stored as a shared variable accessible to all the processing units, and its value can be updated by the relevant processor at any given time. In a distributed-memory setting more care needs to be exercised to reduce overt costly communication. 
+As explained in Section \ref{sec:algorithms}, the $i$th iteration of the {\em for} loop in the exact algorithm computes the size of the largest clique that contains the vertex $v_i$. Since our algorithm doesn't require a specific order in which vertices have to be processed, these iterations can in principle be performed concurrently. In such a concurrent computation, however, different processes might discover current maximum cliques of different sizes---and 
+for the pruning steps to be most effective, the current globally largest maximum clique size needs to be communicated to all processes as soon as it is discovered. In a shared-memory programming model, the global maximum clique size can be stored as a shared variable accessible to all the processing units, and its value can be updated by the relevant processor at any given time. In a distributed-memory setting more care needs to be exercised to keep the communication cost low. 
 %For the distributed case, the effects of pruning could, however, be tolerably compromised in order to enable the parallel computation. This can, for example, be done by using the most recent value of the maximum clique size for pruning, and updating this value by having synchronization steps at regular intervals.
 
-We implemented a shared-memory algorithm based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the updating of the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, in a {\it critical} section, which is an OpenMP feature that enforces a lock, allowing only one thread to make the update at a time. We used  dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different
-computation time.
+We implemented a shared-memory parallelization based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the updating of the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, in a {\it critical} section (an OpenMP feature that enforces a lock allowing only one thread to make the update at a time). Further, we used  dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different work loads.
 %, so would work best for our case.
 
 We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation running 64-bit version Red Hat Enterprise Linux Server release 6.2, with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, each with 32 KB of L1 and 256 KB of L2 cache, and each processor shares a 18 MB L3 cache.  
@@ -29,13 +26,18 @@ We performed experiments on the same graphs listed in the testbed described in S
     \includegraphics[scale=0.17]{parallel_other_speedup.pdf}
     
 %%\vspace{-30pt}
- \caption{Performance (timing and speedup plots) of shared-memory parallelization on graphs in the test-bed. Graphs whose sequential runtime is less than 5 seconds are omitted. The top set of figures show performance on real-world graphs, whereas the bottom set show for the others.}
+ \caption{Performance (timing and speedup plots) of shared-memory parallelization on graphs in the test-bed. Graphs whose sequential runtime is less than 5 seconds are omitted. The top set of figures show performance on the real-world graphs, whereas the bottom set show results for the RMAT graphs.}
 \label{fig-parallel_perf}
 \end{figure}
 
 
-Figure \ref{fig-parallel_perf} shows the timings and speedups we obtained for the real-world and RMAT graphs separately. We omitted graphs whose sequential runtimes were less than 5 seconds as they were too low to measure, and are not be good test cases for measuring parallelization performance. For the real-world graphs, one can see from the figure that we obtained near-linear scaling of runtimes and speedups up to 16 threads for most graphs. The only exception is {\emph as-Skitter}. It's relatively poorer scaling is probably due to the fact that this instance has a relatively large maximum clique, and hence the core(s) which compute(s) it spends relatively large amount of time computing it, while the other cores which have processed the remaining nodes remain idle after completion. For the other instances, the maximum speedups we obtain for 32 cores/threads is around 22$\times$. 
-For the other instances, we can see the scaling of the runtime and speedups vary based on the instance. We observe super-linear scaling for a couple of instances. For the others, it scales fairly well till 8 threads, and deteriorates with higher number of threads. The speedups we obtain are anywhere between 6$\times$ - 20$\times$.
+Figure \ref{fig-parallel_perf} shows the timings and speedups we obtained for the real-world and RMAT graphs separately. We omitted graphs whose sequential runtimes were less than 5 seconds as they were too low to measure and do meaningful assessment of parallelization performance. For most of the real-world graphs, one can see from the figure that we obtained near-linear scaling of runtimes and speedups when up to 16 threads are used. The only exception is the graph 
+{\emph as-Skitter}. It's relatively poorer scaling is likely due to the fact that this instance has a relatively large maximum clique, and hence the core (thread) which computes it spends relatively large amount of time computing it, while other cores (threads) which have completed their processing of the remaining vertices remain idle. 
+For the other instances of the real-world graphs, the maximum speedup we obtained 
+while using 32 cores/threads is around 22$\times$. 
+
+For the RMAT graphs, it can seen that the scaling of the runtime and speedups vary with the structures (RMAT parameters) of the instances. We observed super-linear speedups for a couple of the instances. For the others, the algorithm scales fairly well up to 8 threads, and begins to
+degrade thereafter. The speedups we obtained range between 6$\times$  to 20$\times$ when 32 threads are used.
 
 
 

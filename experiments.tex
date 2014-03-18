@@ -1,6 +1,5 @@
-\section{Experiments and Results}
+\section{Experiments and Performance Results}
 \label{sec:experiments}
-%\vspace{-6pt}
 
 We present in this section results comparing the performance of our algorithm
 with the algorithms of Carraghan-Pardalos \cite{pardalos}, 
@@ -15,9 +14,8 @@ since it is the best-performing variant.
 
 The experiments are performed on a Linux workstation running 64-bit Red Hat Enterprise Linux Server release 6.2 with a 2 GHz Intel Xeon E7540 processor. The codes are implemented in C++ and compiled using gcc version 4.4.6 with -O3 optimization.
 
-%\vspace{-10pt}
+
 \subsection{Test Graphs}
-%\vspace{-6pt}
 
 \begin{table}[t]
 \small
@@ -57,26 +55,26 @@ Nodes represent intersections \\ & and endpoints and edges represent the roads c
 \end{tabular}
 \end{table}
 
-Our testbed is grouped in three categories.
+Our testbed is grouped in three categories:
 
-%\vspace{-8pt}
-\paragraph{1. Real-world graphs} 
-Under this category, we consider 10 graphs (downloaded from the 
-University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}) that originate
-from various real-world applications. Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.
+{\bf 1. Real-world graphs. } 
+Under this category, we consider 10 graphs downloaded from the 
+University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity} that originate
+from various real-world applications. 
+Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.
   
-%\vspace{-8pt} 
-\paragraph{2. Synthetic Graphs} 
+
+{\bf 2. Synthetic Graphs. } 
 In this category we consider 15 graphs generated using 
 the R-MAT algorithm \cite{Chakrabarti:2006:GML:1132952.1132954}. The graphs
-are subdivided in three categories depending on the structures they represent.
-\newline {\bf A. Random graphs} (5 graphs) -- Erd\H{o}s-R\'{e}nyi random  graphs generated using R-MAT 
-with the parameters (0.25, 0.25, 0.25, 0.25).  Denoted with prefix {\it rmat\_er}.
-\newline {\bf B.  Skewed Degree, Type 1 graphs} (5 graphs) -- graphs generated using R-MAT with the parameters (0.45, 0.15, 0.15, 0.25). Denoted with prefix {\it rmat\_sd1}.
-\newline {\bf C. Skewed Degree, Type 2 graphs} (5 graphs) --  graphs generated using R-MAT with the parameters (0.55, 0.15, 0.15, 0.15). Denoted with prefix {\it rmat\_sd2}.
+are subdivided in three categories depending on the structures they represent:\\
+{\bf 2.a. Random graphs} (5 graphs) -- Erd\H{o}s-R\'{e}nyi random  graphs generated using R-MAT 
+with the parameters (0.25, 0.25, 0.25, 0.25).  We denoted these with prefix {\it rmat\_er}.\\
+{\bf 2.b. Skewed Degree, Type 1 graphs} (5 graphs) -- graphs generated using R-MAT with the parameters (0.45, 0.15, 0.15, 0.25). These are denoted with prefix {\it rmat\_sd1}.\\
+{\bf 2.c. Skewed Degree, Type 2 graphs} (5 graphs) --  graphs generated using R-MAT with the parameters (0.55, 0.15, 0.15, 0.15). These are denoted with prefix {\it rmat\_sd2}.
 
-%\vspace{-8pt}
-\paragraph{3. DIMACS graphs} 
+
+{\bf 3. DIMACS graphs. } 
 This last category consists of 5 graphs selected from the Second DIMACS Implementation Challenge \cite{dimacs}. 
 
 The DIMACS graphs  are an established benchmark for the maximum
@@ -91,12 +89,8 @@ number of edges and the maximum degree) about all 30 of the test graphs.
 
 \input{graphs_properties}
 
-%\vspace{-14pt}
 \subsection{Results}
-%\vspace{-6pt}
-
 \label{sec:exp-results}
-%\input{results_timings_new.tex}
 
 \input{results_timings}
 
@@ -133,6 +127,13 @@ In terms of runtime,  its relative performance compared to the other three varie
 in accordance with the advantages afforded by the various pruning steps.  
 
 
+
+
+%{\bf Analysis of pruning steps.  }
+Vertices that are discarded by Pruning 1 are skipped in the main loop of the algorithm, and the largest cliques containing them are not computed. Pruning 2 avoids re-computing previously computed cliques in the neighborhood of a vertex. In the absence of Pruning 1, the number of vertices pruned by Pruning 2 would be bounded by the number of edges in the graph (note that this is more than the total number of vertices in the graph). While Pruning 3 reduces the size of the input set on which the maximum clique is to be computed, Pruning 5 brings down the time taken to generate the intersection set in Line 12 of the subroutine. 
+Pruning 4 corresponds to back tracking. Unlike Pruning steps 1, 2, 3 and 5, Pruning 4
+is used  by all three of the other algorithms in our comparison. The primary strength of our algorithm is its ability to take advantage of pruning in multiple steps in a hierarchical fashion, allowing for opportunities for one or more of the steps to kick in and impact performance.
+
 \begin{figure}
   \centering
     \includegraphics[scale=0.4]{pruned.eps}
@@ -141,10 +142,6 @@ by the number of edges in the graph (in percents) for the test graphs in categor
 \label{fig-pruningplot}
 \end{figure}
 
-%{\bf Analysis of pruning steps.  }
-Vertices that are discarded by Pruning 1 are skipped in the main loop of the algorithm, and the largest cliques containing them are not computed. Pruning 2 avoids re-computing previously computed cliques in the neighborhood of a vertex. In the absence of Pruning 1, the number of vertices pruned by Pruning 2 would be bounded by the number of edges in the graph (note that this is more than the total number of vertices in the graph). While Pruning 3 reduces the size of the input set on which the maximum clique is to be computed, Pruning 5 brings down the time taken to generate the intersection set in Line 12 of the subroutine. 
-Pruning 4 corresponds to back tracking. Unlike Pruning steps 1, 2, 3 and 5, Pruning 4
-is used  by all three of the other algorithms in our comparison. The primary strength of our algorithm is its ability to take advantage of pruning in multiple steps in a hierarchical fashion, allowing for opportunities for one or more of the steps to kick in and impact performance.
 
 In Figure~\ref{fig-pruningplot} we show the number of vertices discarded by all
 the  pruning steps of the exact algorithm normalized by the total number of edges
@@ -152,6 +149,7 @@ in a graph for the real-world graphs (category 1) in the testbed. We cut few bar
 140\% as their correspnding values are much higher.
 In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. It can be seen for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero, but relatively modest.
 %Since our new pruning steps hierarchically reduce the search space, one can expect a decreasing order of effect in the performance of Prunings 1, 2, 3 and 5, with Pruning 1 having the highest impact, and 5 the lowest. 
+
 
 As a result  of the differences seen in the effects of the pruning steps, as discussed below,
 the runtime performance of our algorithm (seen in Table \ref{tab:timings}) compared
@@ -171,17 +169,6 @@ for the step Pruning 1.
 %the graphs with high maximum clique size and high maximum degree.
 %as well. For instance, for as-Skitter reduction the search space is reduced dramatically due to pruning, and results in a very impressive performance.
 
-%\vspace{-10pt}
-%\vspace{-10pt}
-\begin{SCfigure}
-  \centering
-    \includegraphics[width=7.0cm]{maxclqplot.eps}
-%%\vspace{-30pt}
-  \caption{Runtime (normalized, mean) comparison between various algorithms. For each category of graph, first, all runtimes for each graph were normalized by the runtime of the slowest algorithm for that graph, and then the mean was calculated for each algorithm. Graphs were considered only if the runtimes for at least three algorithms was less than the 25,000 seconds limit set.}
-\label{fig-timeplot}
-\end{SCfigure}
-%\vspace{-10pt}
-%\vspace{-10pt}
 
 
 
@@ -207,6 +194,36 @@ It is to be noted that the DIMACS graphs are intended to serve as challenging te
 Most of these have between 20 to 1024 vertices with an average edge density of roughly 0.6, 
 whereas, most real world graphs are often very large and sparse. Good examples are Internet topology graphs \cite{Faloutsos:1999:PRI:316188.316229}, the web graph \cite{kumar:extracting}, social network graphs \cite{Domingos:2001:MNV:502512.502525}, and the real-world graphs in our testbed. 
 
+
+
+
+
+
+
+
+%\vspace{-15pt}
+\subsubsection{The Heuristic}
+\label{sec:exp-heuristic}
+
+It can be seen that our heuristic runs several orders of magnitude faster than our exact algorithm,
+while delivering either optimal or very close to optimal solution.
+It gave the optimal solution on 25 out of the 30 test cases.
+On the remaining 5 cases where it was suboptimal, its accuracy ranges from 83\% to 99\% (on average 93\%).
+Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{maxDsel} of Algorithm \ref{alg:mClqHeu} instead of the one with the maximum degree. We observe that on average, the solution is optimal only for less than $40\%$ of the test cases compared to 83\% when selecting the maximum degree vertex.
+%after three repetitions with different random seeds
+
+%\vspace{-10pt}
+%\vspace{-10pt}
+\begin{SCfigure}
+  \centering
+    \includegraphics[width=7.0cm]{maxclqplot.eps}
+%%\vspace{-30pt}
+  \caption{Runtime (normalized, mean) comparison between various algorithms. For each category of graph, first, all runtimes for each graph were normalized by the runtime of the slowest algorithm for that graph, and then the mean was calculated for each algorithm. Graphs were considered only if the runtimes for at least three algorithms was less than the 25,000 seconds limit set.}
+\label{fig-timeplot}
+\end{SCfigure}
+%\vspace{-10pt}
+%\vspace{-10pt}
+
 \begin{figure}
   \centering
     \includegraphics[scale=0.6]{compare_time_er.eps}
@@ -223,19 +240,6 @@ whereas, most real world graphs are often very large and sparse. Good examples a
 \label{fig-runtimeplots}
 \end{figure}
 
-
-
-
-%\vspace{-15pt}
-\subsubsection{The Heuristic}
-\label{sec:exp-heuristic}
-
-It can be seen that our heuristic runs several orders of magnitude faster than our exact algorithm,
-while delivering either optimal or very close to optimal solution.
-It gave the optimal solution on 25 out of the 30 test cases.
-On the remaining 5 cases where it was suboptimal, its accuracy ranges from 83\% to 99\% (on average 93\%).
-Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{maxDsel} of Algorithm \ref{alg:mClqHeu} instead of the one with the maximum degree. We observe that on average, the solution is optimal only for less than $40\%$ of the test cases compared to 83\% when selecting the maximum degree vertex.
-%after three repetitions with different random seeds
 
 Figure~\ref{fig-timeplot} provides an aggregated visual summary of the runtime trends of
 the various algorithms across the five categories of graphs in the testbed. 
@@ -255,6 +259,8 @@ It can be seen that the runtime of the heuristic by and large grows
 somewhat linearly with the size of a graph. The exact algorithm's runtime, which is orders of
 magnitude larger than the heuristic, exhibited a similar growth behavior for these test-cases
 even though its worst-case complexity suggests exponential growth. 
+
+
 
 %Finally, we comment on our experience in using the 
 %{\it MaxCliqueDyn} code.

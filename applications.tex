@@ -1,51 +1,47 @@
 \section{Example of an application in social network analysis}
 \label{sec:applications}
 
-In this section, we demonstrate how maximum clique based algorithms can be used as powerful tools in community detection in social networks. In particular, such algorithms have the unique ability to detect communities that are overlapping, i.e. they allow multiple communities to have common vertices, which most other algorithms do not.
-Finding overlapping communities is a challenging problem \cite{Fortunato_2010}, and many algorithms employed for this purpose, only extract mutually independent communities for a given network. However, in many real networks, it is natural to find vertices or members that belong to more than one group, and such groups form overlapping communities. Classical examples in social networks are, where an individual usually belongs to different circles at the same time, from that of work colleagues to family, sport associations, etc. 
+In this section, we demonstrate how maximum clique based algorithms can be used as  tools for  
+detecting overlapping communities in social networks. 
+%In particular, such algorithms have the unique ability to detect communities that are overlapping, i.e. they allow multiple communities to have common vertices, which most other algorithms do not.
+Finding overlapping communities is a challenging problem \cite{Fortunato_2010}. 
+Most community detection algorithms extract mutually independent communities 
+in a given network and therefore are not suitable for detecting overlapping communities.
+Yet, in many real-world networks, it is natural to find vertices (or members) that belong to more than 
+one group (or community) at the same time.
+%In social networks, for example, an individual may belong to different circles at the same time, one circle based on work colleagues, another on family relationships, and a third on sport associations, etc. 
 
-We developed a rudimentary clique-based community detection algorithm by using our heuristic as follows. We modified our heuristic to retain the largest clique containing each node. We could have used the exact algorithm instead of the heuristic for this purpose. However, we choose the heuristic since it is much faster, delivers near-optimal solutions, and for this particular problem of community detection the accuracy of the size of cliques formed is not critical. Since we we used the heuristic as opposed to the exact algorithm, this might result in duplicate cliques,  %or cliques that can be a subset of another, 
-and so we remove these. The resulting cliques are cohesively connected subgroups, are essentially the communities returned by our algorithm.
+We developed a very simple clique-based community detection algorithm using our heuristic as follows. We modified our heuristic such that it retains the largest clique containing each node. We use the heuristic instead of the exact algorithm because it is much faster and delivers near-optimal solution which is sufficient for the purpose of detecting communities. It is possible that we get duplicate cliques via different nodes,  
+and so we remove these. The resulting cliques are cohesively connected subgroups, and those are
+what our algorithm outputs as communities.
 
 %This is done by simply substituting Lines 3 and 4 of Algorithm \ref{alg:clqHeu}, with a simple routine that stores each clique in a preferred data structure. 
 
 
 %A detailed overview of community detection methods, and the significance and complexity involved in overlapping community findingcan be found in \cite{Fortunato_2010}.
 
-%\vspace{-20pt}
-\begin{figure}%[h!]
-  \centering
-    \includegraphics[width=1\textwidth]{communities_fb.pdf}
-%\vspace{-30pt}
-  \caption{Some Facebook communities detected by our algorithm.}
-\label{fig-communities-fb}
-\end{figure}
-%\vspace{-10pt}
-
-%\vspace{-20pt}
-\begin{figure}%[h!]
-  \centering
-    \includegraphics[width=1\textwidth]{communities_tw.pdf}
-%\vspace{-30pt}
-  \caption{Some Twitter communities detected by our algorithm.}
-\label{fig-communities-tw}
-\end{figure}
-%\vspace{-10pt}
 
 %\footnotetext{http://www.facebook.com}
-For experiments, we generated a user-interest-based network using data collected from two widely used social media platforms: Facebook\footnote[1]{http://www.facebook.com}  and Twitter\footnote[2]{http://www.twitter.com}. Facebook {\it walls} and Twitter {\it profiles} are features in these platforms, that provide a medium for businesses, groups and individuals to post content such as messages, promotions or campaigns. These features also engage other users by allowing them to reply or comment on the already posted content. We use users' comments on posts added on the Facebook {\it walls} as an indicator of their interests in the respective {it walls}, and use this to formulate the network for our experiments. The user comments and user information from specific {\it walls} are publicly available and collected using Facebook API\footnote[3]{http://developers.facebook.com/}. Similarly, for Twitter we deduce users' interests by using their {\it tweets}. A {\it tweet} is a message with up to 140 characters related to a particular Twitter {\it profile}. We use two kinds of {it tweets}. First, {\it retweet}, which is a {\it tweet} made by a Twitter {\it profile} that gets tweeted again by another interested user. Second, {\it mentioned tweet}, which is a {\it tweet} made by an interested user regarding the Twitter profile. The publicly available user mentioned tweets, retweets of a Twitter profile, and information of users who tweeted on these profiles are collected using Twitter API\footnote[4]{https://dev.twitter.com/docs/}.
 
-With the collected data, we use the following technique to generate our user-interest-based network. From the gathered Facebook data, we calculate, for each {\it wall} $i$, the total number of unique users $u_i$ who have commented on it, and for each pairs of {\it walls} $i, j$, the number of common users who have commented on both {\it walls} $c_{ij}$. The same procedure is carried out for Twitter {\it profiles}. We then construct an undirected graph $G = (V,E)$, where $V$ represents the {\it walls} or {\it profiles} and $E$ represents edges between them. We assign an edge between a pair of vertices, if there is at least one common user between them. The edge weight $w_{ij}$, which is indicative of the strength of the connection, is computed using the Jacard index or similarity coefficient \cite{Leydesdorff}, given by
+For experiments, we generated a user-interest-based network using data collected from 
+two widely used social media platforms: Facebook and Twitter.
+%\footnote[1]{http://www.facebook.com}  and Twitter \footnote[2]{http://www.twitter.com}. 
+Facebook {\it walls} and Twitter {\it profiles} are features in these platforms that provide a medium for businesses, groups and individuals to post content such as messages, promotions or campaigns. These features also engage other users by allowing them to reply or comment on the already posted content. We use users' comments on posts added on the Facebook {\it walls} as an indicator of their interests in the respective 
+{\it walls}, and use this to formulate the network for our experiments. The user comments and user information from specific {\it walls} are publicly available and collected using Facebook API\footnote[3]{http://developers.facebook.com/}. Similarly, for Twitter, we deduce users' interests by using their {\it tweets}. 
+A {\it tweet} is a message with up to 140 characters related to a particular Twitter {\it profile}. We use two kinds of {\it tweets}: {\it retweet}, which is a {\it tweet} made by a Twitter {\it profile} that gets tweeted again by another interested user, and {\it mentioned tweet}, which is a {\it tweet} made by an interested user regarding the Twitter profile. The publicly available user mentioned tweets, retweets of a Twitter profile, and information of users who tweeted on these profiles are collected using Twitter API\footnote[4]{https://dev.twitter.com/docs/}.
 
-\begin{equation}
-w_{ij} = \frac{c_{ij}}{u_i+u_j-c_{ij}}
-\end{equation}
+
+
+With the collected data, we use the following technique to generate our user-interest-based network. From the gathered Facebook data, we calculate, for each {\it wall} $i$, the total number of unique users $u_i$ who have commented on it, and for each pair of {\it walls} $i, j$, the number of common users who have commented on both {\it walls} $c_{ij}$. The same procedure is carried out for Twitter {\it profiles}. We then construct an undirected graph $G = (V,E)$, where $V$ represents the {\it walls} or {\it profiles} and $E$ represents edges between them. We assign an edge between a pair of vertices, if there is at least one common user between them. The edge weight $w_{ij}$, which indicates the strength of the connection, is computed using the 
+Jacard index or similarity coefficient \cite{Leydesdorff} given by
+%\begin{equation}
+\[w_{ij} = \frac{c_{ij}}{u_i+u_j-c_{ij}}\]
+%\end{equation}
 
 It is clear from the above equation that the weight is between 0 and 1, a value closer to 1 implying the {\it walls}/{\it profiles} being more similar in terms of user interests.
 We then convert the graph to an unweighted graph by pruning edges whose weights are below a specified threshold, thus retaining only the links that indicate strong correlation. The choice of the threshold is subjective, and determines the size, number and quality of communities detected by our algorithm. 
 
 The weighted graph we formed using the Facebook data had 1144 vertices and 348,274, and that the Twitter graph had 1144 vertices and 204,131 edges. Since we look for the most cohesive subgroups, we set the threshold to a high number, that gave us fairly small communities with up to $\sim$15 vertices.
-
 
 
 %For our small experiment, we use data collected from Facebook\footnote[1]{http://www.facebook.com}. Every user on Facebook has a {\it wall}, which is a the user's profile space that allows the posting of messages, often short or temporal notes by other users. The user comments and user information from specific {\it walls} are publicly available and we collected them using Facebook API. We constructed a graph with the {\it walls} as vertices. Any two users who have commented on the same {\it wall} indicate a connection between the {\it walls}, and we form an edge between them. There could be many common users for each wall, and so we assigned edge weights by Jacard index or similarity coefficient \cite{Leydesdorff}. Once this is done for all {\it walls}, we retained only those edges which have weights above a chosen threshold, indicating a strong correlation. The threshold is a user's choice and decides both the size and the number of communities found.
@@ -56,9 +52,43 @@ The weighted graph we formed using the Facebook data had 1144 vertices and 348,2
 %This is done by simply substituting Lines 3 and 4 of Algorithm \ref{alg:clqHeu}, with a simple routine that stores each clique in a preferred data structure. 
 %The exact algorithm could have also been used instead of the heuristic for this purpose. We choose the heuristic since it is much faster and for this particular problem of community detection the accuracy of the size of cliques formed is not critical.
 
-Figure \ref{fig-communities-fb} shows a few of the cliques/communities detected from the Facebook graph. It is to be noted that the figure represents only a small subset of the communities detected by our algorithm, which we decided to present here to illustrate the results of our algorithm. In reality, a large number of communities ($\sim$100) were detected similar to the ones shown. Also, the members in the communities also represent only a subset of nodes that belonged to that community, and we decided not to show the rest in order to avoid redundancy. In order to improve readability, we also decrypted the names of the vertices, which were Facebook or Twitter handles of {\it walls} or {\it profiles}. The original handles lacked spaces in between words, had special characters such as underscore, or had additional terms, all of which we decided to leave out to help the reader better comprehend the names.
 
-As shown in Figure \ref{fig-communities-fb}, we obtained a number of isolated communities similar to the one of {\it popular singers}, and that of {\it internet corporations}. We also see communities that pertain to {\it MSNBC and its (news related) shows}, {\it news channels}, and {\it politics}. The highlight of this experiment is that our algorithm allows a node to be a member of more than one community giving an overlapping community structure. Although the {\it news channels} and {\it MSNBC and shows} communities are essentially separate, they share a common member, {\it MSNBC}, which is relevant to both. A similar feature can be observed between the {\it news channels} community and that of {\it politics}, where they share two members, {\it Fox News} and {\it White House} which belong to both. Figure \ref{fig-communities-tw} shows the communities detected from the Twitter graph. One can observe a very similar pattern there as well.
+\begin{figure}%[h!]
+  \centering
+    %\includegraphics[width=1\textwidth]{communities_fb.pdf}
+    \includegraphics[scale=0.25]{communities_fb.pdf}
+    
+%\vspace{-30pt}
+  \caption{Some Facebook communities detected by our algorithm.}
+\label{fig-communities-fb}
+\end{figure}
+%\vspace{-10pt}
+
+Figure \ref{fig-communities-fb} shows a few of the cliques/communities detected by our algorithm from the Facebook graph. A few cautionary points need to be pointed out here. The figure represents only a small subset of the communities detected by our algorithm, which we decided to present here to illustrate the results of our algorithm. In reality, a large number of communities ($\sim$100) similar to the ones shown here were detected. Furthermore, the members in the communities also represent only a subset of nodes that belonged to that community, and we decided not to show the rest to favor clarity and simplicity. In order to improve readability, we have also decrypted the names of the nodes, which in reality were Facebook or Twitter handles of {\it walls} or {\it profiles}. The original handles lacked spaces in between words, had special characters such as underscore, or had additional terms, all of which we decided to leave out to help the reader better comprehend the names.
+
+As shown in Figure \ref{fig-communities-fb}, we obtained a number of isolated communities similar to the one of {\it popular singers}, and that of {\it internet corporations}. We also see communities that pertain to {\it MSNBC and its (news related) shows}, {\it news channels}, and {\it politics}. The point of this experiment is that our algorithm allows a node to be a member of more than one community and therefore helps detect overlapping communities. For instance, although the {\it news channels} and {\it MSNBC shows} communities are essentially separate, they share a common member, {\it MSNBC}, which is relevant to both. 
+A similar feature can be observed between the {\it news channels} and  {\it politics} communities
+where the two communities share two members. 
+Figure \ref{fig-communities-tw} shows the communities detected from the Twitter graph. 
+One can observe a very similar pattern there as well.
 %add from nature paper why this is significant. coexistence of their structural subunits 
 
-The algorithm we used here, is rather elementary, but still is capable of producing some interesting results in terms of detecting overlapping communities. That said, our algorithm creates communities only that are cliques, which is a stringent requirement. The immediate next thing to try would be to extend this to allow for clique-relaxations, such as $k$-core, $k$-plex \ref{Doreian1994267} etc. This can be done by merging the communities detected by our algorithm, which is one of the future lines of work we intend to pursue.
+%\vspace{-20pt}
+\begin{figure}%[h!]
+  \centering
+    %\includegraphics[width=1\textwidth]{communities_tw.pdf}
+    \includegraphics[scale=0.25]{communities_tw.pdf}
+%\vspace{-30pt}
+  \caption{Some Twitter communities detected by our algorithm.}
+\label{fig-communities-tw}
+\end{figure}
+%\vspace{-10pt}
+
+
+As demonstrated by these experiments, the algorithm used here although rather elementary can be effective at detecting overlapping communities. Our algorithm, however, detects communities formed by cliques, which is a stringent requirement. Appropriate relaxations, such as the use of $k$-cores, is worth investigating and is one of
+the future lines of work we intend to pursue. 
+
+
+
+
+%The immediate next thing to try would be to extend this to allow for clique-relaxations, such as $k$-core, $k$-plex \ref{Doreian1994267} etc. This can be done by merging the communities detected by our algorithm, which is one of the future lines of work we intend to pursue.
