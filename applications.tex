@@ -11,6 +11,44 @@ Yet, in many real-world networks, it is natural to find vertices (or members) th
 one group (or community) at the same time.
 %In social networks, for example, an individual may belong to different circles at the same time, one circle based on work colleagues, another on family relationships, and a third on sport associations, etc. 
 
+Cliques are used as fundamental building blocks in a number of community detection algorithms which aim at extracting overlapping communities (ref???). One such algorithm, the Clique Percolation Method (CPM) (ref???) detects communities by merging overlapping sets of adjacent cliques. The first step in the algorithm is to identify all cliques of size $k$ in the given graph. This is typical done by detecting all maximal cliques in the graph. Then, a new graph is constructed such that each vertex represents one of these $k$-cliques. Two nodes in this new graph are considered to be connected if the $k$-cliques that represent them share $k$?1 members. The cliques of the connected components in the new graph are merged into communities. Since a vertex can occur in more than one $k$-cliques simultaneously, this results in an overlapping communities structure.
+
+We devised an algorithm based on a similar idea as the CPM, but instead of using a enumerating all maximal cliques, we use our heuristic (Alg 2) as the core clique detection algorithm. We extended our heuristic such that it retains the largest clique containing each node. In order to leverage merging cliques, we also included an option to extract cliques other than the largest. We implemented this by introducing a parameter $c$, which essentially runs the heuristic $c$ additional times using a random choice of vertex at each step instead of picking the largest. In total, $(c+1) \times n$ cliques would be collected, $c \times n$ using random selection of vertices, and $1$ with the largest vertex at each step of the heuristic. We also modified the pruning steps by discarding cliques that cannot be more than size $k$, instead of the maximum clique size. Since we only look for cliques that overlap at least by $k$ nodes, we can safely prune these out. This is achieved by replacing all occurrences of $max$ in Algorithm 2???, and removing Lines (2 and 3???) as we now don't need to keep track of the maximum clique size. After extracting the cliques, we perform a standard component analysis, similar to the one described in (ref??? - supplementary info of Pallla paper) of the clique–clique overlap matrix to merge the cliques into communities.
+
+
+We tested our algorithm on LFR benchmarks (http://sites.google.com/site/andrealancichinetti/files) proposed in [Lancichinetti et al. 2008] to evaluate the performance of our algorithm. These benchmarks introduce heterogeneity into degree and community size distributions of a network. These distributions are governed by power laws with exponents $\tau_1$ and $\tau_2$, respectively. It allows the generation of overlapping communities using the parameters, $O_n$, the fraction of overlapping nodes and $O_m$, the number of communities each overlapping node is assigned to. It also provides other parameters to control the network topology, such as the mixing parameter $\mu$, which is the expected fraction of links through which a node connects to other nodes in the same community, the average degree $K$, the maximum degree $K_{max}$, the maximum community size $C_{max}$, and the minimum community size $C_{min}$. We chose these parameters similar to those in [ref???]. We set the average degree $K$ to 10, which is of the same order as most large real-world social networks. The node degrees and community sizes are governed by power law distributions with exponents $\tau_1$ = 2 and $\tau_2$ = 1 respectively. We set the maximum degree $K_{max}$ to 50, and the minimum and maximum community sizes $C_{min}$ and $C_{max}$ to 20 and 50 respectively. We varied the parameters the mixing parameter $\mu$, the fraction of overlapping communities $On$, and number of community each overlapping node belongs to $O_m$ to generate the graphs. We chose to vary these as opposed to the others since these would have the most profound impact on the network topology for overlapping community detection. We tried two values at either extremes, for each of these parameters, hence resulting in eight graphs in total in our testbed. For $\mu$ we used 0.1 and 0.3, for $O_n$, we used 10$\%$ and 50$\%$, and for $O_m$, we used 2 and 8.
+
+We evaluated the performance of our algorithm using the {\it Omega Index} [Collins and Dent 1988] which is a metric to compare how welll two sets of clusters or communities agree with each other. The omega index is the overlapping version of the Adjusted Rand Index (ARI) [Hubert and Arabie 1985], and it considers pairs of nodes belonging to the same number of clusters (possibly none) to compute the index.
+
+We define the set of clusters found as a cover $C=\{c_1, c_2, ..., c_k\}$ [Lancichinetti et al. 2009], where $k$ is the number of clusters found.In the case of overlapping communities, a node may belong more than one cluster. Let $N1$ and $N2$ be the number of communities in covers $C1$ and $C2$, respectively, the omega index $\omega$ is defined as [Gregory 2011; Havemann et al. 2011]
+
+\begin{equation}
+\omega(C_1, C_2) = \frac{\omega_u(C_1, C_2) - \omega_e(C_1, C_2)}{1 - \omega_e(C_1, C_2)}
+\label{eqn-omega}
+\end{equation}
+
+The unadjusted omega index $\omega_u$ is defined as
+
+\begin{equation}
+\omega_u(C_1, C_2) = \frac{1}{M} \sum\limits_{i=0}^{max(N_1,N_2)} \left\vert{s_i(C_1)\cap s_i(C_2)}\right\vert 
+\end{equation}
+
+where $M = n(n-1) /2$ represents the number of node pairs and $s_i(C)$ is the set of pairs that appear exactly $i$ times in a cover $C$. The expected omega index in the null model $\omega_e$ is given by
+
+\begin{equation}
+\omega_e(C_1, C_2) = \frac{1}{M^2} \sum\limits_{i=0}^{max(N_1,N_2)} \left\vert{s_i(C_1)}\right\vert \cdot \left\vert{s_i(C_2)}\right\vert 
+\end{equation}
+
+The subtraction of the expected value in Equation \ref{eqn-omega} takes into account agreements resulting from chance alone. The larger the omega index is, the better the matching is between two covers. A value of 1 indicates perfect matching. When there is no overlap, the omega index reduces to the ARI.
+
+We test three versions of our algorithm using different values for the parameter $c$ = 0, 2 and 5. When C is set to zero, it basically uses only the largest cliques for each node. As we increase $c$, more and more cliques are considered towards merging and community detection. Other than computing the omega index w.r.t the ground truth, we also compare it with the results of CFinder \footnote{http://www.cfinder.org}, an implementation of CPM, whose time complexity is polynomial in many applications [Palla et al.2005].
+
+\include{results_application}
+
+
+% (ref to supplementary info???).  
+
+
 We developed a very simple clique-based community detection algorithm using our heuristic as follows. We modified our heuristic such that it retains the largest clique containing each node. We use the heuristic instead of the exact algorithm because it is much faster and delivers near-optimal solution which is sufficient for the purpose of detecting communities. It is possible that we get duplicate cliques via different nodes,  
 and so we remove these. The resulting cliques are cohesively connected subgroups, and those are
 what our algorithm outputs as communities.
