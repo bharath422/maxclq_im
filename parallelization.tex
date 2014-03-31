@@ -3,7 +3,7 @@
 
 %The ease with which an algorithm can be parallelized and its performance is important for handling large-scale graphs in emerging applications, where graphs with millions (or more) vertices have become quite common. 
 
-In this section we describe how our exact algorithm can be parallelized, and show performance results
+ We describe in this section how our exact algorithm can be parallelized and show performance results
 on a shared-memory platform. The heuristic can be parallelized following a similar procedure.
 
 %We here describe the parallelization procedure for both shared and distributed memory architecture. 
@@ -14,7 +14,7 @@ for the pruning steps to be most effective, the current globally largest maximum
 We implemented a shared-memory parallelization based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the updating of the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, in a {\it critical} section (an OpenMP feature that enforces a lock allowing only one thread to make the update at a time). Further, we used  dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different work loads.
 %, so would work best for our case.
 
-We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation running 64-bit version Red Hat Enterprise Linux Server release 6.2, with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, each with 32 KB of L1 and 256 KB of L2 cache, and each processor shares a 18 MB L3 cache.  
+We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation running 64-bit version Red Hat Enterprise Linux Server release 6.2 with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, each with 32 KB of L1 and 256 KB of L2 cache, and each processor shares an 18 MB L3 cache.  
 %Implementation was in C++ using OpenMP and compiled with gcc (version 4.4.7) using the -O3 optimization flag.
 
 
@@ -32,7 +32,7 @@ We performed experiments on the same graphs listed in the testbed described in S
 
 
 Figure \ref{fig-parallel_perf} shows the timings and speedups we obtained for the real-world and RMAT graphs separately. We omitted graphs whose sequential runtimes were less than 5 seconds as they were too low to measure and do meaningful assessment of parallelization performance. For most of the real-world graphs, one can see from the figure that we obtained near-linear scaling of runtimes and speedups when up to 16 threads are used. The only exception is the graph 
-{\emph as-Skitter}. It's relatively poorer scaling is likely due to the fact that this instance has a relatively large maximum clique, and hence the core (thread) which computes it spends relatively large amount of time computing it, while other cores (threads) which have completed their processing of the remaining vertices remain idle. 
+{\emph as-Skitter}. The relatively poorer scaling there is likely due to the fact that the instance has a relatively large maximum clique, and hence the core (thread) which computes it spends relatively large amount of time computing it while other cores (threads) which have completed their processing of the remaining vertices remain idle. 
 For the other instances of the real-world graphs, the maximum speedup we obtained 
 while using 32 cores/threads is around 22$\times$. 
 

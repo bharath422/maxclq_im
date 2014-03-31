@@ -1,4 +1,4 @@
-\section{Experiments and Performance Results}
+\section{Experimental Evaluation}
 \label{sec:experiments}
 
 We present in this section results comparing the performance of our algorithm
@@ -25,7 +25,8 @@ The experiments are performed on a Linux workstation running 64-bit Red Hat Ente
 \begin{tabular}{ll}
 {\bf Graph} & {\bf Description} \\ \hline \hline
 {\it cond-mat-2003} \cite{Newman06042004} & A collaboration network of scientists posting preprints 
-on \\ & the condensed matter archive at www.arxiv.org in the period \\ \hline %\\ & between January 1, 1995 and June 30, 2003. \\ \hline
+on \\ & the condensed matter archive at www.arxiv.org in the period \\ 
+& between January 1, 1995 and June 30, 2003. \\ \hline
 %The largest component of this network, which contains 27519 scientists, has been used by several authors as a test-bed for community-finding algorithms for large networks; see for example \cite{PhysRevE.72.027104}
 {\it email-Enron} \cite{Leskovec:2005:GOT:1081870.1081893} & A communication network representing
 email exchanges. \\
@@ -59,7 +60,7 @@ Our testbed is grouped in three categories:
 
 {\bf 1. Real-world graphs. } 
 Under this category, we consider 10 graphs downloaded from the 
-University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity} that originate
+University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}. The graphs originate
 from various real-world applications. 
 Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.
   
@@ -81,7 +82,7 @@ The DIMACS graphs  are an established benchmark for the maximum
 clique problem, but they are of rather limited size and variation. 
 In contrast, the real-work networks included  in category 1 of the testset
 and the synthetic (RMAT) graphs in category 2
-represent a wide spectrum of large graphs posing varying degrees of difficulty for testing the algorithms. 
+represent a wide spectrum of large graphs posing varying degrees of difficulty for the algorithms. 
 The {\it rmat\_er} graphs have {\it normal} degree distribution, whereas the {\it rmat\_sd1} and {\it rmat\_sd2} graphs have skewed degree distributions and contain many dense local subgraphs.
  The {\it rmat\_sd1} and {\it rmat\_sd2} graphs differ primarily in the magnitude of maximum vertex degree they contain; the {\it rmat\_sd2} graphs have much higher maximum degree. 
 Table \ref{tab:struc-graphs} lists basic structural information (the number of vertices, 
@@ -147,7 +148,7 @@ In Figure~\ref{fig-pruningplot} we show the number of vertices discarded by all
 the  pruning steps of the exact algorithm normalized by the total number of edges
 in a graph for the real-world graphs (category 1) in the testbed. We cut few bars reachining
 140\% as their correspnding values are much higher.
-In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. It can be seen for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero, but relatively modest.
+In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. It can be seen for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero but relatively modest.
 %Since our new pruning steps hierarchically reduce the search space, one can expect a decreasing order of effect in the performance of Prunings 1, 2, 3 and 5, with Pruning 1 having the highest impact, and 5 the lowest. 
 
 
@@ -192,25 +193,25 @@ and thus the performance results agree with one's expectation.
 
 It is to be noted that the DIMACS graphs are intended to serve as challenging test cases for the maximum clique problem, and graphs with such high edge densities and low vertex count are rare in practice. 
 Most of these have between 20 to 1024 vertices with an average edge density of roughly 0.6, 
-whereas, most real world graphs are often very large and sparse. Good examples are Internet topology graphs \cite{Faloutsos:1999:PRI:316188.316229}, the web graph \cite{kumar:extracting}, social network graphs \cite{Domingos:2001:MNV:502512.502525}, and the real-world graphs in our testbed. 
-
-
-
-
-
+whereas, most real world graphs are often very large and sparse
+as exemplified by the real-world graphs in our test bed.
+Other good examples of instances with similar nature include Internet topology graphs \cite{Faloutsos:1999:PRI:316188.316229}, the web graph \cite{kumar:extracting}, and social network graphs \cite{Domingos:2001:MNV:502512.502525}.
 
 
 
 %\vspace{-15pt}
-\subsubsection{The Heuristic}
-\label{sec:exp-heuristic}
 
 It can be seen that our heuristic runs several orders of magnitude faster than our exact algorithm,
 while delivering either optimal or very close to optimal solution.
 It gave the optimal solution on 25 out of the 30 test cases.
 On the remaining 5 cases where it was suboptimal, its accuracy ranges from 83\% to 99\% (on average 93\%).
+
 Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{maxDsel} of Algorithm \ref{alg:mClqHeu} instead of the one with the maximum degree. We observe that on average, the solution is optimal only for less than $40\%$ of the test cases compared to 83\% when selecting the maximum degree vertex.
 %after three repetitions with different random seeds
+
+
+\subsubsection{Further Analysis}
+\label{sec:exp-further}
 
 %\vspace{-10pt}
 %\vspace{-10pt}
@@ -227,7 +228,7 @@ Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{ma
 \begin{figure}
   \centering
     \includegraphics[scale=0.6]{compare_time_er.eps}
-    \includegraphics[scale=0.6]{compare_time_sd1.eps}
+    \includegraphics[scale=0.6]{compare_time_sd1.eps}\\
     
     \includegraphics[scale=0.6]{compare_time_sd2.eps}
     \includegraphics[scale=0.6]{compare_time_rw.eps}
@@ -254,11 +255,11 @@ in the testbed. In addition to the curves corresponding to the runtimes of the
 {\em exact} algorithm and the {\em heuristic}, the figures also include a curve corresponding to
 the number of {\em edges} in the graph divided by the clock frequency of the computing
 platform used in the experiment. This curve is added to facilitate comparison between
-the growth rate of the algorithms with that of a linear-time (in the size of the graph) growth rate. 
+the growth rate of the runtime of the algorithms with that of a linear-time (in the size of the graph) growth rate. 
 It can be seen that the runtime of the heuristic by and large grows 
 somewhat linearly with the size of a graph. The exact algorithm's runtime, which is orders of
 magnitude larger than the heuristic, exhibited a similar growth behavior for these test-cases
-even though its worst-case complexity suggests exponential growth. 
+even though its worst-case complexity suggests exponential growth in the general case. 
 
 
 

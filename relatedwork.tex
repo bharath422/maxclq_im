@@ -32,11 +32,11 @@ However, the new pruning strategy used in this algorithm is intimately tied to t
 A number of existing branch-and-bound algorithms for maximum clique
 also use a vertex-coloring of the graph to obtain an upper bound on the maximum clique. 
 %A {\em vertex-coloring} of a graph is an assignment of colors to vertices such that  a pair of adjacent vertices receive different colors. Clearly, the number of colors used gives  an upper bound on the maximum clique of the graph, which can be used to reduce the search space. 
-A popular and recent algorithm based on this idea is 
-the algorithm of Tomita and Seiku \cite{citeulike:7905505} (known as MCQ). 
+A popular and recent method based on this idea is 
+the MCQ algorithm of Tomita and Seiku \cite{citeulike:7905505}. 
 More recently, Konc and Jane\v{z}i\v{c} \cite{konc2007improved} presented 
-an improved version of MCQ, known as MaxCliqueDyn (MCQD and MCQD+CS), that
-involves the use of tighter, computationally more expensive upper bounds 
+an improved version of MCQ, known as MaxCliqueDyn (with the variants MCQD and MCQD+CS), 
+that involves the use of tighter, computationally more expensive upper bounds 
 applied on a fraction of the search space.
 
 %They present two variations - 1) MCQ with improved 

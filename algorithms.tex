@@ -16,6 +16,27 @@ denoted by $d(v_i)$.
 \label{subsec:exact}
 %\vspace{-4pt}
 
+Recall that the maximum clique in a graph can be found by computing the largest clique containing each vertex and picking the largest among these. 
+A key element of our exact algorithm is that during the search for the largest clique containing a given vertex, vertices that cannot form cliques larger than the current maximum 
+clique are {\em pruned}, in a hierarchical fashion. 
+The method is outlined in detail in Algorithm \ref{alg:mClq}. 
+Throughout, the variable $max$ stores the size of the maximum clique found 
+thus far. Initially it is set to be equal to the lower bound $lb$ provided as an input parameter.
+It gives the maximum clique size when the algorithm terminates.
+
+
+To obtain the largest clique containing a vertex $v_i$, 
+it is sufficient to consider only the neighbors of $v_i$. 
+The main routine {\sc MaxClique} thus generates  for each 
+vertex $v_i \in V$ a set $U \subseteq N(v_i)$ 
+(neighbors of $v_i$ that survive pruning) and calls the subroutine \clq\ on $U$.  
+The subroutine \clq\ goes through every relevant clique containing $v_i$ 
+in a recursive fashion and returns the largest.
+%, and a more elaborate explanation can be found there. 
+We use $size$ to maintain the size of the clique found at any point through the recursion.
+Since we start with a clique of just one vertex, the value of $size$ is set to one initially, 
+when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
+
 %\begin{wrapfigure}{R}{0.6\textwidth}
 %%\begin{figure}[t]
 %\begin{center}
@@ -23,7 +44,7 @@ denoted by $d(v_i)$.
 %\vspace{\afterfigure}
 
 %\begin{minipage}{0.6\textwidth}
-\begin{algorithm}
+\begin{algorithm}[t]
 \begin{spacing}{\algospacing}
 {
 \small
@@ -105,26 +126,7 @@ denoted by $d(v_i)$.
 %\end{wrapfigure}
 %\end{figure}
 
-The maximum clique in a graph can be found by computing the largest clique containing each vertex and picking the largest among these. 
-A key element of our exact algorithm is that during the search for the largest clique containing a given vertex, vertices that cannot form cliques larger than the current maximum 
-clique are {\em pruned}, in a hierarchical fashion. 
-The method is outlined in detail in Algorithm \ref{alg:mClq}. 
-Throughout, the variable $max$ stores the size of the maximum clique found 
-thus far. Initially it is set to be equal to the lower bound $lb$ provided as an input parameter.
-It gives the maximum clique size when the algorithm terminates.
 
-
-To obtain the largest clique containing a vertex $v_i$, 
-it is sufficient to consider only the neighbors of $v_i$. 
-The main routine {\sc MaxClique} thus generates  for each 
-vertex $v_i \in V$ a set $U \subseteq N(v_i)$ 
-(neighbors of $v_i$ that survive pruning) and calls the subroutine \clq\ on $U$.  
-The subroutine \clq\ goes through every relevant clique containing $v_i$ 
-in a recursive fashion and returns the largest.
-%, and a more elaborate explanation can be found there. 
-We use $size$ to maintain the size of the clique found at any point through the recursion.
-Since we start with a clique of just one vertex, the value of $size$ is set to one initially, 
-when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
 
 Our algorithm consists of several pruning steps.
 Pruning 1 (Line \ref{pr1}, {\sc MaxClique}) 
