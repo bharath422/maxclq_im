@@ -1,0 +1,28 @@
+\begin{table}[!hbt]
+
+\footnotesize
+%\scriptsize
+\small
+\centering
+\caption{Results of communities extracted using our new algorithm and CFinder on LFR benchmarks. All graphs have $n$ = 1000 vertices, and the parameters used to generate the graphs are given by the first three columns. $mu$ is the mixing parameter, $O_n$, the fraction of overlapping nodes, and $O_m$, the number of communities each overlapping node is assigned to. C is the num of communities, S, the number of shared nodes, and $\omega$, the omega index. C(GT) is the number of communities in the input graph. }
+\label{tab:applications1}
+%\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r}
+
+%\begin{tabular}{ c@{\hspace{4pt}}  c@{\hspace{2pt}}  c | @{\hspace{2pt}}c@{\hspace{2pt}} || c@{\hspace{2pt}}  c@{\hspace{2pt}}  c@{\hspace{4pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}}  | c@{\hspace{3pt}}  c@{\hspace{3pt}} c@{\hspace{3pt}}  }
+\begin{tabular}{ c c c c || c@{\hspace{3pt}} c@{\hspace{3pt}} c@{\hspace{3pt}} | c c c | c c c | c c c }
+\toprule\toprule
+	&  			& 			& 			&  		& 	CFinder	&			&		&	c=0		&			&		&	c=2	&			&		&	c=5	&		\\
+$\mu$&	$O_m$	&	$O_n$	&	C(GT)	&	C	&	S		&	$\omega$	&	C	&	S		&	$\omega$	&	C	&	S	&	$\omega$	&	C	&	S	&	$\omega$	\\
+\hline\hline
+0.1	&	2	&	10\%	&	34	&	37	&	55	&	0.842	&	60	&	64	&	0.758	&	49	&	76	&	0.825	&	40	&	59	&	0.840	\\
+0.1	&	2	&	50\%	&	44	&	62	&	153	&	0.402	&	87	&	116	&	0.280	&	83	&	158	&	0.363	&	68	&	158	&	0.395	\\
+0.1	&	8	&	10\%	&	51	&	58	&	30	&	$\sim$0.0	&	76	&	46	&	$\sim$0.0	&	65	&	39	&	$\sim$0.0	&	61	&	35	&	$\sim$0.0	\\
+0.1	&	8	&	50\%	&	130	&	74	&	68	&	0.030	&	74	&	56	&	0.020	&	79	&	66	&	0.028	&	79	&	72	&	0.030	\\
+0.3	&	2	&	10\%	&	35	&	50	&	53	&	0.612	&	69	&	67	&	0.461	&	64	&	73	&	0.577	&	55	&	60	&	0.605	\\
+0.3	&	2	&	50\%	&	44	&	60	&	95	&	0.193	&	92	&	93	&	0.109	&	85	&	102	&	0.152	&	77	&	106	&	0.169	\\
+0.3	&	8	&	10\%	&	48	&	64	&	35	&	0.304	&	79	&	59	&	0.239	&	74	&	55	&	0.293	&	69	&	46	&	0.301	\\
+0.3	&	8	&	50\%	&	142	&	57	&	43	&	0.019	&	58	&	46	&	0.013	&	61	&	49	&	0.017	&	59	&	45	&	0.018	\\
+\bottomrule\bottomrule
+\end{tabular}
+
+\end{table}

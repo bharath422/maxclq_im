@@ -1,0 +1,27 @@
+\begin{table}[!hbt]
+
+\footnotesize
+%\scriptsize
+\small
+\centering
+\caption{Timing results of our new algorithm and CFinder on LFR benchmarks. All graphs have $n$ = 1000 vertices, and the parameters used to generate the graphs are given by the first three columns. $mu$ is the mixing parameter, $O_n$, the fraction of overlapping nodes, and $O_m$, the number of communities each overlapping node is assigned to. $\tau_c$ is the time spent (in seconds) on computing the cliques, $\tau$, the total time (in seconds), and $\tau_c\%$, the percentage of total time spent for clique computation. }
+\label{tab:applications2}
+%\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r}
+
+%\begin{tabular}{ c@{\hspace{4pt}}  c@{\hspace{2pt}}  c | @{\hspace{2pt}}c@{\hspace{2pt}} || c@{\hspace{2pt}}  c@{\hspace{2pt}}  c@{\hspace{4pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}}  | c@{\hspace{3pt}}  c@{\hspace{3pt}} c@{\hspace{3pt}}  }
+\begin{tabular}{ c c c || c | c c c | c c c | c c c }
+\toprule\toprule
+ 	&  		& 		&	CFinder	&			&	c=0		&			&			&	c=2		&			&			&	c=5		&			\\
+$\mu$&$O_m$	&$O_n$	&	$\tau$	&	$\tau_c$	&	$\tau$	&$\tau_c\%$	&	$\tau_c$	&	$\tau$	&$\tau_c\%$	&	$\tau_c$	&	$\tau$	&$\tau_c\%$	\\
+\hline\hline
+0.1	&	2	&	10\%	&	0.913	&	0.005	&	0.031	&	17.3\%	&	0.025	&	0.255	&	9.7\%	&	0.050	&	0.912	&	5.5\%	\\
+0.1	&	2	&	50\%	&	0.855	&	0.004	&	0.016	&	22.0\%	&	0.010	&	0.089	&	10.8\%	&	0.017	&	0.254	&	6.8\%	\\
+0.1	&	8	&	10\%	&	0.732	&	0.004	&	0.025	&	17.4\%	&	0.012	&	0.159	&	7.4\%	&	0.024	&	0.550	&	4.4\%	\\
+0.1	&	8	&	50\%	&	0.358	&	0.002	&	0.005	&	42.8\%	&	0.006	&	0.016	&	36.1\%	&	0.011	&	0.042	&	26.7\%	\\
+0.3	&	2	&	10\%	&	0.592	&	0.004	&	0.013	&	26.0\%	&	0.011	&	0.090	&	11.8\%	&	0.027	&	0.321	&	8.3\%	\\
+0.3	&	2	&	50\%	&	0.434	&	0.002	&	0.006	&	38.1\%	&	0.006	&	0.024	&	27.2\%	&	0.013	&	0.068	&	18.4\%	\\
+0.3	&	8	&	10\%	&	0.472	&	0.003	&	0.011	&	25.7\%	&	0.008	&	0.064	&	12.5\%	&	0.016	&	0.205	&	7.6\%	\\
+0.3	&	8	&	50\%	&	0.326	&	0.002	&	0.005	&	50.0\%	&	0.006	&	0.011	&	54.9\%	&	0.017	&	0.034	&	51.3\%	\\\bottomrule\bottomrule
+\end{tabular}
+
+\end{table}
