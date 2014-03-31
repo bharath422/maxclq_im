@@ -2,18 +2,46 @@
 \label{sec:applications}
 
 In this section, we demonstrate how maximum clique based algorithms can be used as  tools for  
-detecting overlapping communities in social networks. 
+detecting overlapping communities in networks. 
 %In particular, such algorithms have the unique ability to detect communities that are overlapping, i.e. they allow multiple communities to have common vertices, which most other algorithms do not.
-Finding overlapping communities is a challenging problem \cite{Fortunato_2010}. 
-Most community detection algorithms extract mutually independent communities 
+%Finding overlapping communities is a challenging problem \cite{Fortunato_2010}. 
+Most community detection algorithms are designed to identify mutually independent communities 
 in a given network and therefore are not suitable for detecting overlapping communities.
 Yet, in many real-world networks, it is natural to find vertices (or members) that belong to more than 
 one group (or community) at the same time.
 %In social networks, for example, an individual may belong to different circles at the same time, one circle based on work colleagues, another on family relationships, and a third on sport associations, etc. 
 
-Cliques are used as fundamental building blocks in a number of community detection algorithms which aim at extracting overlapping communities (ref???). One such algorithm, the Clique Percolation Method (CPM) (ref???) detects communities by merging overlapping sets of adjacent cliques. The first step in the algorithm is to identify all cliques of size $k$ in the given graph. This is typical done by detecting all maximal cliques in the graph. Then, a new graph is constructed such that each vertex represents one of these $k$-cliques. Two nodes in this new graph are considered to be connected if the $k$-cliques that represent them share $k$?1 members. The cliques of the connected components in the new graph are merged into communities. Since a vertex can occur in more than one $k$-cliques simultaneously, this results in an overlapping communities structure.
+%Cliques are fundamental building blocks in a number of community detection algorithms which aim at extracting overlapping communities (ref???). 
+%One such algorithm, 
 
-We devised an algorithm based on a similar idea as the CPM, but instead of using a enumerating all maximal cliques, we use our heuristic (Alg 2) as the core clique detection algorithm. We extended our heuristic such that it retains the largest clique containing each node. In order to leverage merging cliques, we also included an option to extract cliques other than the largest. We implemented this by introducing a parameter $c$, which essentially runs the heuristic $c$ additional times using a random choice of vertex at each step instead of picking the largest. In total, $(c+1) \times n$ cliques would be collected, $c \times n$ using random selection of vertices, and $1$ with the largest vertex at each step of the heuristic. We also modified the pruning steps by discarding cliques that cannot be more than size $k$, instead of the maximum clique size. Since we only look for cliques that overlap at least by $k$ nodes, we can safely prune these out. This is achieved by replacing all occurrences of $max$ in Algorithm 2???, and removing Lines (2 and 3???) as we now don't need to keep track of the maximum clique size. After extracting the cliques, we perform a standard component analysis, similar to the one described in (ref??? - supplementary info of Pallla paper) of the clique-clique overlap matrix to merge the cliques into communities.
+The Clique Percolation Method (CPM) due to Palla et al \cite{Palla} is one approach for detecting overlapping communities in a network. The basic idea in CPM is that a typical community is likely to be made up of several cliques that share many of their vertices. More precisely, Palla et al. define
+a {\em $k$-clique community} as a union of all $k$-cliques (cliques of size $k$) that can be reached from each other through a series of {\em adjacent} $k$-cliques 
+(two $k$-cliques are called adjacent if they share $k - 1$ nodes). 
+Further, they define a {\em $k$-clique chain} as the union of a sequence of adjacent $k$-cliques, and
+call two $k$-cliques $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, the $k$-clique communities are then equivalent to the $k$-clique connected components
+of the network.
+
+A large clique of size $q$ contains $\binom{q}{k}$ different $k-cliques$.
+An algorithm that tries to locate the $k$-cliques individually and examine the adjacency
+between them can therefore be very very slow for large networks. However, a clique of size $k$
+is clearly a $k$-clique connected subset for any $k \leq q$. Furthermore, two large
+cliques that share at least $k-1$ nodes form one $k$-clique connected component as well.
+Based on these, Palla et al employ a strategy that avoids searching for $k$-cliques individually
+and instead first locates the large cliques in the network and then looks for the $k$-clique connected subsets of given $k$---the $k$-clique communities---by studying the overlap between them.
+More specifically, their algorithm first constructs a symmetric clique-clique overlap matrix, 
+where each row represents a maximal clique, each matrix entry is equal to the number of common nodes between the two corresponding maximal cliques, and each diagonal entry is equal to the
+size of the clique. The $k$-clique communities for a given $k$ are equivalent to such connected 
+clique components in which the neighboring cliques are linked to each other by at least $k-1$ common nodes. Palla et al then find these components by erasing every off-diagonal entry smaller $k-1$ and every diagonal entry smaller than $k$ in the matrix, replacing the remaining elements by one, and then carrying out a component analysis of this matrix. The resulting separate components are equivalent to the different $k$-clique communities.
+       
+
+%detects communities by merging overlapping sets of adjacent cliques. The first step in the algorithm is to identify all cliques of size $k$ in the given graph. This is typical done by detecting all maximal cliques in the graph. Then, a new graph is constructed such that each vertex represents one of these $k$-cliques. Two nodes in this new graph are considered to be connected if the $k$-cliques that represent them share $k$?1 members. The cliques of the connected components in the new graph are merged into communities. Since a vertex can occur in more than one $k$-cliques simultaneously, this results in an overlapping communities structure.
+
+We devised an algorithm based on a similar idea as the CPM, but instead of enumerating 
+all maximal cliques, we use a variant of our heuristic maximum clique algorithm (Algorithm 2) 
+as the core  clique detection step.  {\bf the remainder of this paragraph needs more work.}
+Among other modifications, we extended the heuristic such that it returns the largest clique (not just the size) containing each node. In order to make merging of
+cliques more ``aggressive'', we also included an option for extracting cliques other than the {\em largest}. We implemented this by introducing a parameter $c$, which essentially runs the heuristic $c$ additional times using a random choice of vertex at each step instead of picking the vertex with the
+largest degree. In total, $(c+1) \times n$ cliques would be collected, $c \times n$ using random selection of vertices, and $1$ with the vertex with the largest degree at each step of the heuristic. We also modified the pruning steps by discarding cliques that cannot be more than size $k$, instead of the maximum clique size. Since we only look for cliques that overlap at least by $k$ nodes, we can safely prune these out. This is achieved by replacing all occurrences of $max$ in Algorithm 2???, and removing Lines (2 and 3???) as we now don't need to keep track of the maximum clique size. After extracting the cliques, we perform a standard component analysis, similar to the one described in (ref??? - supplementary info of Pallla paper) of the clique-clique overlap matrix to merge the cliques into communities.
 
 
 We tested our algorithm on LFR benchmarks \footnote{http://sites.google.com/site/andrealancichinetti/files} proposed in [Lancichinetti et al. 2008] to evaluate the performance of our algorithm. These benchmarks introduce heterogeneity into degree and community size distributions of a network. These distributions are governed by power laws with exponents $\tau_1$ and $\tau_2$, respectively. It allows the generation of overlapping communities using the parameters, $O_n$, the fraction of overlapping nodes and $O_m$, the number of communities each overlapping node is assigned to. It also provides other parameters to control the network topology, such as the mixing parameter $\mu$, which is the expected fraction of links through which a node connects to other nodes in the same community, the average degree $K$, the maximum degree $K_{max}$, the maximum community size $C_{max}$, and the minimum community size $C_{min}$. We chose these parameters similar to those in [ref???]. We generated graphs with $n$ = 1000 nodes, with the average degree $K$ to 10, which is of the same order as most large real-world social networks. The node degrees and community sizes are governed by power law distributions with exponents $\tau_1$ = 2 and $\tau_2$ = 1 respectively. We set the maximum degree $K_{max}$ to 50, and the minimum and maximum community sizes $C_{min}$ and $C_{max}$ to 20 and 50 respectively. We varied the parameters the mixing parameter $\mu$, the fraction of overlapping nodes $On$, and number of community each overlapping node belongs to $O_m$ to generate the graphs. We chose to vary these as opposed to the others since these would have the most profound impact on the network topology for overlapping community detection. We tried two values at either extremes, for each of these parameters, hence resulting in eight graphs in total in our testbed. For $\mu$ we used 0.1 and 0.3, for $O_n$, we used 10$\%$ and 50$\%$, and for $O_m$, we used 2 and 8.
