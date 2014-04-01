@@ -248,7 +248,11 @@ Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 an
 
 
 The exact algorithm examines all relevant cliques containing every vertex.
-Our heuristic, shown in Algorithm \ref{alg:mClqHeu}, considers only the {\em maximum degree} neighbor at each step instead of recursively considering all neighbors from the set $U$, and thus is much faster.
+Our heuristic, shown in Algorithm \ref{alg:mClqHeu}, considers only {\em one} neighbor
+with {\em maximum degree} at each step instead of recursively considering {\em all} neighbors 
+from the set $U$, and thus is much faster. The vertex with maximum degree is chosen
+because it is more likely to be a member of the largest clique containing that vertex
+compared to the other vertices.
 %The subset considered is the one with high likelihood to contain the largest clique.  
  %The main routine is very similar to the main routine in Algorithm \ref{alg:mClq}. The subroutine \clqh\ considers only the {\em maximum degree} neighbor at each step instead of recursively considering all neighbors from the set $U$. Since we are looking for the largest clique containing each vertex, the maximum degree vertex is more likely to be a member of the largest clique compared to the other vertices. The effect of choosing the maximum degree vertex as opposed to any random vertex will be analyzed in Section~\ref{sec:exp-heuristic}.
 %The pruning steps in Algorithm \ref{alg:mClqHeu}, are otherwise the same as in Algorithm \ref{alg:mClq}, unless not applicable (Pruning 2 and 4).

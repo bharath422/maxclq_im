@@ -14,7 +14,9 @@ for the pruning steps to be most effective, the current globally largest maximum
 We implemented a shared-memory parallelization based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the updating of the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, in a {\it critical} section (an OpenMP feature that enforces a lock allowing only one thread to make the update at a time). Further, we used  dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different work loads.
 %, so would work best for our case.
 
-We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation running 64-bit version Red Hat Enterprise Linux Server release 6.2 with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, each with 32 KB of L1 and 256 KB of L2 cache, and each processor shares an 18 MB L3 cache.  
+We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation 
+%running 64-bit version Red Hat Enterprise Linux Server release 6.2 
+with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, each with 32 KB of L1 and 256 KB of L2 cache, and each processor shares an 18 MB L3 cache.  
 %Implementation was in C++ using OpenMP and compiled with gcc (version 4.4.7) using the -O3 optimization flag.
 
 
