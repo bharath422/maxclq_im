@@ -1,24 +1,26 @@
 \section{Clique Algorithms and Community Detection}
 \label{sec:applications}
 
-In this section, we demonstrate how clique finding algorithms can be used as 
+In this section we demonstrate how clique finding algorithms can be used as 
 parts of methods for detecting overlapping communities in networks. 
+
+
+{\bf Background. }
 Most community detection algorithms are designed to identify mutually independent communities in a given network and therefore are not suitable for detecting overlapping communities. Yet, in many real-world networks, it is natural to find vertices (or members) that belong to more than one group (or community) at the same time.
 
-%\subsection{The Clique Percolation Method}
-
-Palla et al.\cite{cite-key} introduced the Clique Percolation Method (CPM) 
+Palla et al~\cite{cite-key} introduced the Clique Percolation Method (CPM) 
 as one effective approach for detecting overlapping communities in a network. 
 The basic premiss in CPM is that a typical community is likely to be made up of several cliques that share many of their vertices.  
 We recall a few notions defined in \cite{cite-key} to make this more precise.
-A clique of size $k$ is called a $k$-clique, and   
+A clique of size $k$ is called a {\em $k$-clique}, and   
 two $k$-cliques are called {\em adjacent} if they share $k - 1$ nodes. 
 A {\em $k$-clique community} is a union of all $k$-cliques that can be reached 
 from each other through a series of adjacent $k$-cliques. 
 Further, a {\em $k$-clique chain} is the union of a sequence of adjacent $k$-cliques, and
 two $k$-cliques are said to be $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, Palla et al observe that the $k$-clique communities are  
-equivalent to the $k$-clique connected components of the network; note that by definition
-overlap between communities is allowed.
+equivalent to the $k$-clique connected components of the network; 
+note that, by definition, $k$-clique communities allow for
+overlaps between communities to exist.
 
 A large clique of size $q >k $ contains $\binom{q}{k}$ different {\em k-cliques}.
 An algorithm that tries to locate the $k$-cliques individually and examine the adjacency
@@ -26,12 +28,12 @@ between them can therefore be very very slow for large networks.
 Palla et al make two observations that help one come up with a better strategy.
 First, a clique of size $q$ is clearly a $k$-clique connected subset for any $k \leq q$. 
 Second, two large cliques that share at least $k-1$ nodes form one $k$-clique connected component as well.
-The strategy of Palla et al. avoids searching for $k$-cliques individually
+Leveraging these, the strategy of Palla et al. avoids searching for $k$-cliques individually
 and instead first locates the large cliques in the network and then looks for the $k$-clique connected subsets of given $k$ (that is, the $k$-clique communities) by studying the overlap between them.
 More specifically, their algorithm first constructs a symmetric {\em clique-clique overlap matrix}, 
 in which each row represents a large (to be precise a maximal) clique, 
 each matrix entry is equal to the number of common nodes between the two corresponding cliques, and each diagonal entry is equal to the size of the clique. 
-The $k$-clique communities for a given $k$ are equivalent to connected 
+The $k$-clique communities for a given $k$ are then equivalent to connected 
 clique components in which the neighboring cliques are linked to each other by at least $k-1$ common nodes. Palla et al then find these components by erasing every off-diagonal entry smaller than $k-1$ and every diagonal entry smaller than $k$ in the matrix, replacing the remaining elements by one, and then carrying out a component analysis of this matrix. The resulting separate components are equivalent to the different $k$-clique communities.
        
 
@@ -39,17 +41,21 @@ clique components in which the neighboring cliques are linked to each other by a
 
 %\subsection{Our Method}
 
-{\bf Our Method. } We devised an algorithm based on a similar idea as the CPM,
-but using a variant of our heuristic maximum clique-algorithm 
+{\bf Our Method. } We devised an algorithm based on a similar idea as the procedure
+above, but using a variant of our heuristic maximum clique-algorithm 
 (Algorithm 2) for the core clique detection step. 
 
-The standard CPM in essence presupposes finding {\em all} maximal cliques in a network, and the number of maximal cliques in a network can in general be exponential in the number of nodes $n$ in the network. In our method we work instead with a smaller set of maximal cliques. In particular, the basic variant of our method considers exactly one maximal clique per each vertex. Clearly, this can be too restrictive a requirement and may fail to add deserving members to a community. To allow for more refined solutions, we include a parameter, $c$, 
-in the method that tells us how many additional cliques per vertex will be considered.
-The case $c=0$, corresponds to no additional cliques than the maximal clique containing the vertex. The case $c>1$ corresponds to $c$ additional large cliques (each of size at least $k$)
+The standard CPM in essence presupposes finding {\em all} maximal cliques in a network.
+The number of maximal cliques in a network can in general be exponential in the number of nodes $n$ in the network. In our method, we work instead with a smaller set of maximal cliques. In particular, the basic variant of our method considers exactly one maximal clique per each vertex. Clearly, this can be too restrictive a requirement and may fail to add deserving members to a $k$-clique community. 
+To allow for more refined solutions, we include a parameter $c$
+in the method that tells us how many additional cliques per vertex would be considered.
+The case $c=0$ corresponds to no additional cliques than the maximal clique containing the vertex. The case $c>1$ corresponds to $c$ additional large cliques (each of size at least $k$)
 per vertex.  In considering a vertex $v$, the maximal clique containing $v$ 
-is obtained by exploring the neighbor of $v$ with maximum degree in Algorithm 2.
+is obtained by exploring the neighbor of $v$ with {\em maximum degree} 
+in the corresponding step in Algorithm 2.
 In contrast, when the other large cliques involving $v$ are to be obtained (case $c>1$),
-the neighbor of $v$ to be explored is randomly chosen.      
+we explore a {\em randomly} chosen neighbor of $v$, regardless of its degree value.
+
 
 
 %The intuition for this follows from the fact that, in  CPM, many $k$-cliques which are $k$-clique-connected are merged into a single community. If we consider one such $k$-clique-community, it would naturally include the largest clique of size greater than or equal to $k$, that can be formed with a subset of its vertices. Hence, all large cliques of size greater than or equal to $k$ would certainly be contained within one of the $k$-clique-communities. 
@@ -69,10 +75,10 @@ the neighbor of $v$ to be explored is randomly chosen.
 
 %\subsection{Test on Synthetic Networks}
 
-{\bf Test on Synthetic Networks. } We tested our algorithm on the LFR benchmarks\footnote{http://sites.google.com/site/andrealancichinetti/files} proposed in \cite{2008PhRvE..78d6110L}. These benchmarks allow
-for generation of synthetic networks with known "ground truth"  about the communities.
-We generated graphs with $n$ = 1000 nodes, average degree $K$ = 10, and power law exponents $\tau_1$ = 2 and $\tau_2$ = 1. We set the maximum degree $K_{max}$ to 50, and the minimum and maximum community sizes $C_{min}$ and $C_{max}$ to 20 and 50, respectively. We tried two values at either extremes for the mixing parameter $\mu$, the fraction of overlapping nodes $O\_n$, and the number of communities each overlapping node belongs to $O_m$. For $\mu$ we used 0.1 and 0.3, for $O_n$ we used 10$\%$ and 50$\%$, and for $O_m$ we used 2 and 8. These combinations of parameters resulted in 
-eight graphs in total.
+{\bf Test on Synthetic Networks. } We tested our algorithm on the LFR benchmarks\footnote{http://sites.google.com/site/andrealancichinetti/files} proposed in \cite{2008PhRvE..78d6110L}. These benchmarks have the attractive feature that they allow
+for generation of synthetic networks with known ``ground truth"  about the communities.
+We generated graphs with $n$ = 1000 nodes, average degree $K$ = 10, and power law exponents $\tau_1$ = 2 and $\tau_2$ = 1 in the LFR model. We set the maximum degree $K_{max}$ to 50, and the minimum and maximum community sizes $C_{min}$ and $C_{max}$ to 20 and 50, respectively. We used two far-part values each for the mixing parameter $\mu$, the fraction of overlapping nodes $O_n$, and the number of communities each overlapping node belongs to $O_m$. Specifically, for $\mu$ we used 0.1 and 0.3, for $O_n$ we used 10$\%$ and 50$\%$, and for $O_m$ we used 2 and 8. 
+All together, these combinations of parameters resulted in eight graphs in the testbed.
 %, which is of the same order as most large real-world social networks. 
 %We chose to vary these as opposed to the others since these would have the most profound impact on the network topology for overlapping community detection. 
 %These benchmarks introduce heterogeneity into degree and community size distributions of a network. These distributions are governed by power laws with exponents $\tau_1$ and $\tau_2$, respectively. It allows the generation of overlapping communities using the parameters, $O_n$, the fraction of overlapping nodes and $O_m$, the number of communities each overlapping node is assigned to. It also provides other parameters to control the network topology, such as the mixing parameter $\mu$, which is the expected fraction of links through which a node connects to other nodes in the same community, the average degree $K$, the maximum degree $K_{max}$, the maximum community size $C_{max}$, and the minimum community size $C_{min}$. 
@@ -103,9 +109,9 @@ eight graphs in total.
 %The subtraction of the expected value in Equation \ref{eqn-omega} takes into account agreements resulting from chance alone. The larger the omega index is, the better the matching is between two covers. A value of 1 indicates perfect matching. When there is no overlap, the omega index reduces to the ARI.
 
 We evaluated the performance of our algorithm against the ground truth 
-using the {\it Omega Index} \cite{doi:10.1207/s15327906mbr2302_6}, 
+using {\it Omega Index} \cite{doi:10.1207/s15327906mbr2302_6}, 
 which is the overlapping version of the Adjusted Rand Index (ARI) \cite{ARI_paper_1985}.
-Intuitively, the Omega Index measures....{\bf complete this sentence}.
+Intuitively, Omega Index measures....{\bf complete this sentence}.
 
 We used three values for the parameter $c$ of our method: 0, 2, and 5. 
 Recall that $c$ set to zero corresponds to picking only the largest clique for each node. 
@@ -125,11 +131,12 @@ total number of shared nodes ($S$) and the Omega Index ($\Omega$) for
 CFinder and our method with different values for the parameter $c$.
 
 In our experiments, for CFinder as well as all variants of our algorithm, 
-we found that the value of $k$=4 gives the best Omega Index value relative 
-to the ground truth. All results reported in Table\ref{tab:applications1} are for $k=4$.
+we found that the value of $k=4$ gives the best Omega Index value relative 
+to the ground truth. All results reported in Table\ref{tab:applications1} are therefore
+for $k=4$.
 
 In general we observe that there is a close correlation between our method and CFinder
-in terms of all three of the quantities $C$, $S$ and $\Omega$. It can be seen that as we increase the value of $c$ in our method, the omega values get closer and closer to that of CFinder. For our algorithm run with $c=0$, the omega value is about 75$\%$ of that of CFinder. When run with $c$=2, it is about 92$\%$ and for $c$=5, it is about 99$\%$. When we increased the value of $c$ even further to 10, we observed that the omega index was almost identical to that obtained by CFinder. From this, one can see that we can get almost exactly the same results as the CPM method using our algorithm which uses only a small set of 
+in terms of all three of the quantities $C$, $S$ and $\Omega$. It can be seen that as we increase the value of $c$ in our method, the omega values get closer and closer to that of CFinder. For our algorithm run with $c=0$, the omega value is about 75$\%$ of that of CFinder. When run with $c$ = 2, it is about 92$\%$ and for $c$ = 5, it is about 99$\%$. When we increased the value of $c$ even further to 10, we observed that the omega index was almost identical to that obtained by CFinder. From this, one can see that we can get almost exactly the same results as the CPM method using our algorithm which uses only a small set of 
 maximal cliques, as opposed to all the maximal cliques in the graph.
 
 \input{results_application2}
@@ -137,24 +144,24 @@ maximal cliques, as opposed to all the maximal cliques in the graph.
 Table~\ref{tab:applications2} shows the time taken by CFinder and our method 
 run with $c$ = 0, 2 and 5. For our method, the table lists the total run time $\tau$ 
 as well as the time $\tau_c$ spent on just the clique detection part and the ratio
-$\frac{\tau_c}{\tau}$ expressed in percents ($\tau_c$ \%).
+$\frac{\tau_c}{\tau}$ expressed in percents ($\tau_c$\%).
 The remaining time $\tau - \tau_c$ is spent on building the clique-clique overlap matrix, eliminating cliques, component analysis and generating the communities.  As a side note,
-we point out that our immediate goal in the implementation of these phases has been quick experimentation, rather than efficient code, and therefore there is a very large room for improving the runtimes. Yet, looking only at the total time taken in Table~\ref{tab:applications2}, and comparing CFinder and our algorithm run with $c$=5 (the case where the omega values match most closely with CFinder), we see that our algorithm is at least 4$\times$ faster. When $c$ is set to 0 and 2, the speedups are 51$\times$ and 13$\times$ respectively. Further, one can also see that the average percentage of time our algorithm spends on clique-finding decreases as $c$ is increased; the quantity is about 30$\%$ when $c$=0 and about 
-16$\%$ when $c$=5.
+we point out that our immediate goal in the implementation of these later phases has been quick experimentation, rather than efficient code, and therefore there is a very large room for improving the runtimes. Yet, looking only at the total time taken in Table~\ref{tab:applications2}, and comparing CFinder and our algorithm run with $c$ = 5 (the case where the omega values match most closely with CFinder), we see that our algorithm is at least 4$\times$ faster. When $c$ is set to 0 and 2, the speedups are 51$\times$ and 13$\times$ respectively. Further, one can also see that the average percentage of time our algorithm spends on clique-finding decreases as $c$ is increased; the quantity is about 30$\%$ when $c$ = 0 and about 
+16$\%$ when $c$ = 5.
 % Hence, the proportion of time the algorithm spends anything other than clique-detection progressively increases. 
 
 %On the other hand, we noticed that CFinder spent most of its time in finding the cliques. 
 Since the source code for CFinder is not publicly available, we were not able to measure exactly the proportion of time it spends on clique-finding. 
+We suspect it constitutes a vast proportion of the total runtime.
 %However, from our observation during the runs, we estimate this to be, on average, at least more than 95$\%$ of its total runtime. 
 %If one assumes this to be 95$\%$, and also assuming the other parts of our algorithm (other than clique-finding) can be optimized to an equal proportion, our algorithm would be $\sim$28$\times$ for the $c$=5 case. 
 
 %\subsection{Test on Real-world Networks}
 
-{\bf Test on Real-world Networks. } We also tested our method and CFinder on four of the real world graphs from our testbed in Section \ref{sec:experiments}---{\em cond-mat-2003}, {\em email-Enron} and {\em dictionary28}and {\em roadNet-CA}---and a user-interest-based network using data collected from  Facebook. The data collection method for the last graph is explained in \cite{dianapaper}. This is a weighted graph, and we used a threshold of 0.009 to include only strong links.
-The network has 1144 vertices and 2561 edges. 
+{\bf Test on Real-world Networks. } We also tested our method and CFinder on three of the real world graphs from our testbed in Section \ref{sec:experiments}---{\em cond-mat-2003}, {\em email-Enron} and {\em dictionary28}---and a user-interest-based graph generated using data collected from Facebook. The data collection method for the Facebook graph is explained in \cite{dianapaper}. This is a weighted graph, and we used a threshold of 0.009 to include only strong links. The graph has 1144 vertices and 2561 edges. 
 
-The results of the algorithms for $k$=4 on all the five real-world graphs is shown in 
-Table~\ref{tab:applications3}. The table lists the number of communities found by each algorithm, total number of shared nodes, and the total time taken. For our algorithm, it also specifies the time spent on clique-finding. These graphs do not have any known community structure, so we were not able to measure the Omega Index values. For the graph $email-Enron$, CFinder was not able complete within 30 minutes. For the $c$=0 case, our algorithm comfortably outperforms CFinder, even in terms of total time, on average performing about 115$\times$ faster. For the $c$=5 case, the total time taken by our algorithm turns out to be higher. However, it should be noted that the time taken for clique finding is incomparably smaller than the post-clique-finding processing time.  
+The results of our method and CFinder for the case $k$ = 4 on all the four 
+real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists the number of communities found by each algorithm, total number of shared nodes, and the total time taken. For our algorithm, it also specifies the time spent on clique-finding. These graphs do not have any known community structure, so we were not able to measure the Omega Index values. For the graph $email-Enron$, CFinder was not able complete within 30 minutes. For the $c$ = 0 case, our algorithm comfortably outperforms CFinder, even in terms of total time, on average performing about 115$\times$ faster. For the $c$ = 5 case, the total time taken by our algorithm turns out to be higher. However, it should be noted that the time taken for clique finding is incomparably smaller than the post-clique-finding processing time.  
 %If we make a previous assumption of 5$\%$ of the total time to which the post-clique-processing time can be reduced to, the speedup we gain would be on average, $\sim$576$\times$ faster for the $c$=0 case and $\sim$66$\times$ faster for the $c$=5 case.
 
 \input{results_application3}
