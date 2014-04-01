@@ -24,40 +24,20 @@ Throughout, the variable $max$ stores the size of the maximum clique found
 thus far. Initially it is set to be equal to the lower bound $lb$ provided as an input parameter.
 It gives the maximum clique size when the algorithm terminates.
 
-
-To obtain the largest clique containing a vertex $v_i$, 
-it is sufficient to consider only the neighbors of $v_i$. 
-The main routine {\sc MaxClique} thus generates  for each 
-vertex $v_i \in V$ a set $U \subseteq N(v_i)$ 
-(neighbors of $v_i$ that survive pruning) and calls the subroutine \clq\ on $U$.  
-The subroutine \clq\ goes through every relevant clique containing $v_i$ 
-in a recursive fashion and returns the largest.
-%, and a more elaborate explanation can be found there. 
-We use $size$ to maintain the size of the clique found at any point through the recursion.
-Since we start with a clique of just one vertex, the value of $size$ is set to one initially, 
-when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
-
-%\begin{wrapfigure}{R}{0.6\textwidth}
-%%\begin{figure}[t]
-%\begin{center}
-%\vspace{\beforesubfigures}
-%\vspace{\afterfigure}
-
-%\begin{minipage}{0.6\textwidth}
-\begin{algorithm}[t]
+\vspace{14pt}
+\hrule
+\vspace{10pt}
 \begin{spacing}{\algospacing}
 {
-\small
-\caption{{\protect\small Algorithm for finding the maximum clique of a given graph.
-{\it Input}: Graph $G = \left (V, E\right )$, lower bound on clique $lb$ (default, 0). 
-{\it Output}: Size of maximum clique.}}
-%The vertex set $V$ is assumed to be {\em ordered}.
-%\vspace{4pt}
-%\algorithmroutine{Main routine}
-%%\rule{0.65\textwidth}{.1mm}
-%\vspace{4pt}
+{\small
+\captionof{algorithm}{{\protect\small Algorithm for finding the maximum clique of a given graph.
+{\it Input}: Graph $G = \left (V, E\right )$, lower bound on clique $lb$ (default, 0). {\it Output}: Size of maximum clique.}}\label{alg:mClq}
+%\vspace{5pt}
+\hrule
+\vspace{8pt}
 
-\label{alg:mClq}
+\noindent\begin{minipage}{.5\textwidth}
+\vspace{-12pt}
 \begin{algorithmic}[1]
 \Procedure {MaxClique}{$G=\left (V,E\right )$, $lb$}
 \State $max \leftarrow lb$
@@ -81,16 +61,10 @@ when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
 \EndFor
 \EndProcedure
 \end{algorithmic}
-}
-\vspace{-4pt}
-\rule{1\textwidth}{.1mm}\\
-%\vspace{4pt}
-\algorithmroutine{Subroutine}
-{
-%\footnotesize
-%\caption{{\small Algorithm to find the maximum clique size containing vertex $v$ whose neighbor set $U \subset V$ is given.
-%{\it Input}: Graph $G = \left (V, E\right )$, neighbors of the give vertex $U$, size of clique found so far, $size$. {\it Output}: Size of maximum clique containing a vertex.}}
-%\label{alg:clq}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\captionof*{algorithm}{{\em Subroutine}}
+\vspace{-6pt}
 \begin{algorithmic}[1]
 \Procedure {Clique}{$G=\left (V,E\right )$, $U$, $size$}
 
@@ -116,16 +90,155 @@ when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
 
 \EndProcedure
 \end{algorithmic}
+\end{minipage}
+}
 }
 \end{spacing}
-\end{algorithm}
-%    \end{minipage}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\end{center}
-%\end{wrapfigure}
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+To obtain the largest clique containing a vertex $v_i$, 
+it is sufficient to consider only the neighbors of $v_i$. 
+The main routine {\sc MaxClique} thus generates  for each 
+vertex $v_i \in V$ a set $U \subseteq N(v_i)$ 
+(neighbors of $v_i$ that survive pruning) and calls the subroutine \clq\ on $U$.  
+The subroutine \clq\ goes through every relevant clique containing $v_i$ 
+in a recursive fashion and returns the largest.
+%, and a more elaborate explanation can be found there. 
+We use $size$ to maintain the size of the clique found at any point through the recursion.
+Since we start with a clique of just one vertex, the value of $size$ is set to one initially, 
+when \clq\ is called (Line \ref{subCall}, {\sc MaxClique}).
+
+
+
+
+%\begin{figure}[!ht]
+%\centering
+%\hrule
+%\vspace{5pt}
+%\caption{{\protect\small Algorithm for finding the maximum clique of a given graph.
+%{\it Input}: Graph $G = \left (V, E\right )$, lower bound on clique $lb$ (default, 0). 
+%{\it Output}: Size of maximum clique.}}
+%\vspace{-4pt}
+%\hrule
+%\vspace{8pt}
+%\begin{subfigure}{.48\textwidth}
+%\centering
+%\begin{algorithmic}
+%\Procedure {MaxClique}{$G=\left (V,E\right )$, $lb$}
+%\State $max \leftarrow lb$
+%\For{$i:1$ to $n$}
+%%\If{$degree(v_i) < maxClq$} 
+%%\State continue \Comment{{\small Pruning 1}}
+%%\EndIf
+%\If{$d(v_i) \ge max$} \Comment{{\footnotesize Pruning 1}} \label{pr1}
+%\State $U \leftarrow \emptyset$
+%\For{each $v_j \in N(v_i)$}
+%\If{$j > i$} \Comment{{\footnotesize Pruning 2}} \label{prOld}
+%\If{$d(v_j) \ge max$} \Comment{{\footnotesize Pruning 3}} \label{pr2}
+%\State $U \leftarrow U \cup \{v_j\}$ 
+%\EndIf
+%\EndIf
+%\EndFor
+%
+%\State \textsc{Clique}$(G, U, 1)$ \label{subCall}
+%\EndIf
+%
+%\EndFor
+%\EndProcedure
+%\end{algorithmic}
+%%\caption{Test Algorithm No.1}\label{alg:alg-1}
+%\end{subfigure}
+%\hfill
+%\begin{subfigure}{.48\textwidth}
+%\centering
+%\begin{algorithmic}
+%\If{$d(v_j) \ge max$} \Comment{{\footnotesize Pruning 3}}
+%\State $U \leftarrow U \cup \{v_j\}$ 
+%\EndIf
+%\end{algorithmic}
+%%\caption{Test Algorithm No.2}\label{alg:alg-2}
+%\end{subfigure}
+%\vspace{5pt}
+%\hrule
+%%\caption{Two algorithms side by side}\label{fig:twoalg}
 %\end{figure}
 
+
+%\begin{minipage}{0.6\textwidth}
+%\begin{algorithm}[t]
+%\begin{spacing}{\algospacing}
+%{
+%\small
+%\caption{{\protect\small Algorithm for finding the maximum clique of a given graph.
+%{\it Input}: Graph $G = \left (V, E\right )$, lower bound on clique $lb$ (default, 0). 
+%{\it Output}: Size of maximum clique.}}
+%%The vertex set $V$ is assumed to be {\em ordered}.
+%%\vspace{4pt}
+%%\algorithmroutine{Main routine}
+%%%\rule{0.65\textwidth}{.1mm}
+%%\vspace{4pt}
+%
+%\label{alg:mClq}
+%\begin{algorithmic}[1]
+%\Procedure {MaxClique}{$G=\left (V,E\right )$, $lb$}
+%\State $max \leftarrow lb$
+%\For{$i:1$ to $n$}
+%%\If{$degree(v_i) < maxClq$} 
+%%\State continue \Comment{{\small Pruning 1}}
+%%\EndIf
+%\If{$d(v_i) \ge max$} \Comment{{\footnotesize Pruning 1}} \label{pr1}
+%\State $U \leftarrow \emptyset$
+%\For{each $v_j \in N(v_i)$}
+%\If{$j > i$} \Comment{{\footnotesize Pruning 2}} \label{prOld}
+%\If{$d(v_j) \ge max$} \Comment{{\footnotesize Pruning 3}} \label{pr2}
+%\State $U \leftarrow U \cup \{v_j\}$ 
+%\EndIf
+%\EndIf
+%\EndFor
+%
+%\State \textsc{Clique}$(G, U, 1)$ \label{subCall}
+%\EndIf
+%
+%\EndFor
+%\EndProcedure
+%\end{algorithmic}
+%}
+%\vspace{-4pt}
+%\rule{1\textwidth}{.1mm}\\
+%
+%\algorithmroutine{Subroutine}
+%{
+%\begin{algorithmic}[1]
+%\Procedure {Clique}{$G=\left (V,E\right )$, $U$, $size$}
+%
+%\If{$U = \emptyset$}
+%\If{$size > max$} 
+%\State $max \leftarrow size$ \label{critical}
+%\EndIf
+%\State {\bf return}
+%\EndIf
+%
+%\While{$\left|U\right| > 0$}
+%\If{$size + \left|{U}\right| \le max$} \Comment{{\footnotesize Pruning 4}} \label{pr3}
+%\State {\bf return} 
+%\EndIf
+%
+%\State Select any vertex $u$ from $U$ 
+%%of maximum degree in $G$
+%
+%\State $U \leftarrow U \setminus \{u\} $
+%\State $N'(u):= \{w | w \in N(u) \wedge d(w) \ge max\}$  \Comment{{\footnotesize Pruning 5}} \label{pr4}
+%\State \textsc{Clique}$( G, U \cap N'(u), size + 1)$
+%\EndWhile
+%
+%\EndProcedure
+%\end{algorithmic}
+%}
+%\end{spacing}
+%\end{algorithm}
+%
 
 
 Our algorithm consists of several pruning steps.
@@ -150,30 +263,21 @@ Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 an
 %\vspace{-10pt}
 \subsection{The Heuristic}
 \label{subsec:heuristic}
-%\vspace{-4pt}
 
-%\begin{wrapfigure}{R}{0.6\textwidth}
-%%\begin{figure}[t]
-%\begin{center}
-%\vspace{\beforesubfigures}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\begin{minipage}{0.6\textwidth}
-\begin{algorithm}[t]
+\vspace{14pt}
+\hrule
+\vspace{10pt}
 \begin{spacing}{\algospacing}
 {
-\small
-\caption{{\protect\small Heuristic for finding the maximum clique in a graph.
-{\it Input}: Graph $G = \left (V, E\right )$. {\it Output}: Approximate size of maximum clique.}}
-%The vertex set $V$ is assumed to be {\em ordered}.
-\label{alg:mClqHeu}
-%\vspace{4pt}
-%\algorithmroutine{Main routine}
-%\rule{0.65\textwidth}{.1mm}
-%\vspace{4pt}
+{\small
+\captionof{algorithm}{{\protect\small Heuristic for finding the maximum clique in a graph.
+{\it Input}: Graph $G = \left (V, E\right )$. {\it Output}: Approximate size of maximum clique.}}\label{alg:mClqHeu}
+%\vspace{5pt}
+\hrule
+\vspace{8pt}
 
-
+\noindent\begin{minipage}{.5\textwidth}
+\vspace{12pt}
 \begin{algorithmic}[1]
 \Procedure {MaxCliqueHeu}{$G=\left (V,E\right )$}
 \For{$i:1$ to $n$}
@@ -195,13 +299,10 @@ Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 an
 \EndFor
 \EndProcedure
 \end{algorithmic}
-}
-\vspace{-4pt}
-\rule{1\textwidth}{.1mm}\\
-\algorithmroutine{Subroutine}
-
-{
-%\footnotesize
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\captionof*{algorithm}{{\em Subroutine}}
+\vspace{-7pt}
 \label{alg:clqHeu}
 \begin{algorithmic}[1]
 \Procedure {CliqueHeu}{$G=\left (V,E\right )$, $U$, $size$}
@@ -230,21 +331,119 @@ Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 an
 %\EndWhile
 
 \EndProcedure
+
 \end{algorithmic}
+\end{minipage}
+}
 }
 \end{spacing}
-\end{algorithm}
-%    \end{minipage}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\vspace{\afterfigure}
-%\end{center}
-%\end{wrapfigure}
-%\end{figure}
-%\vspace{-6pt}
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{algorithm}[t]
+%\begin{spacing}{\algospacing}
+%{
+%\small
+%\caption{{\protect\small Heuristic for finding the maximum clique in a graph.
+%{\it Input}: Graph $G = \left (V, E\right )$. {\it Output}: Approximate size of maximum clique.}}
+%%The vertex set $V$ is assumed to be {\em ordered}.
+%\label{alg:mClqHeu}
+%%\vspace{4pt}
+%%\algorithmroutine{Main routine}
+%%\rule{0.65\textwidth}{.1mm}
+%%\vspace{4pt}
+%
+%
+%\begin{algorithmic}[1]
+%\Procedure {MaxCliqueHeu}{$G=\left (V,E\right )$}
+%\For{$i:1$ to $n$}
+%%\If{$degree(v_i) < maxClq$} 
+%%\State continue \Comment{{\small Pruning 1}}
+%%\EndIf
+%\If{$d(v_i) \ge max$}
+%\State $U \leftarrow \emptyset$
+%\For{each $v_j \in N(v_i)$}
+%\If{$d(v_j) \ge max$} 
+%\State $U \leftarrow U \cup \{v_j\}$ 
+%\EndIf
+%\EndFor
+%
+%\State \textsc{CliqueHeu}$(G, U, 1)$
+%\EndIf
+%%\EndIf
+%
+%\EndFor
+%\EndProcedure
+%\end{algorithmic}
+%}
+%\vspace{-4pt}
+%\rule{1\textwidth}{.1mm}\\
+%\algorithmroutine{Subroutine}
+%
+%{
+%%\footnotesize
+%\label{alg:clqHeu}
+%\begin{algorithmic}[1]
+%\Procedure {CliqueHeu}{$G=\left (V,E\right )$, $U$, $size$}
+%
+%\If{$U = \emptyset$}
+%\If{$size > max$}
+%\State $max \leftarrow size$
+%\EndIf
+%\State {\bf return}
+%\EndIf
+%
+%%\While{$U > \emptyset$}
+%%\If{$size + \left|{U}\right| <= max$} 
+%%\State \bf{return} \Comment{{\small Pruning 3}}
+%%\EndIf
+%
+%%\State $i:=max\{j \mid v_j \in U\}$
+%\State Select a vertex $u \in U$ of maximum degree in $G$ \label{maxDsel}
+%%\State $U \leftarrow U \setminus u$
+%\State $U \leftarrow U \setminus \{u\} $
+%\State $N'(u):= \{w | w \in N(u) \wedge d(w) \ge max\}$  \label{pr4}
+%\State \textsc{CliqueHeu}$( G, U \cap N'(u), size + 1)$
+%
+%%\State \textsc{CliqueHeu}$(G, U \cap N(u), size + 1)$
+%%\State return
+%%\EndWhile
+%
+%\EndProcedure
+%\end{algorithmic}
+%}
+%\end{spacing}
+%\end{algorithm}
+%%    \end{minipage}
+%%\vspace{\afterfigure}
+%%\vspace{\afterfigure}
+%%\vspace{\afterfigure}
+%%\vspace{\afterfigure}
+%%\vspace{\afterfigure}
+%%\vspace{\afterfigure}
+%%\end{center}
+%%\end{wrapfigure}
+%%\end{figure}
+%%\vspace{-6pt}
 
 
 The exact algorithm examines all relevant cliques containing every vertex.
