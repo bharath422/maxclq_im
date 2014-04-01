@@ -1,18 +1,19 @@
-\begin{table}[!hbt]
+\begin{table}
 
 \footnotesize
 %\scriptsize
 \small
 \centering
-\caption{Results of communities extracted using our new algorithm and CFinder on LFR benchmarks. All graphs have $n$ = 1000 vertices, and the parameters used to generate the graphs are given by the first three columns. $\mu$ is the mixing parameter, $O_n$, the fraction of overlapping nodes, and $O_m$, the number of communities each overlapping node is assigned to. C is the num of communities, S, the number of shared nodes, and $\Omega$, the omega index. C(GT) is the number of communities in the input graph. }
+\caption{Results of communities detected using our new method and CFinder on LFR benchmarks \cite{2008PhRvE..78d6110L}. 
+All networks have $n$ = 1000 nodes, and the parameters used to generate the netwroks are listed in the first three columns: $\mu$ is the mixing parameter, $O_m$ is the number of communities each overlapping node is assigned to $O_n$ is the fraction of overlapping nodes. $C$ denotes the number of communities, $S$ the number of shared nodes, and $\Omega$ the omega index. $C(GT)$ is the number of communities in the input graph (ground truth). }
 \label{tab:applications1}
 %\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r}
 
 %\begin{tabular}{ c@{\hspace{4pt}}  c@{\hspace{2pt}}  c | @{\hspace{2pt}}c@{\hspace{2pt}} || c@{\hspace{2pt}}  c@{\hspace{2pt}}  c@{\hspace{4pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}} | c@{\hspace{3pt}}  c@{\hspace{3pt}}  c@{\hspace{3pt}}  | c@{\hspace{3pt}}  c@{\hspace{3pt}} c@{\hspace{3pt}}  }
 \begin{tabular}{ c c c c || c@{\hspace{3pt}} c@{\hspace{3pt}} c@{\hspace{3pt}} | c c c | c c c | c c c }
 \toprule\toprule
-	&  			& 			& 			&  		& 	CFinder	&			&		&	c=0		&			&		&	c=2	&			&		&	c=5	&		\\
-$\mu$&	$O_m$	&	$O_n$	&	C(GT)	&	C	&	S		&	$\Omega$	&	C	&	S		&	$\Omega$	&	C	&	S	&	$\Omega$	&	C	&	S	&	$\Omega$	\\
+	&  			& 			& 			&  		& 	CFinder	&			&		&	Our ($c=0$)		&			&		&	Our  ($c=2$)	&			&		&	Our ($c=5$)	&		\\
+$\mu$&	$O_m$	&	$O_n$	&	$C(GT)$	&	$C$	&	$S$		&	$\Omega$	&	$C$	&	$S$		&	$\Omega$	&	$C$	&	S	&	$\Omega$	&	$C$	&	$S$	&	$\Omega$	\\
 \hline\hline
 0.1	&	2	&	10\%	&	34	&	37	&	55	&	0.842	&	60	&	64	&	0.758	&	49	&	76	&	0.825	&	40	&	59	&	0.840	\\
 0.1	&	2	&	50\%	&	44	&	62	&	153	&	0.402	&	87	&	116	&	0.280	&	83	&	158	&	0.363	&	68	&	158	&	0.395	\\
