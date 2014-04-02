@@ -24,17 +24,18 @@ Throughout, the variable $max$ stores the size of the maximum clique found
 thus far. Initially it is set to be equal to the lower bound $lb$ provided as an input parameter.
 It gives the maximum clique size when the algorithm terminates.
 
-\vspace{14pt}
+\begin{figure}
+%\vspace{14pt}
 \hrule
-\vspace{10pt}
+\vspace{6pt}
 \begin{spacing}{\algospacing}
 {
 {\small
 \captionof{algorithm}{{\protect\small Algorithm for finding the maximum clique of a given graph.
 {\it Input}: Graph $G = \left (V, E\right )$, lower bound on clique $lb$ (default, 0). {\it Output}: Size of maximum clique.}}\label{alg:mClq}
-%\vspace{5pt}
+\vspace{-5pt}
 \hrule
-\vspace{8pt}
+\vspace{6pt}
 
 \noindent\begin{minipage}{.5\textwidth}
 \vspace{-12pt}
@@ -94,9 +95,10 @@ It gives the maximum clique size when the algorithm terminates.
 }
 }
 \end{spacing}
-\vspace{10pt}
+\vspace{8pt}
 \hrule
-\vspace{14pt}
+%\vspace{10pt}
+\end{figure}
 
 To obtain the largest clique containing a vertex $v_i$, 
 it is sufficient to consider only the neighbors of $v_i$. 
@@ -260,21 +262,21 @@ Note that the routine \clq\ is similar to the
 Carraghan-Pardalos algorithm \cite{pardalos}; Pruning 5 accounts for the main difference.
 Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 and 5 are not.
 
-%\vspace{-10pt}
 \subsection{The Heuristic}
 \label{subsec:heuristic}
 
-\vspace{14pt}
-\hrule
+\begin{figure}
 \vspace{10pt}
+\hrule
+\vspace{6pt}
 \begin{spacing}{\algospacing}
 {
 {\small
 \captionof{algorithm}{{\protect\small Heuristic for finding the maximum clique in a graph.
 {\it Input}: Graph $G = \left (V, E\right )$. {\it Output}: Approximate size of maximum clique.}}\label{alg:mClqHeu}
-%\vspace{5pt}
+\vspace{-5pt}
 \hrule
-\vspace{8pt}
+\vspace{6pt}
 
 \noindent\begin{minipage}{.5\textwidth}
 \vspace{12pt}
@@ -337,20 +339,10 @@ Also, Pruning 4 is used in most existing algorithms, whereas Prunings 1, 2, 3 an
 }
 }
 \end{spacing}
-\vspace{10pt}
+\vspace{8pt}
 \hrule
-\vspace{14pt}
-
-
-
-
-
-
-
-
-
-
-
+%\vspace{14pt}
+\end{figure}
 
 
 

@@ -18,7 +18,7 @@ The experiments are performed on a Linux workstation running 64-bit Red Hat Ente
 \subsection{Test Graphs}
 
 \begin{table}[t]
-\small
+%\small
 \centering
 \caption{Overview of real-world graphs in the testbed and their origins.}
 \label{tab:real-graphs}
@@ -56,26 +56,27 @@ Nodes represent intersections \\ & and endpoints and edges represent the roads c
 \end{tabular}
 \end{table}
 
-Our testbed is grouped in three categories:
-
-{\bf 1. Real-world graphs. } 
+Our testbed is grouped in three categories:\\
+\begin{enumerate*}[label=\textbf{\arabic*})]
+\item {\bf Real-world graphs. } 
 Under this category, we consider 10 graphs downloaded from the 
 University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}. The graphs originate
 from various real-world applications. 
-Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.
-  
+Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.\\
 
-{\bf 2. Synthetic Graphs. } 
+
+\item {\bf Synthetic Graphs. } 
 In this category we consider 15 graphs generated using 
 the R-MAT algorithm \cite{Chakrabarti:2006:GML:1132952.1132954}. The graphs
 are subdivided in three categories depending on the structures they represent:\\
-{\bf 2.a. Random graphs} (5 graphs) -- Erd\H{o}s-R\'{e}nyi random  graphs generated using R-MAT 
-with the parameters (0.25, 0.25, 0.25, 0.25).  We denoted these with prefix {\it rmat\_er}.\\
-{\bf 2.b. Skewed Degree, Type 1 graphs} (5 graphs) -- graphs generated using R-MAT with the parameters (0.45, 0.15, 0.15, 0.25). These are denoted with prefix {\it rmat\_sd1}.\\
-{\bf 2.c. Skewed Degree, Type 2 graphs} (5 graphs) --  graphs generated using R-MAT with the parameters (0.55, 0.15, 0.15, 0.15). These are denoted with prefix {\it rmat\_sd2}.
 
+\begin{enumerate*}[label=\textbf{\alph*})]
+\item {\bf Random graphs} (5 graphs) -- Erd\H{o}s-R\'{e}nyi random  graphs generated using R-MAT with the parameters (0.25, 0.25, 0.25, 0.25).  We denoted these with prefix {\it rmat\_er}.\\
+\item {\bf Skewed Degree, Type 1 graphs} (5 graphs) -- graphs generated using R-MAT with the parameters (0.45, 0.15, 0.15, 0.25). These are denoted with prefix {\it rmat\_sd1}.\\
+\item {\bf Skewed Degree, Type 2 graphs} (5 graphs) --  graphs generated using R-MAT with the parameters (0.55, 0.15, 0.15, 0.15). These are denoted with prefix {\it rmat\_sd2}.\\
+\end{enumerate*}
 
-{\bf 3. DIMACS graphs. } 
+\item {\bf DIMACS graphs. } 
 This last category consists of 5 graphs selected from the Second DIMACS Implementation Challenge \cite{dimacs}. 
 
 The DIMACS graphs  are an established benchmark for the maximum
@@ -87,6 +88,7 @@ The {\it rmat\_er} graphs have {\it normal} degree distribution, whereas the {\i
  The {\it rmat\_sd1} and {\it rmat\_sd2} graphs differ primarily in the magnitude of maximum vertex degree they contain; the {\it rmat\_sd2} graphs have much higher maximum degree. 
 Table \ref{tab:struc-graphs} lists basic structural information (the number of vertices, 
 number of edges and the maximum degree) about all 30 of the test graphs.
+\end{enumerate*}
 
 \input{graphs_properties}
 
@@ -137,7 +139,7 @@ is used  by all three of the other algorithms in our comparison. The primary str
 
 \begin{figure}
   \centering
-    \includegraphics[scale=0.4]{pruned.eps}
+    \includegraphics[scale=0.5]{pruned.pdf}
 \caption{Number of ``pruned" vertices in the various pruning steps normalized
 by the number of edges in the graph (in percents) for the test graphs in category 1 (we cut few bars reachining 140\% as their correspnding values are much higher).}
 \label{fig-pruningplot}
@@ -172,7 +174,6 @@ for the step Pruning 1.
 
 
 
-
 {\bf Synthetic Graphs. }
 For the synthetic graph types {\it rmat\_er} and {\it rmat\_sd1}, our algorithm clearly outperforms 
 the other three by a few orders of magnitude in all cases. 
@@ -191,12 +192,13 @@ For these graphs, only Pruning 2 was found to be effective,
 and thus the performance results agree with one's expectation. 
 %We include in the Appendix timing results on a larger collection of DIMACS graphs. 
 
+
+
 It is to be noted that the DIMACS graphs are intended to serve as challenging test cases for the maximum clique problem, and graphs with such high edge densities and low vertex count are rare in practice. 
 Most of these have between 20 to 1024 vertices with an average edge density of roughly 0.6, 
 whereas, most real world graphs are often very large and sparse
 as exemplified by the real-world graphs in our test bed.
 Other good examples of instances with similar nature include Internet topology graphs \cite{Faloutsos:1999:PRI:316188.316229}, the web graph \cite{kumar:extracting}, and social network graphs \cite{Domingos:2001:MNV:502512.502525}.
-
 
 
 %\vspace{-15pt}
@@ -212,14 +214,9 @@ Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{ma
 %after three repetitions with different random seeds
 
 
-\subsubsection{Further Analysis}
-\label{sec:exp-further}
-
-%\vspace{-10pt}
-%\vspace{-10pt}
 \begin{SCfigure}
   \centering
-    \includegraphics[width=7.0cm]{maxclqplot.eps}
+    \includegraphics[width=7.8cm]{maxclqplot.pdf}
 %%\vspace{-30pt}
   \caption{Runtime (normalized, mean) comparison between various algorithms. For each category of graph, first, all runtimes for each graph were normalized by the runtime of the slowest algorithm for that graph, and then the mean was calculated for each algorithm. Graphs were considered only if the runtimes for at least three algorithms was less than the 25,000 seconds limit set.}
 \label{fig-timeplot}
@@ -227,22 +224,11 @@ Additionally, we run the heuristic by choosing a vertex randomly in Line \ref{ma
 %\vspace{-10pt}
 %\vspace{-10pt}
 
-\begin{figure}
-  \centering
-    \includegraphics[scale=0.6]{compare_time_er.eps}
-    \includegraphics[scale=0.6]{compare_time_sd1.eps}\\
-    
-    \includegraphics[scale=0.6]{compare_time_sd2.eps}
-    \includegraphics[scale=0.6]{compare_time_rw.eps}
-    
-%%\vspace{-30pt}
- \caption{Run time plots of the new exact and heuristic algorithms. The third curve, labeled
- {\em edges}, shows the quantity number of edges in the graph divided by the clock 
- frequency of the computing platform used in the experiment. 
- }
-\label{fig-runtimeplots}
-\end{figure}
 
+
+
+\subsubsection{Further Analysis}
+\label{sec:exp-further}
 
 Figure~\ref{fig-timeplot} provides an aggregated visual summary of the runtime trends of
 the various algorithms across the five categories of graphs in the testbed. 
@@ -262,6 +248,23 @@ It can be seen that the runtime of the heuristic by and large grows
 somewhat linearly with the size of a graph. The exact algorithm's runtime, which is orders of
 magnitude larger than the heuristic, exhibited a similar growth behavior for these test-cases
 even though its worst-case complexity suggests exponential growth in the general case. 
+
+
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.67]{compare_time_er.pdf}
+    \includegraphics[scale=0.67]{compare_time_sd1.pdf}\\
+    
+    \includegraphics[scale=0.67]{compare_time_sd2.pdf}
+    \includegraphics[scale=0.67]{compare_time_rw.pdf}
+    
+%%\vspace{-30pt}
+ \caption{Run time plots of the new exact and heuristic algorithms. The third curve, labeled
+ {\em edges}, shows the quantity number of edges in the graph divided by the clock 
+ frequency of the computing platform used in the experiment. 
+ }
+\label{fig-runtimeplots}
+\end{figure}
 
 
 

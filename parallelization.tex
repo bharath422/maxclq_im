@@ -7,11 +7,11 @@
 on a shared-memory platform. The heuristic can be parallelized following a similar procedure.
 
 %We here describe the parallelization procedure for both shared and distributed memory architecture. 
-As explained in Section \ref{sec:algorithms}, the $i$th iteration of the {\em for} loop in the exact algorithm computes the size of the largest clique that contains the vertex $v_i$. Since our algorithm doesn't require a specific order in which vertices have to be processed, these iterations can in principle be performed concurrently. In such a concurrent computation, however, different processes might discover current maximum cliques of different sizes---and 
-for the pruning steps to be most effective, the current globally largest maximum clique size needs to be communicated to all processes as soon as it is discovered. In a shared-memory programming model, the global maximum clique size can be stored as a shared variable accessible to all the processing units, and its value can be updated by the relevant processor at any given time. In a distributed-memory setting more care needs to be exercised to keep the communication cost low. 
+As explained in Section \ref{sec:algorithms}, the $i$th iteration of the {\em for} loop in the exact algorithm (Algorithm 1) computes the size of the largest clique that contains the vertex $v_i$. Since our algorithm does not impose any specific order in which vertices have to be processed, these iterations can in principle be performed concurrently. During such a concurrent computation, however, different processes might discover maximum cliques of different sizes---and 
+for the pruning steps to be most effective, the current globally largest maximum clique size needs to be communicated to all processes as soon as it is discovered. In a shared-memory programming model, the global maximum clique size can be stored as a shared variable accessible to all the processing units, and its value can be updated by the relevant processor at any given time. In a distributed-memory setting, more care needs to be exercised to keep the communication cost low. 
 %For the distributed case, the effects of pruning could, however, be tolerably compromised in order to enable the parallel computation. This can, for example, be done by using the most recent value of the maximum clique size for pruning, and updating this value by having synchronization steps at regular intervals.
 
-We implemented a shared-memory parallelization based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the updating of the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, in a {\it critical} section (an OpenMP feature that enforces a lock allowing only one thread to make the update at a time). Further, we used  dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different work loads.
+We implemented a shared-memory parallelization based on the procedure described above using OpenMP. Since the global value of the maximum clique is shared by all processing units, we embed the step that updates the maximum clique, i.e. Line \ref{critical} of Algorithm \ref{alg:mClq}, into a {\it critical} section (an OpenMP feature that enforces a lock, thus allowing only one thread at a time to make the update). Further, we use dynamic load scheduling, since different vertices might return different sizes of maximum clique resulting in different work loads.
 %, so would work best for our case.
 
 We performed experiments on the same graphs listed in the testbed described in Section \ref{sec:experiments}. For these, we used a Linux workstation 
@@ -22,13 +22,13 @@ with six 2.00 GHz Intel Xeon E7540 processors. Each processor has six cores, eac
 
 \begin{figure}
   \centering
-    \includegraphics[scale=0.17]{parallel_realworld_timing.pdf}
-    \includegraphics[scale=0.17]{parallel_realworld_speedup.pdf}
-    \includegraphics[scale=0.17]{parallel_other_timing.pdf}
-    \includegraphics[scale=0.17]{parallel_other_speedup.pdf}
+    \includegraphics[scale=0.21]{parallel_realworld_timing.pdf}
+    \includegraphics[scale=0.21]{parallel_realworld_speedup.pdf}
+    \includegraphics[scale=0.21]{parallel_other_timing.pdf}
+    \includegraphics[scale=0.21]{parallel_other_speedup.pdf}
     
 %%\vspace{-30pt}
- \caption{Performance (timing and speedup plots) of shared-memory parallelization on graphs in the test-bed. Graphs whose sequential runtime is less than 5 seconds are omitted. The top set of figures show performance on the real-world graphs, whereas the bottom set show results for the RMAT graphs.}
+ \caption{Performance (timing and speedup plots) of shared-memory parallelization on graphs in the test-bed. The top set of figures show performance on the real-world graphs, whereas the bottom set show results for the RMAT graphs. Graphs whose sequential runtime is less than 5 seconds were omitted.}
 \label{fig-parallel_perf}
 \end{figure}
 
