@@ -50,11 +50,11 @@ The standard CPM in essence presupposes finding {\em all} maximal cliques in a n
 The number of maximal cliques in a network can in general be exponential in the number of nodes $n$ in the network. In our method, we work instead with a smaller set of maximal cliques. In particular, the basic variant of our method considers exactly one clique per vertex, the largest of all the maximal cliques that it belongs to. Clearly, this can be too restrictive a requirement and may fail to add deserving members to a $k$-clique community. 
 To allow for more refined solutions, we include a parameter $c$
 in the method that tells us how many additional cliques per vertex would be considered.
-The case $c=0$ corresponds to no additional cliques than the largest maximal clique containing the vertex. The case $c>1$ corresponds to $c$ additional maximal cliques (each of size at least $k$)
+The case $c=0$ corresponds to no additional cliques than the largest maximal clique containing the vertex. The case $c\geq1$ corresponds to $c$ additional maximal cliques (each of size at least $k$)
 per vertex. Hence, in total, $n(c+1)$ cliques will be collected. For a particular vertex $v$, the largest maximal clique containing it 
 can be heuristically obtained by exploring the neighbor of $v$ with {\em maximum degree} 
 in the corresponding step in Algorithm 2.
-In contrast, to obtain the other maximal cliques involving $v$ (case $c>1$),
+In contrast, to obtain the other maximal cliques involving $v$ (case $c\geq1$),
 we explore a {\em randomly} chosen neighbor of $v$, regardless of its degree value.
 
 
@@ -112,7 +112,7 @@ All together, these combinations of parameters resulted in eight graphs in the t
 We evaluated the performance of our algorithm against the ground truth 
 using {\it Omega Index} \cite{doi:10.1207/s15327906mbr2302_6}, 
 which is the overlapping version of the Adjusted Rand Index (ARI) \cite{ARI_paper_1985}.
-Intuitively, Omega Index measures the level of agreement between two given sets of communities, by looking at node pairs that occur the same number of times (possibly none) in both.
+Intuitively, Omega Index measures the extent of agreement between two given sets of communities, by looking at node pairs that occur the same number of times (possibly none) in both.
 
 We used three values for the parameter $c$ of our method: 0, 2, and 5. 
 Recall that $c$ set to zero corresponds to picking only the largest clique for each node. 
@@ -122,6 +122,8 @@ are considered for each node.
 We compare the performance of our method with that of CFinder\footnote{http://www.cfinder.org}, an implementation of CPM~\cite{cite-key}. We used the command line utility provided in the package for all experiments. For this study, we used a MacBook Pro running OS X v.10.9.2 with 2.66 GHz Intel Core i7 processor with 2 cores, 256KB of L2 cache per core, 4MB of L3 cache and 8GB of main memory.
 
 \input{results_application1}
+
+\input{results_application2}
 
 %The results are shown in Table \ref{tab:applications1} and \ref{tab:applications2}. 
 
@@ -137,17 +139,15 @@ to the ground truth. All results reported in Table~\ref{tab:applications1} are t
 for $k=4$.
 
 In general we observe that there is a close correlation between our method and CFinder
-in terms of all three of the quantities $C$, $S$ and $\Omega$. It can be seen that as we increase the value of $c$ in our method, the omega index values get closer and closer to that of CFinder. For our algorithm run with $c=0$, the omega index is about 75$\%$ of that of CFinder. When run with $c$ = 2, it is about 92$\%$ and for $c$ = 5, it is about 99$\%$. When we increased the value of $c$ even further to 10, we observed that the omega index was almost identical to that obtained by CFinder. From this, one can see that we can get almost exactly the same results as the CPM method using our algorithm which uses only a small set of 
+in terms of all three of the quantities $C$, $S$ and $\Omega$. It can be seen that as we increase the value of $c$ in our method, the Omega Index values get closer and closer to that of CFinder. For our algorithm run with $c=0$, the Omega Index is about 75$\%$ of that of CFinder. When run with $c$ = 2, it is about 92$\%$ and for $c$ = 5, it is about 99$\%$. When we increased the value of $c$ even further to 10, we observed that the Omega Index was almost identical to that obtained by CFinder. From this, one can see that we can get almost exactly the same results as the CPM method using our algorithm which uses only a small set of 
 maximal cliques, as opposed to all the maximal cliques in the graph.
-
-\input{results_application2}
 
 Table~\ref{tab:applications2} shows the time taken by CFinder and our method 
 run with $c$ = 0, 2 and 5. For our method, the table lists the total run time $\tau$ 
 as well as the time $\tau_c$ spent on just the clique detection part and the ratio
 ${\tau_c}/{\tau}$ expressed in percents ($\tau_c$\%).
 The remaining time $\tau - \tau_c$ is spent on building the clique-clique overlap matrix, eliminating cliques, component analysis and generating the communities.  As a side note,
-we point out that our immediate goal in the implementation of these later phases has been quick experimentation, rather than efficient code, and therefore there is a very large room for improving the runtimes. This is also reflected by the numbers; one can see from the table that the average percentage of time our algorithm spends on clique-finding decreases as $c$ is increased; the quantity is about 30$\%$ when $c$ = 0 and about 16$\%$ when $c$ = 5. Yet, looking only at the total time taken in Table~\ref{tab:applications2}, and comparing CFinder and our algorithm run with $c$ = 5 (the case where the omega index values match most closely with CFinder), we see that our algorithm is at least 4$\times$ faster. When $c$ is set to 0 and 2, the speedups are 51$\times$ and 13$\times$ respectively. 
+we point out that our immediate goal in the implementation of these later phases has been quick experimentation, rather than efficient code, and therefore there is a very large room for improving the runtimes. This is also reflected by the numbers; one can see from the table that the average percentage of time our algorithm spends on clique-finding decreases as $c$ is increased; the quantity is about 30$\%$ when $c$ = 0 and about 16$\%$ when $c$ = 5. Yet, looking only at the total time taken in Table~\ref{tab:applications2}, and comparing CFinder and our algorithm run with $c$ = 5 (the case where the Omega Index values match most closely with CFinder), we see that our algorithm is at least 4$\times$ faster on average. When $c$ is set to 0 and 2, the mean speedups are 51$\times$ and 13$\times$ respectively. 
 % Hence, the proportion of time the algorithm spends anything other than clique-detection progressively increases. 
 
 %On the other hand, we noticed that CFinder spent most of its time in finding the cliques. 
@@ -158,10 +158,11 @@ We suspect it constitutes a vast proportion of the total runtime.
 
 %\subsection{Test on Real-world Networks}
 
-{\bf Test on Real-world Networks. } We also tested our method and CFinder on four of the real world graphs from our testbed in Section \ref{sec:experiments}---{\em cond-mat-2003}, {\em email-Enron}, {\em dictionary28} and {\em roadNet-CA}---and a user-interest-based graph generated using data collected from Facebook. The data collection method for the Facebook graph is explained in \cite{dianapaper}. This is a weighted graph, and we used a threshold of 0.009 to include only strong links. The graph has 1144 vertices and 2561 edges. 
+{\bf Test on Real-world Networks. } We also tested our method and CFinder on four of the real world graphs from our testbed in Section \ref{sec:experiments}---{\em cond-mat-2003}, {\em email-Enron}, {\em dictionary28} and {\em roadNet-CA}---and a user-interest-based graph generated using data collected from Facebook. We briefly explain here how this graph was generated.
+Every user on Facebook has a {\it wall}, which is a the user's profile space that allows the posting of messages, often short or temporal notes or comments by other users. We generate a graph with the {\it walls} as vertices, and assign an edge between a pair of vertices, if there is at least one user who has commented on both walls. We assign edge weights proportional to the number of common users, as we consider this to be an indicator of the strength of the connection. A more elaborate explanation of the data collection method and network generation  for the Facebook graph is discussed in \cite{dianapaper}. As this is a weighted graph, we used a threshold (of 0.009) to include only strong links, resulting in a network with 1144 vertices and 2561 edges.
+%{\it walls}, and use this to formulate the network for our experiments.
 
-The results of our method and CFinder for the case $k$ = 4 on all the five 
-real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists the number of communities found by each algorithm, total number of shared nodes, and the total time taken. For our algorithm, it also specifies the time spent on clique-finding. These graphs do not have any known community structure, so we were not able to measure the Omega Index values. For the graph {\em email-Enron}, CFinder was not able complete within 30 minutes. For the $c$ = 0 case, our algorithm comfortably outperforms CFinder, even in terms of total time, on average performing about 115$\times$ faster. For the $c$ = 5 case, the total time taken by our algorithm turns out to be higher. However, it should be noted that the time taken for clique finding is incomparably smaller than the post-clique-finding processing time.  
+The results of our method for $c$ = 0 and 5, $k$ = 4, and CFinder for the case $k$ = 4 on all the five real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists the number of communities found by each algorithm, total number of shared nodes, and the total time taken. For our algorithm, it also specifies the time spent on clique-finding. These graphs do not have any known community structure, so we were not able to measure the Omega Index values. For the graph {\em email-Enron}, CFinder was not able complete within 30 minutes. For the $c$ = 0 case, our algorithm comfortably outperforms CFinder, even in terms of total time, on average performing about 115$\times$ faster. For the $c$ = 5 case, the total time taken by our algorithm turns out to be higher for some cases, and lower for others. However, it should be noted that the time taken for clique finding is incomparably smaller than the post-clique-finding processing time. 
 %If we make a previous assumption of 5$\%$ of the total time to which the post-clique-processing time can be reduced to, the speedup we gain would be on average, $\sim$576$\times$ faster for the $c$=0 case and $\sim$66$\times$ faster for the $c$=5 case.
 
 \input{results_application3}
@@ -222,7 +223,7 @@ real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists th
 \begin{figure}%[h!]
   \centering
     %\includegraphics[width=1\textwidth]{communities_fb.pdf}
-    \includegraphics[scale=0.5]{communities_fb.pdf}
+    \includegraphics[scale=0.5]{communities_fb_new.pdf}
     
 %\vspace{-30pt}
   \caption{Some Facebook communities detected by our algorithm.}
@@ -230,7 +231,8 @@ real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists th
 \end{figure}
 %\vspace{-10pt}
 
-Figure \ref{fig-communities-fb} shows a few of the communities detected by our algorithm from the Facebook graph. We obtained a number of isolated communities similar to the one of {\it popular musicians}, and that of {\it internet corporations}. We also see communities that pertain to {\it MSNBC and its (news related) shows}, {\it news channels}, and {\it politics}. One can see that although the {\it news channels} and {\it MSNBC shows} communities are essentially separate, they share a common member, {\it MSNBC}, which is relevant to both. Similarly the {\it news channels} and {\it politics} communities share two nodes. One can see from that overlapping communities are a natural characteristic of real-world networks, which our algorithm helps in detecting.
+We also present some of the sports-related communities detected by our algorithm in the Facebook graph in Figure \ref{fig-communities-fb}, which is self-explanatory.
+%We obtained a number of isolated communities similar to the one of {\it popular musicians}, and that of {\it internet corporations}. We also see communities that pertain to {\it MSNBC and its (news related) shows}, {\it news channels}, and {\it politics}. One can see that although the {\it news channels} and {\it MSNBC shows} communities are essentially separate, they share a common member, {\it MSNBC}, which is relevant to both. Similarly the {\it news channels} and {\it politics} communities share two nodes. One can see from that overlapping communities are a natural characteristic of real-world networks, which our algorithm helps in detecting.
 
 
 %A few cautionary points need to be pointed out here. The figure represents only a small subset of the communities detected by our algorithm, which we decided to present here to illustrate the results of our algorithm. In reality, a large number of communities similar to the ones shown here were detected. Furthermore, the members in the communities also represent only a subset of nodes that belonged to that community, and we decided not to show the rest to favor clarity and simplicity. In order to improve readability, we have also decrypted the names of the nodes, which in reality were Facebook or Twitter handles of {\it walls} or {\it profiles}. The original handles lacked spaces in between words, had special characters such as underscore, or had additional terms, all of which we decided to leave out to help the reader better comprehend the names.
