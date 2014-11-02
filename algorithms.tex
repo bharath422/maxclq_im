@@ -466,3 +466,17 @@ Thus, the time complexity of the heuristic is bounded by $O(n\cdot \Delta^{2})$.
 %$O(n^3)$.
 %\vspace{-8pt}
 
+\subsection{Implementation}
+\label{subsec:implementation}
+
+{\bf Our implementation uses a simple adjacency list representation to store the graph. This is done by maintaining two arrays. Given a graph $G=(V,E)$, with its vertices numbered from $0$ to $|V|-1$, the edge array maintains the concatenated list of sorted neighbors of each vertex. The size of this array is $2|E|$. The vertex array is $|V|$ elements long, one for each vertex in sequential order, and each element points (stores the array index) to starting point of its neighbor list in the edge array. 
+%In addition to the list of neighbors, the number of neighbors can also be easily obtained from our data structure. 
+Figure \ref{fig-implementation} shows our representation and data structure used for a sample graph.}
+
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.25]{implementation.eps}
+\caption{{\bf The adjacency list data structure used in our implementation shown for a sample graph. Each element in the vertex array stores the index to the starting element of its neighbor list in the edge array.}}
+\label{fig-implementation}
+\end{figure}
+

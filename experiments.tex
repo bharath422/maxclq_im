@@ -2,17 +2,7 @@
 \label{sec:experiments}
 
 We present in this section results comparing the performance of our algorithm
-with the algorithms of Carraghan-Pardalos \cite{pardalos}, 
-\"{O}sterg\.{a}rd algorithm \cite{ostergard}, and
-Konc and Janezik \cite{konc2007improved}. We implemented the algorithm of \cite{pardalos} ourselves. 
-For the algorithm of \cite{ostergard},  we used the publicly available {\it cliquer} source code \cite{cliquer}.
-For the algorithm of \cite{konc2007improved}, we used the code {\it MaxCliqueDyn} 
-(MCQD, available at {\small \url{http://www.sicmm.org/~konc/maxclique/}}). 
-Among the variants available in MCQD, we report results on 
-MCQD+CS (which uses improved coloring and dynamic sorting),
-since it is the best-performing variant.  
-
-The experiments are performed on a Linux workstation running 64-bit Red Hat Enterprise Linux Server release 6.2 with a 2 GHz Intel Xeon E7540 processor. The codes are implemented in C++ and compiled using gcc version 4.4.6 with -O3 optimization.
+with other existing algorithms. Our experiments were performed on a Linux workstation running 64-bit Red Hat Enterprise Linux Server release 6.2 with a 2 GHz Intel Xeon E7540 processor. Our implementation is in C++, compiled using gcc version 4.4.6 with -O3 optimization.
 
 
 \subsection{Test Graphs}
@@ -89,8 +79,22 @@ The {\it rmat\_er} graphs have {\it normal} degree distribution, whereas the {\i
  The {\it rmat\_sd1} and {\it rmat\_sd2} graphs differ primarily in the magnitude of maximum vertex degree they contain; the {\it rmat\_sd2} graphs have much higher maximum degree. 
 Table \ref{tab:struc-graphs} lists basic structural information (the number of vertices, 
 number of edges and the maximum degree) about all 30 of the test graphs.
+{\bf In addition to these, we also present results on selected medium and large Pajek data sets \cite{pajek2006}, and a representative sample of graphs from the Stanford Large Network Dataset Collection \cite{stanford_dataset}. These are available in Table \ref{tab:pajek_stanford} in the Appendix.}
 
 \input{graphs_properties}
+
+\subsection{Algorithms for Comparison}
+{\bf The algorithms we consider for comparison are the ones by: 
+\begin{itemize}
+\item Carraghan-Pardalos \cite{pardalos}. We used our own implementation of this algorithm.
+\item \"{O}sterg\.{a}rd algorithm \cite{ostergard}. We used the publicly available {\it cliquer} source code \cite{cliquer}.
+\item Konc and Janezik \cite{konc2007improved}. We used the code {\it MaxCliqueDyn} or MCQD, available at \\{\small \url{http://www.sicmm.org/~konc/maxclique/}}. Among the variants available in MCQD, we report results on MCQD+CS (which uses improved coloring and dynamic sorting), since it is the best-performing variant. The {\it MaxCliqueDyn} code was not capable of handling large input graphs and had to be aborted for many instances. For those that it successfully ran, we had to first modify the graph reader to make it able to handle graphs with multiple connected components.
+\item Tomita and Seki (MCQ) \cite{citeulike:7905505}.
+\item Tomita et al. (MCS) \cite{walcom}.
+\item San Segundo et al. \cite{SanSegundo}.
+For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs.
+\end{itemize}
+}
 
 \subsection{Results}
 \label{sec:exp-results}
@@ -111,9 +115,7 @@ In Table \ref{tab:timings}, the fastest runtime for each instance is indicated w
 An asterisk (*) indicates that an algorithm did not terminate within 25,000 seconds for a particular
 instance. A hyphen (-) indicates that the publicly available implementation 
 (the {\it MaxCliqueDyn} code) had to be aborted because the input graph was too large 
-for the implementation to handle. Even for the instances for which the code
-eventually run successfully, we had to first modify 
-the graph reader to make it able to handle graphs with multiple connected components.
+for the implementation to handle.
 For the graph {\it rmat\_sd2\_5}, none of the algorithms computed the maximum clique size in 
 a reasonable time; the entry there is marked with N, standing for  ``Not Known''.
 

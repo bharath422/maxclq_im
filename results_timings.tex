@@ -6,7 +6,7 @@
 \centering
 \caption{Comparison of runtimes (in seconds) of algorithms {\it CP}~\cite{pardalos}, 
  {\it cliquer}~\cite{ostergard},  {\it MCQD+CS}~\cite{konc2007improved} and
-and our new exact algorithm ($\tau_{A_1}$) for the graphs in the testbed. 
+and our new exact algorithm (${A_1}$) for the graphs in the testbed. 
  Columns $P1$, $P2$, $P3$ and $P5$ list the number of vertices/branches pruned in steps Pruning 1, 2, 3 and 5 of our exact algorithm (K stands for the quantity $10^3$, M for $10^6$ and B for $10^9$). 
 The column $\omega$ (second column) lists the maximum clique size in each graph, 
 the column $\omega_{A_2}$ lists the clique size returned by our heuristic and the column
@@ -21,9 +21,9 @@ Graph           	& $\omega$ & $\tau_{CP}$    & $\tau_{cliquer}$  & $_{+CS}$  &  
 %Graph 			& $\omega$ & $\tau_{CP}$ 	& $\tau_{cliquer}$	& $\tau_{MCQD+CS}$	& $\tau_{new-exact}$ & $\omega_{new-heuristic}$& $\tau_{new-heuristic}$\\ \hline \hline
 %\vspace{-4pt} \\
 %				& 		& 		 		& 				& $_{-exact}$ 	 	& $_{-heuristic}$ 	& $_{-heuristic}$	\\ \hline \hline
-{\it cond-mat-2003} 	& 	25 	& 	4.875 		&  	11.17		&	2.41		&	{\bf 0.011}		& 	29K 			&	48K			&	6,527 		& 	17K			&	25 		& 	$<$0.01 	\\
-{\it email-Enron} 	& 	20 	& 	7.005		& 	15.08 		&	3.70		& 	{\bf 0.998}		& 	32K 			&	155K		&	4,060 		& 	8M			&	18 		& 	0.261	\\ %8,835,739	
-{\it dictionary28} 	& 	26 	& 	7.700 		&	32.74 		&	7.69		&	{\bf $<$0.01}	& 	52K			& 	4,353		&	2,114		& 	107			&	26 		&	$<$0.01	\\	
+{\it cond-mat-2003} 	& 	25 	& 	4.87 			&  	11.17		&	2.41		&	{\bf 0.011}		& 	29K 			&	48K			&	6,527 		& 	17K			&	25 		& 	$<$0.01 	\\
+{\it email-Enron} 	& 	20 	& 	7.01			& 	15.08 		&	3.70		& 	{\bf 0.998}		& 	32K 			&	155K		&	4,060 		& 	8M			&	18 		& 	0.26	\\ %8,835,739	
+{\it dictionary28} 	& 	26 	& 	7.70	 		&	32.74 		&	7.69		&	{\bf $<$0.01}	& 	52K			& 	4,353		&	2,114		& 	107			&	26 		&	$<$0.01	\\	
 {\it Fault\_639}		&	18	&	14571.20		&	4437.14		&	-		&	{\bf 20.03}		&	36			&	13M			&	126			&	1,116		&	18		&	5.80 		\\
 {\it audikw\_1}		&	36	&	*			&	9282.49		&	-		&	{\bf 190.17}	&	4,101		&	38M			&	59K			&	721K		&	36		&	58.38 	\\
 {\it bone010}		&	24	&	*			&	10002.67		&	-		&	{\bf 393.11}	&	37K			&	34M			&	361K		&	44M			&	24		&	24.39 	\\ %43,991,787

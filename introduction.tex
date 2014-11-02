@@ -34,13 +34,13 @@ While branching systematically searches for all candidate solutions, bounding (a
 The algorithm of Carraghan and Pardalos \cite{pardalos} is an early example of 
 a simple and  effective branch-and-bound algorithm for the maximum clique problem.
 %are \cite{Bomze99themaximum,pardalos}. 
-More recently,  \"{O}sterg\.{a}rd \cite{ostergard} introduced 
+More recently, \"{O}sterg\.{a}rd \cite{ostergard} introduced 
 an improved algorithm and demonstrated its relative advantages via computational experiments. 
 Tomita and Seki \cite{citeulike:7905505}, and later, Konc and Jane\v{z}i\v{c} \cite{konc2007improved}
 use upper bounds computed using vertex coloring to enhance the branch-and-bound approach. 
 %Sewell (1998) presented a maximum clique algorithm designed for dense graphs.
 Other examples of branch-and-bound algorithms for the clique problem include 
-the works of Bomze et al~\cite{Bomze99themaximum}, Segundo et al~\cite{SanSegundo}
+the works of Bomze et al~\cite{Bomze99themaximum}, Segundo et al.~\cite{SanSegundo}
 and Babel and Tinhofer~\cite{babel1990branch}.
 Prosser~\cite{prosser2012} in a recent work compares various exact algorithms 
 for the maximum clique problem. %An attractive feature of the algorithms of \cite{pardalos} and \cite{ostergard} is their simplicity in terms of ease of implementation. However, their runtimes could  be infeasible for very large graphs.
@@ -56,15 +56,14 @@ for the maximum clique problem. %An attractive feature of the algorithms of \cit
 In this paper, we present a new exact branch-and-bound
 algorithm for the maximum clique problem that employs 
 several new pruning strategies in addition to those used in \cite{pardalos},
-\cite{ostergard},  \cite{citeulike:7905505} and \cite{konc2007improved},
+\cite{ostergard}, \cite{citeulike:7905505} and \cite{konc2007improved},
 making it suitable for massive graphs.
 %We also present a heuristic that is based on similar pruning techniques as the exact algorithm but runs much faster---the heuristic follows just one of the ``paths" in the search space, and as a result its complexity is nearly linear-time in the size of the graph, in contrast to the exact algorithm whose worst-case complexity is exponential. 
 We run our algorithms on a large variety of test graphs and compare its performance with the
-algorithm of Carraghan and Pardalos \cite{pardalos}, the algorithm of \"{O}sterg\.{a}rd \cite{ostergard} and the algorithm of Konc and Jane\v{z}i\v{c} \cite{konc2007improved}. 
+algorithms by Carraghan and Pardalos \cite{pardalos}, \"{O}sterg\.{a}rd \cite{ostergard}, {\bf Tomita et al. \cite{citeulike:7905505}\cite{walcom}, Konc and Jane\v{z}i\v{c} \cite{konc2007improved}, and Segundo et al.~\cite{SanSegundo}}. 
 We find our new exact algorithm to be up to orders of magnitude faster on large,
 sparse graphs and of comparable runtime on denser graphs.
-We also present a hew heuristic, which runs several orders of magnitude faster than the exact algorithm while providing solutions that are optimal or near-optimal for most cases.
-The algorithms are presented in detail in Section~\ref{sec:algorithms} and the experimental evaluations and comparisons are presented in Section~\ref{sec:experiments}. 
+We also present a hew heuristic, which runs several orders of magnitude faster than the exact algorithm while providing solutions that are optimal or near-optimal for most cases. The algorithms are presented in detail in Section~\ref{sec:algorithms} and the experimental evaluations and comparisons are presented in Section~\ref{sec:experiments}. 
 
 Both the exact algorithm and the heuristic are well-suited for parallelization.
 We discuss a simple shared-memory parallelization and present performance 

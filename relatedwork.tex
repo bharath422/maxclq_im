@@ -22,7 +22,7 @@ If that number is found to be smaller, the algorithm backtracks (search is prune
 pruning strategy to the one by Carraghan and Pardalos.
 The opportunity for the new pruning strategy is created by {\em reversing} the order in which the search is done by
 the Carraghan-Pardalos algorithm. This allows for an additional pruning with the help of
-some auxiliary bookkeeping. 
+some auxiliary book-keeping. 
 Experimental results in \cite{ostergard} showed that the \"{O}sterg\.{a}rd
 algorithm is faster than the Carraghan-Pardalos algorithm on random and 
 DIMACS benchmark graphs \cite{dimacs}.
@@ -33,11 +33,10 @@ A number of existing branch-and-bound algorithms for maximum clique
 also use a vertex-coloring of the graph to obtain an upper bound on the maximum clique. 
 %A {\em vertex-coloring} of a graph is an assignment of colors to vertices such that  a pair of adjacent vertices receive different colors. Clearly, the number of colors used gives  an upper bound on the maximum clique of the graph, which can be used to reduce the search space. 
 A popular and recent method based on this idea is 
-the MCQ algorithm of Tomita and Seiku \cite{citeulike:7905505}. 
+the MCQ algorithm of Tomita and Seki \cite{citeulike:7905505}. 
 More recently, Konc and Jane\v{z}i\v{c} \cite{konc2007improved} presented 
-an improved version of MCQ, known as MaxCliqueDyn (with the variants MCQD and MCQD+CS), 
-that involves the use of tighter, computationally more expensive upper bounds 
-applied on a fraction of the search space.
+an improved version of MCQ, known as MaxCliqueDyn (with the variants MCQD and MCQD+CS), that involves the use of tighter, computationally more expensive upper bounds 
+applied on a fraction of the search space. {\bf Another improved version of MCQ is by San Segundo et al. \cite{SanSegundo}, which makes use of bit strings to sort vertices in constant time as well as to compute graph transitions and bounds efficiently.}
 
 %They present two variations - 1) MCQ with improved 
 %approximate coloring algorithm ColorSort (MCQ+CS) and 2) MCQ with improved coloring and dynamic sorting 
