@@ -7,7 +7,7 @@
 \textheight=9in
 
 \name{ Bharath Pattabiraman\\
- Corresponding Authors  \\
+ Corresponding Author  \\
 \vspace*{0.5cm}
 \hspace*{-0.3cm}
 \begin{tabular}{lcl}
@@ -34,12 +34,20 @@ Toronto, Canada
 
 \opening{Dear Professor Bonato:}
 
-At the manuscript submission site, please find an electronic copy of our manuscript titled
-``Fast Algorithms for the Maximum Clique Problem on Massive Graphs with Applications to Overlapping Community Detection" to be considered for publication as a Research Paper in the 
-{\em Special Issue of the Journal of Internet Mathematics}.
+I am pleased to resubmit for publication the revised version of our manuscript titled ``Fast Algorithms for the Maximum Clique Problem on Massive Graphs with Applications to Overlapping Community Detection". I appreciate the constructive criticisms of the reviewers. I have addressed their concerns by making appropriate changes, the major ones are outlined below.
 
-In this manuscript, we extended the work we presented at the ``{\em $10^{th}$ Workshop on Algorithms and Models for the World Wide Web}" titled  ``{\em Fast Algorithms for the Maximum Clique Problem on Massive Sparse Graphs}". We have supplemented this with a comprehensive analysis of our algorithms and experimental results. We have also added two new sections. The first is about the parallelization of our algorithms and experimental evaluation on shared memory platforms. The second is an application of our
-algorithms for the purpose of detecting overlapping communities in a network. We present a much faster algorithm for clique-based overlapping community detection. We corroborate the validity and performance of our algorithm by comparing it with other similar algorithms on synthetic as well as real-world networks.
+\begin{itemize}
+\item We included Section 3.4 on implementation, where we describe the graph representation and data structure used.
+\item We expanded our testbed to include most of the medium to large data sets considered in Eppstein \& Strash (SEA 2011) to enable a better assessment of our algorithm's performance. We report timings of our algorithm on these graphs, and also mention the runtime of the maximal clique enumeration algorithm of the Eppstein \& Strash (exact numbers reported in their paper).
+\item Our comparison of results with other algorithms is now more exhaustive. We now compare against three more algorithms, MCQ, MCS and BBMC. We used a publicly available implementation by Prosser for this purpose. For the real-world and synthetic graphs, unfortunately, this implementation does not run due to excessive memory demands. Hence, we report timings of these algorithms only for DIMACS graphs. 
+\item We now also report timings on a much larger set of DIMACS graphs in Table 8 (now Table 10) in the Appendix.
+\item We have added a simple example for demonstrating the Clique Percolation Method to make the section more readable.
+\item We have also taken care of other comments by both referees, which are relatively minor which we choose not to mention in detail here.
+\end{itemize}
+
+%At the manuscript submission site, please find an electronic copy of our manuscript titled ``Fast Algorithms for the Maximum Clique Problem on Massive Graphs with Applications to Overlapping Community Detection" to be considered for publication as a Research Paper in the {\em Special Issue of the Journal of Internet Mathematics}.
+
+%In this manuscript, we extended the work we presented at the ``{\em $10^{th}$ Workshop on Algorithms and Models for the World Wide Web}" titled  ``{\em Fast Algorithms for the Maximum Clique Problem on Massive Sparse Graphs}". We have supplemented this with a comprehensive analysis of our algorithms and experimental results. We have also added two new sections. The first is about the parallelization of our algorithms and experimental evaluation on shared memory platforms. The second is an application of our algorithms for the purpose of detecting overlapping communities in a network. We present a much faster algorithm for clique-based overlapping community detection. We corroborate the validity and performance of our algorithm by comparing it with other similar algorithms on synthetic as well as real-world networks.
 
 Thank you very much for your consideration.
 

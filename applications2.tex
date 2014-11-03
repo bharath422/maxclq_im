@@ -20,7 +20,22 @@ Further, a {\em $k$-clique chain} is the union of a sequence of adjacent $k$-cli
 two $k$-cliques are said to be $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, Palla et al devise a method to extract the $k$-clique communities, which  are essentially the $k$-clique connected components of the network; 
 note that, by definition, $k$-clique communities allow for
 overlaps between communities.
+
+{\bf The CPM algorithm is illustrated in Figure \ref{fig-cpm}. Given a graph, it first extracts cliques of size $k$, in this case we choose $k$=3. This is followed by generating the {\it clique graph}, where each $k$-clique in the original graph is represented by a vertex. An edge is added between any two $k$-cliques in the clique graph that are adjacent, in the case of $k$=3, this means any two cliques that share two nodes. The connected components in the clique graph represent a community, and the actual members of the community are obtained by merging the vertices of the individual cliques that form the connected component. }
+
 %Palla et al observe that the $k$-clique communities are equivalent to the $k$-clique connected components of the network; note that, by definition, $k$-clique communities allow for overlaps between communities to exist.
+
+
+\begin{figure}%[h!]
+  \centering
+    %\includegraphics[width=1\textwidth]{communities_fb.pdf}
+    \includegraphics[scale=0.4]{cpm.eps}
+    
+%\vspace{-30pt}
+  \caption{Illustration of the Clique Percolation Method (CPM) algorithm on a sample graph.}
+\label{fig-cpm}
+\end{figure}
+%\vspace{-10pt}
 
 
 A large clique of size $q \geq k $ contains $\binom{q}{k}$ different {\em k-cliques}.
