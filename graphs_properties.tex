@@ -3,8 +3,8 @@
 %\scriptsize
 \centering
 \caption{Structural properties---the number of vertices $|V|$; the umber of edges $|E|$; and the maximum degree $\Delta$---of the graphs $G$ in the testbed.
-The first ten graphs are the graphs from the UF collection; the next fifteen are the   
-RMAT graphs; and the last five are the DIMACS Challenge graphs.}  
+The graphs on the left side are graphs from the UF collection, Pajek data sets, and Stanford Large Dataset collection. On the right are the   
+RMAT graphs; and the DIMACS Challenge graphs.}  
 \label{tab:struc-graphs}
 %\begin{tabular}{l@{\hspace{2pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{8pt}}r@{\hspace{5pt}}|@{\hspace{5pt}}l@{\hspace{2pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{8pt}}r}
 \begin{tabular}{l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}|@{\hspace{5pt}}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}r}
@@ -16,12 +16,8 @@ $G$ & $|V|$ & $|E|$ & $\Delta$ & $G$ & $|V|$ & $|E|$ & $\Delta$ \\ \hline \hline
 {\it email-Enron} & 36,692	 & 183,831 &	1,383  &	{\it rmat\_sd1\_2} &    262,144 &    2,093,552 &   558    \\ \vspace*{\rowspace}
 {\it dictionary28} & 	52,652 &	89,038 &	38  &		{\it rmat\_sd1\_3} &    524,288 &    4,190,376 &    618  \\ \vspace*{\rowspace}
 {\it Fault\_639} &    638,802 &    13,987,881 &    317 &  {\it rmat\_sd1\_4} &    1,048,576 &    8,382,821 &  802    \\ \vspace*{\rowspace}
-{\it audikw\_1} &    943,695 &    38,354,076 &    344  &	 {\it rmat\_sd1\_5} &    2,097,152 &    16,767,728 &    1,069   \\
-
-%\midrule
-\vspace*{\rowspace}
-
- {\it bone010} &    986,703 &    35,339,811 &    80 & 
+{\it audikw\_1} &    943,695 &    38,354,076 &    344  &	 {\it rmat\_sd1\_5} &    2,097,152 &    16,767,728 &    1,069   \\ \vspace*{\rowspace}
+{\it bone010} &    986,703 &    35,339,811 &    80 & 
 {\it rmat\_sd2\_1} &    131,072 &    1,032,634 &    2,980        \\ \vspace*{\rowspace}
 {\it af\_shell10} &    1,508,065 &    25,582,130 &    34 &  
 {\it rmat\_sd2\_2} &    262,144 &    2,067,860 &    4,493      \\ \vspace*{\rowspace}
@@ -35,19 +31,26 @@ $G$ & $|V|$ & $|E|$ & $\Delta$ & $G$ & $|V|$ & $|E|$ & $\Delta$ \\ \hline \hline
 \midrule
 \vspace*{\rowspace}
 
+{\it foldoc}				&	13,356	&	91,470		&	728		&{\it rmat\_er\_1} &    131,072 &    1,048,515 &    82 	 \\ \vspace*{\rowspace}  
+{\it eatRS}				&	23,219	&	304,938		&	1090		&{\it rmat\_er\_2} &    262,144 &    2,097,104 &    98 	 \\ \vspace*{\rowspace}
+{\it hep-th}				&	27,240	&	341,923		&	2411		&{\it rmat\_er\_3} &    524,288 &    4,194,254 &    94  	 \\ \vspace*{\rowspace}
+{\it patents}			&	240,547	&	560,943		&	212		&{\it rmat\_er\_4} &    1,048,576 &    8,388,540 &    97  	 \\ \vspace*{\rowspace}
+{\it days-all}			&	13,308	&	148,035		&	2265		&{\it rmat\_er\_5} &    2,097,152 &    16,777,139 &    102 	 \\
+\midrule
+\vspace*{\rowspace}
 
-{\it rmat\_er\_1} &    131,072 &    1,048,515 &    82  &   
-{\it hamming6-4} & 64 &    704 &    22 	 \\ \vspace*{\rowspace}
-{\it rmat\_er\_2} &    262,144 &    2,097,104 &    98 &  
-{\it johnson8-4-4} & 70 &    1,855 &    53   \\ \vspace*{\rowspace} 
-{\it rmat\_er\_3} &    524,288 &    4,194,254 &    94  &  
-{\it keller4} &    171 &    9,435 &    124  \\ \vspace*{\rowspace}   
-{\it rmat\_er\_4} &    1,048,576 &    8,388,540 &    97  & 
-{\it c-fat200-5} &    200 &    8,473 &    86  \\ \vspace*{\rowspace} 
-{\it rmat\_er\_5} &    2,097,152 &    16,777,139 &    102 & 
-{\it brock200\_2} &    200 &    9,876 &    114 \\
-
-
+{\it roadNet-PA}			&	1,088,092	&	1,541,898		&	9		&{\it hamming6-4} & 64 &    704 &    22 	 \\ \vspace*{\rowspace}
+{\it roadNet-TX}			&	1,393,383	&	1,921,660		&	12		&{\it johnson8-4-4} & 70 &    1,855 &    53   \\ \vspace*{\rowspace} 
+{\it amazon0601}		&	403,394	&	2,247,318		&	2752		&{\it keller4} &    171 &    9,435 &    124  \\ \vspace*{\rowspace}   
+{\it email-EuAll}			&	265,214	&	364,481		&	7636		&{\it c-fat200-5} &    200 &    8,473 &    86  \\ \vspace*{\rowspace} 
+{\it web-Google}		&	916,428	&	4,322,051		&	6332		&{\it brock200\_2} &    200 &    9,876 &    114 \\ \vspace*{\rowspace}
+{\it soc-wiki-Vote}		&	8,297	&	100,762		&	1065		& &     &     &     \\ \vspace*{\rowspace}
+{\it soc-slashdot0902}	&	82,168	&	504,230		&	2252		& &     &     &     \\ \vspace*{\rowspace}
+{\it cit-Patents}			&	3,774,768	&	16,518,947	&	793		& &     &     &     \\ \vspace*{\rowspace}
+{\it soc-Epinions1}		&	75,888	&	405,740		&	3044		& &     &     &     \\ \vspace*{\rowspace}
+{\it soc-wiki-Talk}		&	2,394,385	&	4,659,565		&	100029	& &     &     &     \\ \vspace*{\rowspace}
+{\it web-berkstan}		&	685,230	&	6,649,470		&	84230	&
+ &     &     &     \\ 
 \bottomrule\bottomrule
 \end{tabular}
 %\vspace{-6pt}

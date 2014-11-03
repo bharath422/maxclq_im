@@ -7,7 +7,7 @@ with other existing algorithms. Our experiments were performed on a Linux workst
 
 \subsection{Test Graphs}
 
-\begin{table}[t]
+\begin{table}[!h]
 %\small
 \centering
 \caption{Overview of real-world graphs in the testbed and their origins.}
@@ -43,6 +43,29 @@ A detailed micro-finite element model of bones representing \\
 {\it roadNet-CA} \cite{Leskovec:2005:GOT:1081870.1081893} & A road network of California.
 Nodes represent intersections \\ & and endpoints and edges represent the roads connecting them. \\ \hline % \\ & intersections or endpoints. \\    \hline
 {\it kkt\_power} \cite{Davis97theuniversity} & An Optimal Power Flow (nonlinear optimization) network. \\\hline
+{\it foldoc} \cite{foldoc} & A searchable dictionary of terms related to computing. \\\hline
+{\it eatRS} \cite{eatRS} & The Edinburgh Associative Thesaurus, a set of word association norms \\
+& showing the counts of word association as collected from subjects. \\\hline
+{\it hep-th} \cite{hep-th-kdd}	& Citation data from KDD Cup 2003, a knowledge discovery and data mining\\
+& competition held in conjunction with the Ninth ACM SIGKDD Conference. \\\hline
+{\it patents} \cite{hall2001}	& Data set containing information on almost 3 million U.S. patents granted\\
+& between January 1963 and December 1999, and all citations made to\\
+& these patents between 1975 and 1999. 	\\\hline
+{\it days-all} \cite{corman2002}	& Reuters terror news network obtained from the CRA networks produced \\
+& by Steve Corman and Kevin Dooley at Arizona State University.	\\\hline
+{\it roadNet-PA} \cite{Leskovec:2005:GOT:1081870.1081893}	& Road network of Pennsylvania	\\\hline
+{\it roadNet-TX} \cite{Leskovec:2005:GOT:1081870.1081893}	& Road network of Texas	\\\hline
+{\it amazon0601} \cite{leskovec2007}	& Amazon product co-purchasing network from June 1 2003 \\\hline
+{\it email-EuAll} \cite{leskovec2007-2}	& Email network from a EU research institution	\\\hline
+{\it web-Google} \cite{web-google}	& Web graph released by Google in 2002 as a part of \\
+& Google Programming Contest.	\\\hline
+{\it soc-wiki-Vote} \cite{leskovec2010}	& Wikipedia who-votes-on-whom network	\\\hline
+{\it soc-slashdot0902} \cite{Leskovec:2005:GOT:1081870.1081893}	& Slashdot social network from November 2008	\\\hline
+{\it cit-Patents} \cite{hall2001}	& Citation network among US Patents	\\\hline
+{\it soc-Epinions1} \cite{richardson2003}	&	Who-trusts-whom network of Epinions.com \\\hline
+{\it soc-wiki-Talk} \cite{leskovec2010}	&	Wikipedia talk (communication) network \\\hline
+{\it web-berkstan} \cite{Leskovec:2005:GOT:1081870.1081893}	& Web graph of Berkeley and Stanford	\\\hline
+
 \end{tabular}
 \end{table}
 
@@ -50,7 +73,8 @@ Our testbed is grouped in three categories:\\
 \begin{enumerate*}[label=\textbf{\arabic*})]
 \item {\bf Real-world graphs. } 
 Under this category, we consider 10 graphs downloaded from the 
-University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}. The graphs originate
+University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}, {\bf 5 medium to large graphs from Pajek data sets \cite{pajek2006}, and a 11 graphs from the Stanford Large Network Dataset Collection \cite{stanford_dataset}.}
+The graphs originate
 from various real-world applications. 
 Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.\\
 
@@ -79,7 +103,6 @@ The {\it rmat\_er} graphs have {\it normal} degree distribution, whereas the {\i
  The {\it rmat\_sd1} and {\it rmat\_sd2} graphs differ primarily in the magnitude of maximum vertex degree they contain; the {\it rmat\_sd2} graphs have much higher maximum degree. 
 Table \ref{tab:struc-graphs} lists basic structural information (the number of vertices, 
 number of edges and the maximum degree) about all 30 of the test graphs.
-{\bf In addition to these, we also present results on selected medium and large Pajek data sets \cite{pajek2006}, and a representative sample of graphs from the Stanford Large Network Dataset Collection \cite{stanford_dataset}. These are available in Table \ref{tab:pajek_stanford} in the Appendix.}
 
 \input{graphs_properties}
 
@@ -87,13 +110,13 @@ number of edges and the maximum degree) about all 30 of the test graphs.
 {\bf The algorithms we consider for comparison are the ones by: 
 \begin{itemize}
 \item Carraghan-Pardalos \cite{pardalos}. We used our own implementation of this algorithm.
-\item \"{O}sterg\.{a}rd algorithm \cite{ostergard}. We used the publicly available {\it cliquer} source code \cite{cliquer}.
-\item Konc and Janezik \cite{konc2007improved}. We used the code {\it MaxCliqueDyn} or MCQD, available at \\{\small \url{http://www.sicmm.org/~konc/maxclique/}}. Among the variants available in MCQD, we report results on MCQD+CS (which uses improved coloring and dynamic sorting), since it is the best-performing variant. The {\it MaxCliqueDyn} code was not capable of handling large input graphs and had to be aborted for many instances. For those that it successfully ran, we had to first modify the graph reader to make it able to handle graphs with multiple connected components.
+\item \"{O}sterg{\aa}rd algorithm \cite{ostergard}. We used the publicly available {\it cliquer} source code \cite{cliquer}.
+\item Konc and Jane\v{z}i\v{c} \cite{konc2007improved}. We used the code {\it MaxCliqueDyn} or MCQD, available at \\{\small \url{http://www.sicmm.org/~konc/maxclique/}}. Among the variants available in MCQD, we report results on MCQD+CS (which uses improved coloring and dynamic sorting), since it is the best-performing variant. The {\it MaxCliqueDyn} code was not capable of handling large input graphs and had to be aborted for many instances. For those that it successfully ran, we had to first modify the graph reader to make it able to handle graphs with multiple connected components.
 \item Tomita and Seki (MCQ) \cite{citeulike:7905505}.
 \item Tomita et al. (MCS) \cite{walcom}.
 \item San Segundo et al. \cite{SanSegundo}.
-For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs.
 \end{itemize}
+For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs. In addition to comparing with these, for the Pajek and Stanford data sets, we provide comparison of the timing results of our algorithm with the maximal clique enumeration algorithm by Epstein \& Strash \cite{sea}. For this, we directly quote numbers published in \cite{sea}, and it is to be kept in mind that maximal clique enumeration in general is a harder problem than maximum clique finding, and these experiments have been performed on a different testing environment.
 }
 
 \subsection{Results}
@@ -102,7 +125,7 @@ For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1
 \input{results_timings}
 
 Table \ref{tab:timings} shows the size of the maximum clique ($\omega$) and the runtimes  of our exact algorithm (Algorithm 1) and the algorithms of Caraghan and Pardalos (CP), 
-\"{O}sterg\.{a}rd ({\it cliquer}) 
+\"{O}sterg{\aa}rd ({\it cliquer}) 
 and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed. 
 The last two columns show the results of our heuristic (Algorithm 2)---the size of the maximum clique 
 returned ($\omega_{A_2}$)  and its runtime ($\tau_{A_2}$). 
@@ -132,12 +155,13 @@ In terms of runtime,  its relative performance compared to the other three varie
 in accordance with the advantages afforded by the various pruning steps.  
 
 
+\input{new_timings}
 
 
 %{\bf Analysis of pruning steps.  }
 Vertices that are discarded by Pruning 1 are skipped in the main loop of the algorithm, and the largest cliques containing them are not computed. Pruning 2 avoids re-computing previously computed cliques in the neighborhood of a vertex. In the absence of Pruning 1, the number of vertices pruned by Pruning 2 would be bounded by the number of edges in the graph (note that this is more than the total number of vertices in the graph). While Pruning 3 reduces the size of the input set on which the maximum clique is to be computed, Pruning 5 brings down the time taken to generate the intersection set in Line 12 of the subroutine. 
 Pruning 4 corresponds to back tracking. Unlike Pruning steps 1, 2, 3 and 5, Pruning 4
-is used  by all three of the other algorithms in our comparison. The primary strength of our algorithm is its ability to take advantage of pruning in multiple steps in a hierarchical fashion, allowing for opportunities for one or more of the steps to kick in and impact performance.
+is used  by all three of the other algorithms in our comparison. The primary strength of our algorithm is its ability to take advantage of pruning in multiple steps in a hierarchical fashion, allowing for opportunities for one or more of the steps to {\bf be triggered and positively impact the performance}.
 
 \begin{figure}
   \centering

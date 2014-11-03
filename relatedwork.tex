@@ -18,12 +18,12 @@ vertices that could potentially constitute a clique containing vertex $v_i$
 against the size of the largest clique encountered thus far.
 If that number is found to be smaller, the algorithm backtracks (search is pruned).
 
-\"{O}sterg\.{a}rd \cite{ostergard} devised an algorithm that incorporated an additional 
+\"{O}sterg{\aa}rd \cite{ostergard} devised an algorithm that incorporated an additional 
 pruning strategy to the one by Carraghan and Pardalos.
 The opportunity for the new pruning strategy is created by {\em reversing} the order in which the search is done by
 the Carraghan-Pardalos algorithm. This allows for an additional pruning with the help of
 some auxiliary book-keeping. 
-Experimental results in \cite{ostergard} showed that the \"{O}sterg\.{a}rd
+Experimental results in \cite{ostergard} showed that the \"{O}sterg{\aa}rd
 algorithm is faster than the Carraghan-Pardalos algorithm on random and 
 DIMACS benchmark graphs \cite{dimacs}.
 However, the new pruning strategy used in this algorithm is intimately tied to the order in which vertices are processed, introducing an inherent sequentiality into the algorithm.

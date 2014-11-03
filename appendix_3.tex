@@ -6,10 +6,8 @@
 %\scriptsize
 %\small
 \centering
-\caption{Comparison of runtimes of algorithms: \cite{ostergard} ({\it $\tau_{cliquer}$}), \cite{konc2007improved} ({\it $\tau_{MCQD+CS}$}), 
-with that of our new exact algorithm ($\tau_{A1}$) for selected medium and large Pajek and Stanford data sets. 
-An asterisk (*) indicates that the algorithm did not terminate within 
-17,000 seconds for that instance. $\Delta$ denotes the maximum degree, and $\omega$ the maximum clique size of the graph.}
+\caption{Comparison of runtimes of our new exact maximum clique finding algorithm ($\tau_{A1}$) and the maximal clique enumeration algorithm by Eppstein \& Strash \cite{sea} ($\tau_{ES}$) for the Pajek and Stanford data sets in our testbed. An asterisk (*) indicates that the algorithm did not terminate within 
+15,000 seconds for that instance. $\Delta$ denotes the maximum degree, and $\omega$ the maximum clique size of the graph.}
 %Comparison between algorithms in \cite{pardalos} (CP), \cite{ostergard} (cliquer) and our new exact and
 %heuristic algorithms.
 %An asterisk (*) indicates that the algorithm did not terminate within 25,000 seconds for that problem instance.
@@ -22,26 +20,26 @@ An asterisk (*) indicates that the algorithm did not terminate within
 %\begin{tabular}{l@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}|@{\hspace{10pt}}r@{\hspace{10pt}}r}
 %\begin{tabular}{lrrrrrr|rr}
 %\begin{tabular}{l@{\hspace{6pt}}r@{\hspace{6pt}}|@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r@{\hspace{6pt}}r}
-\begin{tabular}{lrrrr|rrr}
+\begin{tabular}{lrrrr|rr}
 \toprule\toprule
-	&		&		&		&		&		&	$\tau_{MCQD}$	&		\\
-$G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\Delta$	&	$\omega$	&	$\tau_{cliquer}$	&	$_{+CS}$	&	$\tau_{A1}$	\\ \hline \hline
-{\it foldoc} \cite{foldoc}	&	13,356	&	91,470	&	728	&	9	&	2.23	&	0.58	&	0.05	\\
-{\it eatRS} \cite{eatRS}	&	23,219	&	304,938	&	1090	&	9	&	7.53	&	1.86	&	1.81	\\
-{\it hep-th} \cite{hep-th-kdd}	&	27,240	&	341,923	&	2411	&	23	&	9.43	&	2.43	&	4.48	\\
-{\it patents} \cite{hall2001}	&	240,547	&	560,943	&	212	&	6	&	2829.48	&	239.66	&	0.13	\\
-{\it days-all} \cite{corman2002}	&	13,308	&	148,035	&	2265	&	28	&	2.47	&	0.59	&	75.37	\\
-{\it roadNet-PA} \cite{Leskovec:2005:GOT:1081870.1081893}	&	1,088,092	&	1,541,898	&	9	&	4	&	16052.91	&	*	&	0.24	\\
-{\it roadNet-TX} \cite{Leskovec:2005:GOT:1081870.1081893}	&	1,393,383	&	1,921,660	&	12	&	4	&	*	&	*	&	0.26	\\
-{\it amazon0601} \cite{leskovec2007}	&	403,394	&	2,247,318	&	2752	&	11	&	3190.11	&	717.99	&	0.20	\\
-{\it email-EuAll} \cite{leskovec2007-2}	&	265,214	&	364,481	&	7636	&	16	&	943.74	&	270.67	&	0.92	\\
-{\it web-Google} \cite{web-google}	&	916,428	&	4,322,051	&	6332	&	44	&	10958.68	&	*	&	0.35	\\
-{\it soc-wiki-Vote} \cite{leskovec2010}	&	8,297	&	100,762	&	1065	&	17	&	0.89	&	0.24	&	4.31	\\
-{\it soc-slashdot0902} \cite{Leskovec:2005:GOT:1081870.1081893}	&	82,168	&	504,230	&	2252	&	27	&	88.38	&	23.63	&	25.54	\\
-{\it cit-Patents} \cite{hall2001}	&	3,774,768	&	16,518,947	&	793	&	11	&	2.47	&	*	&	19.99	\\
-{\it soc-Epinions1} \cite{richardson2003}	&	75,888	&	405,740	&	3044	&	23	&	73.85	&	19.95	&	15.01	\\
-{\it soc-wiki-Talk} \cite{leskovec2010}	&	2,394,385	&	4,659,565	&	100029	&	26	&	*	&	*	&	6885.13	\\
-{\it web-berkstan} \cite{Leskovec:2005:GOT:1081870.1081893}	&	685,230	&	6,649,470	&	84230	&	201	&	6416.61	&	*	&	44.70	\\
+	&		&		&		&		&		&		\\
+$G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\Delta$	&	$\omega$	&	$\tau_{A1}$	&	$\tau_{ES}$	\\ \hline \hline
+{\it foldoc}	&	13,356	&	91,470	&	728	&	9	&	0.05	&	0.13	\\
+{\it eatRS}	&	23,219	&	304,938	&	1090	&	9	&	1.81	&	1.03	\\
+{\it hep-th}	&	27,240	&	341,923	&	2411	&	23	&	4.48	&	1.70	\\
+{\it patents}	&	240,547	&	560,943	&	212	&	6	&	0.13	&	1.65	\\
+{\it days-all}	&	13,308	&	148,035	&	2265	&	28	&	75.37	&	5.18	\\
+{\it roadNet-PA}	&	1,088,092	&	1,541,898	&	9	&	4	&	0.24	&	3.21	\\
+{\it roadNet-TX}	&	1,393,383	&	1,921,660	&	12	&	4	&	0.26	&	4.00	\\
+{\it amazon0601}	&	403,394	&	2,247,318	&	2752	&	11	&	0.20	&	6.03	\\
+{\it email-EuAll}	&	265,214	&	364,481	&	7636	&	16	&	0.92	&	1.33	\\
+{\it web-Google}	&	916,428	&	4,322,051	&	6332	&	44	&	0.35	&	9.70	\\
+{\it soc-wiki-Vote}	&	8,297	&	100,762	&	1065	&	17	&	4.31	&	1.14	\\
+{\it soc-slashdot0902}	&	82,168	&	504,230	&	2252	&	27	&	25.54	&	2.58	\\
+{\it cit-Patents}	&	3,774,768	&	16,518,947	&	793	&	11	&	19.99	&	58.64	\\
+{\it soc-Epinions1}	&	75,888	&	405,740	&	3044	&	23	&	15.01	&	4.78	\\
+{\it soc-wiki-Talk}	&	2,394,385	&	4,659,565	&	100029	&	26	&	6885.13	&	216.00	\\
+{\it web-berkstan}	&	685,230	&	6,649,470	&	84230	&	201	&	44.70	&	20.87	\\
 \bottomrule\bottomrule
 \end{tabular}
 \end{table}
