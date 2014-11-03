@@ -130,9 +130,9 @@ It should to be kept in mind that maximal clique enumeration in general is a har
 
 Table~\ref{tab:timings} shows the size of the maximum clique ($\omega$) and the runtimes  of our exact algorithm (Algorithm 1) and the algorithms of Caraghan and Pardalos (CP), 
 \"{O}sterg{\aa}rd ({\it cliquer}) 
-and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed except  for 
+and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed {\bf except  for 
 the Pajek and Stanford test graphs;
-results on the Pajek and Stanford graphs are presented in Table~\ref{tab:pajek_stanford}. 
+results on the Pajek and Stanford graphs are presented in Table~\ref{tab:pajek_stanford}. }
 The last two columns in Table~\ref{tab:timings} show the results of our 
 heuristic (Algorithm 2)---the size of the maximum clique 
 returned ($\omega_{A_2}$)  and its runtime ($\tau_{A_2}$). 
@@ -179,7 +179,7 @@ In Figure~\ref{fig-pruningplot} we show the number of vertices discarded by all
 the  pruning steps of the exact algorithm normalized by the total number of edges
 in a graph for the real-world graphs (category 1) in the testbed. We cut few bars reachining
 140\% as their correspnding values are much higher.
-In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. It can be seen for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero but relatively modest.
+In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. {\bf It can be seen} for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero but relatively modest.
 %Since our new pruning steps hierarchically reduce the search space, one can expect a decreasing order of effect in the performance of Prunings 1, 2, 3 and 5, with Pruning 1 having the highest impact, and 5 the lowest. 
 
 
