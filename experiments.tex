@@ -116,18 +116,25 @@ number of edges and the maximum degree) about all 30 of the test graphs.
 \item Tomita et al. (MCS) \cite{walcom}.
 \item San Segundo et al. \cite{SanSegundo}.
 \end{itemize}
-For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs. In addition to comparing with these, for the Pajek and Stanford data sets, we provide comparison of the timing results of our algorithm with the maximal clique enumeration algorithm by Epstein \& Strash \cite{sea}. For this, we directly quote numbers published in \cite{sea}, and it is to be kept in mind that maximal clique enumeration in general is a harder problem than maximum clique finding, and these experiments have been performed on a different testing environment.
+For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs. 
+
+In addition to comparing with the above mentioned algorithms, for the Pajek and Stanford data sets, we also provide comparison of the timing results of our algorithm with the maximal clique enumeration algorithm by Epstein \& Strash \cite{sea}. For this, we directly quote numbers published in \cite{sea}, and the results are listed in Table~\ref{tab:pajek_stanford-es} in the Appendix.
+It should to be kept in mind that maximal clique enumeration in general is a harder problem than maximum clique finding, and that these experiments have been performed on different test environment. Therefore the runtime results should be understood in a sense qualitatively.
 }
 
 \subsection{Results}
 \label{sec:exp-results}
 
 \input{results_timings}
+\input{new_timings}
 
-Table \ref{tab:timings} shows the size of the maximum clique ($\omega$) and the runtimes  of our exact algorithm (Algorithm 1) and the algorithms of Caraghan and Pardalos (CP), 
+Table~\ref{tab:timings} shows the size of the maximum clique ($\omega$) and the runtimes  of our exact algorithm (Algorithm 1) and the algorithms of Caraghan and Pardalos (CP), 
 \"{O}sterg{\aa}rd ({\it cliquer}) 
-and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed. 
-The last two columns show the results of our heuristic (Algorithm 2)---the size of the maximum clique 
+and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed except  for 
+the Pajek and Stanford test graphs;
+results on the Pajek and Stanford graphs are presented in Table~\ref{tab:pajek_stanford}. 
+The last two columns in Table~\ref{tab:timings} show the results of our 
+heuristic (Algorithm 2)---the size of the maximum clique 
 returned ($\omega_{A_2}$)  and its runtime ($\tau_{A_2}$). 
 The columns labeled $P1$, $P2$, $P3$ and $P5$ list the number of 
 vertices/branches pruned in the respective pruning steps of Algorithm 1.
@@ -153,10 +160,6 @@ As expected, our exact algorithm gave the same size of maximum clique as the oth
 three algorithms for all test cases. 
 In terms of runtime,  its relative performance compared to the other three varied
 in accordance with the advantages afforded by the various pruning steps.  
-
-
-\input{new_timings}
-
 
 %{\bf Analysis of pruning steps.  }
 Vertices that are discarded by Pruning 1 are skipped in the main loop of the algorithm, and the largest cliques containing them are not computed. Pruning 2 avoids re-computing previously computed cliques in the neighborhood of a vertex. In the absence of Pruning 1, the number of vertices pruned by Pruning 2 would be bounded by the number of edges in the graph (note that this is more than the total number of vertices in the graph). While Pruning 3 reduces the size of the input set on which the maximum clique is to be computed, Pruning 5 brings down the time taken to generate the intersection set in Line 12 of the subroutine. 

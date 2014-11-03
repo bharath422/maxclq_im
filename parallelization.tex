@@ -3,7 +3,7 @@
 
 %The ease with which an algorithm can be parallelized and its performance is important for handling large-scale graphs in emerging applications, where graphs with millions (or more) vertices have become quite common. 
 
- We describe in this section how our exact algorithm can be parallelized and show performance results
+ We demonstrate in this section how our exact algorithm can be parallelized and show performance results
 on a shared-memory platform. The heuristic can be parallelized following a similar procedure.
 
 %We here describe the parallelization procedure for both shared and distributed memory architecture. 
@@ -37,7 +37,10 @@ Figure \ref{fig-parallel_perf} shows the timings and speedups we obtained for th
 For the other instances of the real-world graphs, the maximum speedup we obtained 
 while using 32 cores/threads is around 22$\times$. 
 
-For the RMAT graphs, it can seen that the scaling of the runtime and speedups vary with the structures (RMAT parameters) of the instances. We observed super-linear speedups for a couple of the instances, which is not uncommon for branch-and-bound algorithms \cite{a6040618}. For the others, the algorithm scales fairly well up to 8 threads, and begins to
+For the RMAT graphs, it can be seen that the scaling of the runtime and speedups vary with the structures (RMAT parameters) of the instances. We observed super-linear speedups for a couple of the instances, which
+happens as a result of some unfruitful searches in the branch-and-bound procedure being discovered early
+as a result of parallel processing. This phenomenon is better exploited and more fully explored in other works in the literature such as  \cite{a6040618}. 
+For the other instances, the algorithm scales fairly well up to 8 threads, and begins to
 degrade thereafter. The speedups we obtained range between 6$\times$  to 20$\times$ when 32 threads are used.
 
 

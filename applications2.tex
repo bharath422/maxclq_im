@@ -20,10 +20,9 @@ Further, a {\em $k$-clique chain} is the union of a sequence of adjacent $k$-cli
 two $k$-cliques are said to be $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, Palla et al devise a method to extract the $k$-clique communities, which  are essentially the $k$-clique connected components of the network; 
 note that, by definition, $k$-clique communities allow for
 overlaps between communities.
+%Palla et al observe that the $k$-clique communities are equivalent to the $k$-clique connected components of the network; note that, by definition, $k$-clique communities allow for overlaps between communities to exist.
 
 {\bf The CPM algorithm is illustrated in Figure \ref{fig-cpm}. Given a graph, it first extracts cliques of size $k$, in this case we choose $k$=3. This is followed by generating the {\it clique graph}, where each $k$-clique in the original graph is represented by a vertex. An edge is added between any two $k$-cliques in the clique graph that are adjacent, in the case of $k$=3, this means any two cliques that share two nodes. The connected components in the clique graph represent a community, and the actual members of the community are obtained by merging the vertices of the individual cliques that form the connected component. }
-
-%Palla et al observe that the $k$-clique communities are equivalent to the $k$-clique connected components of the network; note that, by definition, $k$-clique communities allow for overlaps between communities to exist.
 
 
 \begin{figure}%[h!]
@@ -36,6 +35,7 @@ overlaps between communities.
 \label{fig-cpm}
 \end{figure}
 %\vspace{-10pt}
+
 
 
 A large clique of size $q \geq k $ contains $\binom{q}{k}$ different {\em k-cliques}.
@@ -92,7 +92,7 @@ we explore a {\em randomly} chosen neighbor of $v$, regardless of its degree val
 %\subsection{Test on Synthetic Networks}
 
 {\bf Test on Synthetic Networks. } We tested our algorithm on the LFR benchmarks\footnote{http://sites.google.com/site/andrealancichinetti/files} proposed in \cite{2008PhRvE..78d6110L}. These benchmarks have the attractive feature that they allow
-for generation of synthetic networks with known ``ground truth"  about the communities.
+for generation of synthetic networks with known communities (ground truth).  
 We generated graphs with $n$ = 1000 nodes, average degree $K$ = 10, and power law exponents $\tau_1$ = 2 and $\tau_2$ = 1 in the LFR model. We set the maximum degree $K_{max}$ to 50, and the minimum and maximum community sizes $C_{min}$ and $C_{max}$ to 20 and 50, respectively. We used two far-apart values each for the mixing parameter $\mu$, the fraction of overlapping nodes $O_n$, and the number of communities each overlapping node belongs to $O_m$. Specifically, for $\mu$ we used 0.1 and 0.3, for $O_n$ we used 10$\%$ and 50$\%$, and for $O_m$ we used 2 and 8. 
 All together, these combinations of parameters resulted in eight graphs in the testbed.
 %, which is of the same order as most large real-world social networks. 

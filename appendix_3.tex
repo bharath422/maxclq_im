@@ -7,7 +7,8 @@
 %\small
 \centering
 \caption{Comparison of runtimes of our new exact maximum clique finding algorithm ($\tau_{A1}$) and the maximal clique enumeration algorithm by Eppstein \& Strash \cite{sea} ($\tau_{ES}$) for the Pajek and Stanford data sets in our testbed. An asterisk (*) indicates that the algorithm did not terminate within 
-15,000 seconds for that instance. $\Delta$ denotes the maximum degree, and $\omega$ the maximum clique size of the graph.}
+15,000 seconds for that instance. The runtimes under column $\tau_{ES}$ are directly quoted from \cite{sea}.
+The column $\Delta$ denotes the maximum degree, and $\omega$ the maximum clique size of the graph.}
 %Comparison between algorithms in \cite{pardalos} (CP), \cite{ostergard} (cliquer) and our new exact and
 %heuristic algorithms.
 %An asterisk (*) indicates that the algorithm did not terminate within 25,000 seconds for that problem instance.
@@ -15,7 +16,7 @@
 %the entry is marked $N$, denoting ``Not Known''.
 %The last two columns of the table show the numbers of vertices pruned in steps Pruning 1
 %and Pruning 3 of Algorithm 1.} 
-\label{tab:pajek_stanford}
+\label{tab:pajek_stanford-es}
 %@{\hspace{5pt}}
 %\begin{tabular}{l@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}r@{\hspace{10pt}}|@{\hspace{10pt}}r@{\hspace{10pt}}r}
 %\begin{tabular}{lrrrrrr|rr}
@@ -23,7 +24,7 @@
 \begin{tabular}{lrrrr|rr}
 \toprule\toprule
 	&		&		&		&		&		&		\\
-$G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\Delta$	&	$\omega$	&	$\tau_{A1}$	&	$\tau_{ES}$	\\ \hline \hline
+$G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\Delta$	&	$\omega$	&	$\tau_{A1}$	&	$\tau_{ES}$ \cite{sea}  	\\ \hline \hline
 {\it foldoc}	&	13,356	&	91,470	&	728	&	9	&	0.05	&	0.13	\\
 {\it eatRS}	&	23,219	&	304,938	&	1090	&	9	&	1.81	&	1.03	\\
 {\it hep-th}	&	27,240	&	341,923	&	2411	&	23	&	4.48	&	1.70	\\
