@@ -10,69 +10,70 @@ with other existing algorithms. Our experiments were performed on a Linux workst
 \begin{table}[!h]
 %\small
 \centering
-\caption{Overview of real-world graphs in the testbed and their origins.}
+\caption{Overview of real-world graphs in the testbed (UF, Pajek and Stanford datasets) and their origins.}
 \label{tab:real-graphs}
 \begin{tabular}{ll}
+\hline \hline
 {\bf Graph} & {\bf Description} \\ \hline \hline
 {\it cond-mat-2003} \cite{Newman06042004} & A collaboration network of scientists posting preprints 
 on \\ & the condensed matter archive at www.arxiv.org in the period \\ 
-& between January 1, 1995 and June 30, 2003. \\ \hline
+& between January 1, 1995 and June 30, 2003. \\
 %The largest component of this network, which contains 27519 scientists, has been used by several authors as a test-bed for community-finding algorithms for large networks; see for example \cite{PhysRevE.72.027104}
 {\it email-Enron} \cite{Leskovec:2005:GOT:1081870.1081893} & A communication network representing
 email exchanges. \\
 %This data was originally made public, and posted to the web, by the Federal Energy Regulatory Commission during its investigation. 
-\hline %Nodes are email addresses and there is a directed edge from \\ & node $i$ to node $j$ if at least one email is sent from $i$ to $j$. \\ \hline
+%Nodes are email addresses and there is a directed edge from \\ & node $i$ to node $j$ if at least one email is sent from $i$ to $j$. \\ \hline
 %(In our experiments we ignore the directions and treat the graph as if it were undirected.)\\
 %sent at least one email to address $j$, the graph contains a directed edge from $i$ to $j$. Note that non-Enron email addresses act as sinks and sources in the network as we only observe their communication with the Enron email addresses. 
-{\it dictionary28} \cite{pajek2006} & Pajek network of words. \\ \hline
+{\it dictionary28} \cite{pajek2006} & Pajek network of words. \\ 
 {\it Fault\_639} \cite{Ferronato20083922} & A structural problem discretizing a faulted gas reservoir with \\
-& tetrahedral Finite Elements and triangular Interface Elements. \\ \hline
+& tetrahedral Finite Elements and triangular Interface Elements. \\
 %& The Interface Elements are used with a Penalty formulation to simulate fault behavior. \\ \hline
 %The problem arises from a 3D discretization with three displacement unknowns associated to each node of the grid. \\
-{\it audikw\_1} \cite{Davis97theuniversity} & An automotive crankshaft model of TETRA elements. \\ \hline
+{\it audikw\_1} \cite{Davis97theuniversity} & An automotive crankshaft model of TETRA elements. \\ 
 {\it bone010} \cite{vanRietbergen199569} &
 %Three-dimensional serial reconstruction techniques allow us to develop 
 A detailed micro-finite element model of bones representing \\
-& the porous bone micro-architecture. \\ \hline
+& the porous bone micro-architecture. \\
 %& Micro computed tomography (CT) is employed to make 3D high-resolution images. \\ \hline
 % ($\sim$50 microns) of a bone. \\ \hline
 %\\
 %Then the 3D reconstruction is directly transformed into an equally shaped micro finite element model by simply converting all bone voxels to equally sized 8-node brick elements. This results in finite element (FE) models with a very large number of elements. \\
-{\it af\_shell} \cite{Davis97theuniversity}  & A sheet metal forming simulation network. \\ \hline
-{\it as-Skitter} \cite{Leskovec:2005:GOT:1081870.1081893} & An Internet topology graph from trace routes run daily in 2005. \\ \hline %From several scattered sources to million destinations. %1.7 million nodes, 11 million edges. 
+{\it af\_shell} \cite{Davis97theuniversity}  & A sheet metal forming simulation network. \\ 
+{\it as-Skitter} \cite{Leskovec:2005:GOT:1081870.1081893} & An Internet topology graph from trace routes run daily in 2005. \\  %From several scattered sources to million destinations. %1.7 million nodes, 11 million edges. 
 {\it roadNet-CA} \cite{Leskovec:2005:GOT:1081870.1081893} & A road network of California.
-Nodes represent intersections \\ & and endpoints and edges represent the roads connecting them. \\ \hline % \\ & intersections or endpoints. \\    \hline
+Nodes represent intersections \\ & and endpoints and edges represent the roads connecting them. \\  % \\ & intersections or endpoints. \\    \hline
 {\it kkt\_power} \cite{Davis97theuniversity} & An Optimal Power Flow (nonlinear optimization) network. \\\hline
-{\it foldoc} \cite{foldoc} & A searchable dictionary of terms related to computing. \\\hline
+{\it foldoc} \cite{foldoc} & A searchable dictionary of terms related to computing. \\
 {\it eatRS} \cite{eatRS} & The Edinburgh Associative Thesaurus, a set of word association norms \\
-& showing the counts of word association as collected from subjects. \\\hline
+& showing the counts of word association as collected from subjects. \\
 {\it hep-th} \cite{hep-th-kdd}	& Citation data from KDD Cup 2003, a knowledge discovery and data mining\\
-& competition held in conjunction with the Ninth ACM SIGKDD Conference. \\\hline
+& competition held in conjunction with the Ninth ACM SIGKDD Conference. \\
 {\it patents} \cite{hall2001}	& Data set containing information on almost 3 million U.S. patents granted\\
 & between January 1963 and December 1999, and all citations made to\\
-& these patents between 1975 and 1999. 	\\\hline
+& these patents between 1975 and 1999. 	\\
 {\it days-all} \cite{corman2002}	& Reuters terror news network obtained from the CRA networks produced \\
 & by Steve Corman and Kevin Dooley at Arizona State University.	\\\hline
-{\it roadNet-TX} \cite{Leskovec:2005:GOT:1081870.1081893}	& Road network of Texas	\\\hline
-{\it amazon0601} \cite{leskovec2007}	& Amazon product co-purchasing network from June 1 2003 \\\hline
-{\it email-EuAll} \cite{leskovec2007-2}	& Email network from a EU research institution	\\\hline
+{\it roadNet-TX} \cite{Leskovec:2005:GOT:1081870.1081893}	& Road network of Texas.	\\
+{\it amazon0601} \cite{leskovec2007}	& Amazon product co-purchasing network from June 1 2003. \\
+{\it email-EuAll} \cite{leskovec2007-2}	& Email network from a EU research institution.	\\
 {\it web-Google} \cite{web-google}	& Web graph released by Google in 2002 as a part of \\
-& Google Programming Contest.	\\\hline
-{\it soc-wiki-Vote} \cite{leskovec2010}	& Wikipedia who-votes-on-whom network	\\\hline
-{\it soc-slashdot0902} \cite{Leskovec:2005:GOT:1081870.1081893}	& Slashdot social network from November 2008	\\\hline
-{\it cit-Patents} \cite{hall2001}	& Citation network among US Patents	\\\hline
-{\it soc-Epinions1} \cite{richardson2003}	&	Who-trusts-whom network of Epinions.com \\\hline
-{\it soc-wiki-Talk} \cite{leskovec2010}	&	Wikipedia talk (communication) network \\\hline
-{\it web-berkstan} \cite{Leskovec:2005:GOT:1081870.1081893}	& Web graph of Berkeley and Stanford	\\\hline
+& Google Programming Contest.	\\
+{\it soc-wiki-Vote} \cite{leskovec2010}	& Wikipedia who-votes-on-whom network.	\\
+{\it soc-slashdot0902} \cite{Leskovec:2005:GOT:1081870.1081893}	& Slashdot social network from November 2008.\\
+{\it cit-Patents} \cite{hall2001}	& Citation network among US Patents.	\\
+{\it soc-Epinions1} \cite{richardson2003}	&	Who-trusts-whom network of Epinions.com. \\
+{\it soc-wiki-Talk} \cite{leskovec2010}	&	Wikipedia talk (communication) network. \\
+{\it web-berkstan} \cite{Leskovec:2005:GOT:1081870.1081893}	& Web graph of Berkeley and Stanford.	\\\hline\hline
 
 \end{tabular}
 \end{table}
 
-Our testbed is grouped in three categories:\\
+Our testbed consists of 91 graphs, grouped in three categories:\\
 \begin{enumerate*}[label=\textbf{\arabic*})]
 \item {\bf Real-world graphs. } 
 Under this category, we consider 10 graphs downloaded from the 
-University of Florida Sparse Matrix Collection  \cite{Davis97theuniversity}, {\bf 5 medium to large graphs from Pajek data sets \cite{pajek2006}, and a 10 graphs from the Stanford Large Network Dataset Collection \cite{stanford_dataset}.}
+University of Florida (UF) Sparse Matrix Collection  \cite{Davis97theuniversity}, {\bf 5 graphs from Pajek data sets \cite{pajek2006}, and 10 graphs from the Stanford Large Network Dataset Collection \cite{stanford_dataset}.}
 The graphs originate
 from various real-world applications. 
 Table~\ref{tab:real-graphs} gives a quick overview of the graphs and their origins.\\
@@ -90,7 +91,7 @@ are subdivided in three categories depending on the structures they represent:\\
 \end{enumerate*}
 
 \item {\bf DIMACS graphs. } 
-This last category consists of 5 graphs selected from the Second DIMACS Implementation Challenge \cite{dimacs}.
+This last category consists of 51 graphs selected from the Second DIMACS Implementation Challenge \cite{dimacs}. Among these, 5 graphs are considered for discussion in the next few sections, while the results for the rest are reported in Table \ref{tab:dimacs} in the Appendix.
 \end{enumerate*}
 
 The DIMACS graphs  are an established benchmark for the maximum
@@ -101,7 +102,7 @@ represent a wide spectrum of large graphs posing varying degrees of difficulty f
 The {\it rmat\_er} graphs have {\it normal} degree distribution, whereas the {\it rmat\_sd1} and {\it rmat\_sd2} graphs have skewed degree distributions and contain many dense local subgraphs.
  The {\it rmat\_sd1} and {\it rmat\_sd2} graphs differ primarily in the magnitude of maximum vertex degree they contain; the {\it rmat\_sd2} graphs have much higher maximum degree. 
 Table \ref{tab:struc-graphs} lists basic structural information (the number of vertices, 
-number of edges and the maximum degree) about all 30 of the test graphs.
+number of edges and the maximum degree) about 45 of the test graphs (25 real-world, 15 synthetic and 5 DIMACS).
 
 \input{graphs_properties}
 
@@ -113,7 +114,7 @@ number of edges and the maximum degree) about all 30 of the test graphs.
 \item Konc and Jane\v{z}i\v{c} \cite{konc2007improved}. We used the code {\it MaxCliqueDyn} or MCQD, available at \\{\small \url{http://www.sicmm.org/~konc/maxclique/}}. Among the variants available in MCQD, we report results on MCQD+CS (which uses improved coloring and dynamic sorting), since it is the best-performing variant. The {\it MaxCliqueDyn} code was not capable of handling large input graphs and had to be aborted for many instances. For those that it successfully ran, we had to first modify the graph reader to make it able to handle graphs with multiple connected components.
 \item Tomita and Seki (MCQ) \cite{citeulike:7905505}.
 \item Tomita et al. (MCS) \cite{walcom}.
-\item San Segundo et al. \cite{SanSegundo}.
+\item San Segundo et al. (BBMC) \cite{SanSegundo}.
 \end{itemize}
 For MCQ, MCS, and BBMC, we used the publicly available Java implementation, MCQ1, MCSa1, and BBMC1 respectively, by Prosser \cite{prosser2012}  available at {\small \url{http://www.dcs.gla.ac.uk/~pat/maxClique/}}. These implementations failed to run due to memory limitations in spite of making available 20 GB of memory for almost all (except two) of the larger data sets. Hence, timings are reported only for DIMACS graphs. 
 
@@ -128,7 +129,7 @@ It should to be kept in mind that maximal clique enumeration in general is a har
 \input{new_timings}
 
 Table~\ref{tab:timings} shows the size of the maximum clique ($\omega$) and the runtimes  of our exact algorithm (Algorithm 1) and the algorithms of Caraghan and Pardalos (CP), 
-\"{O}sterg{\aa}rd ({\it cliquer}) 
+{\bf \"{O}sterg{\aa}rd} ({\it cliquer}) 
 and Konc and Jane\v{z}i\v{c}  (MCQD+CS) for all the graphs in the testbed {\bf except  for 
 the Pajek and Stanford test graphs;
 results on the Pajek and Stanford graphs are presented in Table~\ref{tab:pajek_stanford}. }
@@ -169,14 +170,14 @@ is used  by all three of the other algorithms in our comparison. The primary str
   \centering
     \includegraphics[scale=0.5]{pruned.pdf}
 \caption{Number of ``pruned" vertices in the various pruning steps normalized
-by the number of edges in the graph (in percents) for the test graphs in category 1 (we cut few bars reachining 140\% as their correspnding values are much higher).}
+by the number of edges in the graph (in percents) for the UF collection graphs (we cut few bars reachining 140\% as their correspnding values are much higher).}
 \label{fig-pruningplot}
 \end{figure}
 
 
 In Figure~\ref{fig-pruningplot} we show the number of vertices discarded by all
 the  pruning steps of the exact algorithm normalized by the total number of edges
-in a graph for the real-world graphs (category 1) in the testbed. We cut few bars reachining
+in a graph for the real-world graphs in Table \ref{tab:timings}. We cut few bars reachining
 140\% as their correspnding values are much higher.
 In the Appendix, we provide a complete tabulation of the raw numbers for the pruned vertices in all the steps for all the graphs in the testbed. {\bf It can be seen} for these graphs pruning steps 2 and 5 in particular discard a large percentage of vertices, potentially resulting in large runtime savings. The general behavior of the pruning steps Pruning 1, 2, 3 and 5 for the synthetic graphs {\em rmat\_er} and {\em rmat\_sd1} was observed to be somewhat similar to that depicted in Figure~\ref{fig-pruningplot} for the real-world graphs. In contrast, for the DIMACS graphs, the number of vertices pruned in steps Pruning 1, 3 and 5 were observed to be zero; the numbers in the step Pruning 2 were nonzero but relatively modest.
 %Since our new pruning steps hierarchically reduce the search space, one can expect a decreasing order of effect in the performance of Prunings 1, 2, 3 and 5, with Pruning 1 having the highest impact, and 5 the lowest. 
@@ -188,14 +189,14 @@ to the other three algorithms varied in accordance with the difference in the st
 by the different categories of graphs in the testbed.
 
 {\bf Real-world Graphs. }
-For most of the graphs in this category, it can be seen that our algorithm runs several orders of magnitude faster than the other three, mainly due to the large amount of pruning the algorithm attained. These numbers also illustrate the great benefit of hierarchical pruning. 
+For most of the graphs in this category (Table \ref{tab:timings}), it can be seen that our algorithm runs several orders of magnitude faster than the other three, mainly due to the large amount of pruning the algorithm attained. These numbers also illustrate the great benefit of hierarchical pruning. 
 For the graphs {\em Fault\_639}, {\em audikw\_1} and {\em af\_shell10}, 
 Prunings 1, 3 and 5 have only minimal impact,
 whereas Pruning 2 makes a big difference resulting in impressive runtimes. 
 The number of vertices pruned in steps Pruning 1 and 3 varied among the 
 graph {\em within} the
 category, ranging from 0.001\% for {\it af\_shell} to a staggering 97\% for {\it as-Skitter} 
-for the step Pruning 1. 
+for the step Pruning 1. For the graphs in Table \ref{tab:pajek_stanford} as well, one can observe that our algorithm performs much better than the others.
 %We observe that the relative speedup factor of our algorithm is the highest for
 %the graphs with high maximum clique size and high maximum degree.
 %as well. For instance, for as-Skitter reduction the search space is reduced dramatically due to pruning, and results in a very impressive performance.
@@ -214,12 +215,12 @@ CP but slower than {\em cliquer}.
 {\bf DIMACS Graphs. }
 The runtime of our exact algorithm for the DIMACS graphs is 
 in most cases comparable to that of CP and higher than that of {\it cliquer}
-and {\it MCQD+CS}.
+and {\it MCQD+CS}. 
 %As can be seen from the Table  \ref{tab:timings}, 
 For these graphs, only Pruning 2 was found to be effective, 
 and thus the performance results agree with one's expectation. 
 %We include in the Appendix timing results on a larger collection of DIMACS graphs. 
-
+{\bf The timings on a much larger collection of DIMACS graphs are presented in Table \ref{tab:dimacs} in the Appendix.}
 
 
 It is to be noted that the DIMACS graphs are intended to serve as challenging test cases for the maximum clique problem, and graphs with such high edge densities and low vertex count are rare in practice. 

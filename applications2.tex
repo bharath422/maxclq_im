@@ -8,7 +8,7 @@ In this section we demonstrate how clique finding algorithms can be used for det
 {\bf Background. }
 Most community detection algorithms are designed to identify mutually independent communities in a given network and therefore are not suitable for detecting overlapping communities. Yet, in many real-world networks, it is natural to find vertices (or members) that belong to more than one group (or community) at the same time.
 
-Palla et al~\cite{cite-key} introduced the Clique Percolation Method (CPM) 
+Palla et al.~\cite{cite-key} introduced the Clique Percolation Method (CPM) 
 as one effective approach for detecting overlapping communities in a network. 
 The basic premise in CPM is that a typical community is likely to be made up of several cliques that share many of their vertices.  
 We recall a few notions defined in \cite{cite-key} to make this more precise.
@@ -17,12 +17,12 @@ two $k$-cliques are called {\em adjacent} if they share $k - 1$ nodes.
 A {\em $k$-clique community} is a union of all $k$-cliques that can be reached 
 from each other through a series of adjacent $k$-cliques. 
 Further, a {\em $k$-clique chain} is the union of a sequence of adjacent $k$-cliques, and
-two $k$-cliques are said to be $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, Palla et al devise a method to extract the $k$-clique communities, which  are essentially the $k$-clique connected components of the network; 
+two $k$-cliques are said to be $k$-clique-connected if they are parts of a $k$-clique chain. With these notions at hand, Palla et al. devise a method to extract the $k$-clique communities, which  are essentially the $k$-clique connected components of the network; 
 note that, by definition, $k$-clique communities allow for
 overlaps between communities.
 %Palla et al observe that the $k$-clique communities are equivalent to the $k$-clique connected components of the network; note that, by definition, $k$-clique communities allow for overlaps between communities to exist.
 
-{\bf The CPM algorithm is illustrated in Figure \ref{fig-cpm}. Given a graph, it first extracts cliques of size $k$, in this case we choose $k$=3. This is followed by generating the {\it clique graph}, where each $k$-clique in the original graph is represented by a vertex. An edge is added between any two $k$-cliques in the clique graph that are adjacent, in the case of $k$=3, this means any two cliques that share two nodes. The connected components in the clique graph represent a community, and the actual members of the community are obtained by merging the vertices of the individual cliques that form the connected component. }
+{\bf The CPM algorithm is illustrated in Figure \ref{fig-cpm}. Given a graph, it first extracts cliques of size $k$, for this example we choose $k$=3. This is followed by generating the {\it clique graph}, where each $k$-clique in the original graph is represented by a vertex. An edge is added between any two $k$-cliques in the clique graph that are adjacent, in the case of $k$=3, this means any two cliques that share two nodes. The connected components in the clique graph represent a community, and the actual members of the community are obtained by gathering the vertices of the individual cliques that form the connected component. }
 
 
 \begin{figure}%[h!]
@@ -31,7 +31,7 @@ overlaps between communities.
     \includegraphics[scale=0.4]{cpm.eps}
     
 %\vspace{-30pt}
-  \caption{{\bf Illustration of overlapping community detection by the Clique Percolation Method (CPM) algorithm on a sample graph. Steps involved are 1) Detecting the $k$-cliques 2) Forming the clique-graph 3) Merging members of the connected component in the clique-graph to obtain the $k$-clique communities. In this example, node 2 is shared by the two communities, forming an overlapping structure.}}
+  \caption{{\bf Illustration of overlapping community detection by the Clique Percolation Method (CPM) algorithm on a sample graph. Steps involved are 1) Detecting the $k$-cliques 2) Forming the clique-graph 3) Merging members of the connected components in the clique-graph to obtain the $k$-clique communities. In this example, node 2 is shared by the two communities, forming an overlapping structure.}}
 \label{fig-cpm}
 \end{figure}
 %\vspace{-10pt}
@@ -41,7 +41,7 @@ overlaps between communities.
 A large clique of size $q \geq k $ contains $\binom{q}{k}$ different {\em k-cliques}.
 An algorithm that tries to locate the $k$-cliques individually and examine the adjacency
 between them can therefore be very very slow for large networks. 
-Palla et al make two observations that help one come up with a better strategy.
+Palla et al. make two observations that help one come up with a better strategy.
 First, a clique of size $q$ is clearly a $k$-clique connected subset for any $k \leq q$. 
 Second, two large cliques that share at least $k-1$ nodes form one $k$-clique connected component as well.
 Leveraging these, the strategy of Palla et al. avoids searching for $k$-cliques individually
@@ -50,7 +50,7 @@ More specifically, their algorithm first constructs a symmetric {\em clique-cliq
 in which each row represents a large (to be precise a maximal) clique, 
 each matrix entry is equal to the number of common nodes between the two corresponding cliques, and each diagonal entry is equal to the size of the clique. 
 The $k$-clique communities for a given $k$ are then equivalent to connected 
-clique components in which the neighboring cliques are linked to each other by at least $k-1$ common nodes. Palla et al then find these components by erasing every off-diagonal entry smaller than $k-1$ and every diagonal entry smaller than $k$ in the matrix, replacing the remaining elements by one, and then carrying out a component analysis of this matrix. The resulting separate components are equivalent to the different $k$-clique communities.
+clique components in which the neighboring cliques are linked to each other by at least $k-1$ common nodes. Palla et al. then find these components by erasing every off-diagonal entry smaller than $k-1$ and every diagonal entry smaller than $k$ in the matrix, replacing the remaining elements by one, and then carrying out a component analysis of this matrix. The resulting separate components are equivalent to the different $k$-clique communities.
        
 
 %detects communities by merging overlapping sets of adjacent cliques. The first step in the algorithm is to identify all cliques of size $k$ in the given graph. This is typical done by detecting all maximal cliques in the graph. Then, a new graph is constructed such that each vertex represents one of these $k$-cliques. Two nodes in this new graph are considered to be connected if the $k$-cliques that represent them share $k$?1 members. The cliques of the connected components in the new graph are merged into communities. Since a vertex can occur in more than one $k$-cliques simultaneously, this results in an overlapping communities structure.
@@ -138,8 +138,6 @@ We compare the performance of our method with that of CFinder\footnote{http://ww
 
 \input{results_application1}
 
-\input{results_application2}
-
 %The results are shown in Table \ref{tab:applications1} and \ref{tab:applications2}. 
 
 Table~\ref{tab:applications1} shows the experimental results we obtained.
@@ -157,6 +155,8 @@ In general we observe that there is a close correlation between our method and C
 in terms of all three of the quantities $C$, $S$ and $\Omega$. It can be seen that as we increase the value of $c$ in our method, the Omega Index values get closer and closer to that of CFinder. For our algorithm run with $c=0$, the Omega Index is about 75$\%$ of that of CFinder. When run with $c$ = 2, it is about 92$\%$ and for $c$ = 5, it is about 99$\%$. When we increased the value of $c$ even further to 10, we observed that the Omega Index was almost identical to that obtained by CFinder. From this, one can see that we can get almost exactly the same results as the CPM method using our algorithm which uses only a small set of 
 maximal cliques, as opposed to all the maximal cliques in the graph.
 
+\input{results_application2}
+
 Table~\ref{tab:applications2} shows the time taken by CFinder and our method 
 run with $c$ = 0, 2 and 5. For our method, the table lists the total run time $\tau$ 
 as well as the time $\tau_c$ spent on just the clique detection part and the ratio
@@ -173,14 +173,25 @@ We suspect it constitutes a vast proportion of the total runtime.
 
 %\subsection{Test on Real-world Networks}
 
+\input{results_application3}
+
 {\bf Test on Real-world Networks. } We also tested our method and CFinder on four of the real world graphs from our testbed in Section \ref{sec:experiments}---{\em cond-mat-2003}, {\em email-Enron}, {\em dictionary28} and {\em roadNet-CA}---and a user-interest-based graph generated using data collected from Facebook. We briefly explain here how this graph was generated.
 Every user on Facebook has a {\it wall}, which is a the user's profile space that allows the posting of messages, often short or temporal notes or comments by other users. We generate a graph with the {\it walls} as vertices, and assign an edge between a pair of vertices, if there is at least one user who has commented on both walls. We assign edge weights proportional to the number of common users, as we consider this to be an indicator of the strength of the connection. A more elaborate explanation of the data collection method and network generation  for the Facebook graph is discussed in \cite{dianapaper}. As this is a weighted graph, we used a threshold (of 0.009) to include only strong links, resulting in a network with 1144 vertices and 2561 edges.
 %{\it walls}, and use this to formulate the network for our experiments.
 
+\begin{figure}[h!]
+  \centering
+    %\includegraphics[width=1\textwidth]{communities_fb.pdf}
+    \includegraphics[scale=0.35]{communities_fb_new.pdf}
+    
+%\vspace{-30pt}
+  \caption{Some Facebook communities detected by our algorithm.}
+\label{fig-communities-fb}
+\end{figure}
+%\vspace{-10pt}
+
 The results of our method for $c$ = 0 and 5, $k$ = 4, and CFinder for the case $k$ = 4 on all the five real-world graphs is shown in  Table~\ref{tab:applications3}. The table lists the number of communities found by each algorithm, total number of shared nodes, and the total time taken. For our algorithm, it also specifies the time spent on clique-finding. These graphs do not have any known community structure, so we were not able to measure the Omega Index values. For the graph {\em email-Enron}, CFinder was not able complete within 30 minutes. For the $c$ = 0 case, our algorithm comfortably outperforms CFinder, even in terms of total time, on average performing about 115$\times$ faster. For the $c$ = 5 case, the total time taken by our algorithm turns out to be higher for some cases, and lower for others. However, it should be noted that the time taken for clique finding is incomparably smaller than the post-clique-finding processing time. 
 %If we make a previous assumption of 5$\%$ of the total time to which the post-clique-processing time can be reduced to, the speedup we gain would be on average, $\sim$576$\times$ faster for the $c$=0 case and $\sim$66$\times$ faster for the $c$=5 case.
-
-\input{results_application3}
 
 
 
@@ -234,17 +245,6 @@ The results of our method for $c$ = 0 and 5, $k$ = 4, and CFinder for the case $
 %%This is done by simply substituting Lines 3 and 4 of Algorithm \ref{alg:clqHeu}, with a simple routine that stores each clique in a preferred data structure. 
 %%The exact algorithm could have also been used instead of the heuristic for this purpose. We choose the heuristic since it is much faster and for this particular problem of community detection the accuracy of the size of cliques formed is not critical.
 
-
-\begin{figure}%[h!]
-  \centering
-    %\includegraphics[width=1\textwidth]{communities_fb.pdf}
-    \includegraphics[scale=0.5]{communities_fb_new.pdf}
-    
-%\vspace{-30pt}
-  \caption{Some Facebook communities detected by our algorithm.}
-\label{fig-communities-fb}
-\end{figure}
-%\vspace{-10pt}
 
 We also present some of the sports-related communities detected by our algorithm in the Facebook graph in Figure \ref{fig-communities-fb}, which is self-explanatory.
 %We obtained a number of isolated communities similar to the one of {\it popular musicians}, and that of {\it internet corporations}. We also see communities that pertain to {\it MSNBC and its (news related) shows}, {\it news channels}, and {\it politics}. One can see that although the {\it news channels} and {\it MSNBC shows} communities are essentially separate, they share a common member, {\it MSNBC}, which is relevant to both. Similarly the {\it news channels} and {\it politics} communities share two nodes. One can see from that overlapping communities are a natural characteristic of real-world networks, which our algorithm helps in detecting.

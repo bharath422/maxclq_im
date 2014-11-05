@@ -18,12 +18,12 @@ vertices that could potentially constitute a clique containing vertex $v_i$
 against the size of the largest clique encountered thus far.
 If that number is found to be smaller, the algorithm backtracks (search is pruned).
 
-\"{O}sterg{\aa}rd \cite{ostergard} devised an algorithm that incorporated an additional 
+{\bf \"{O}sterg{\aa}rd} \cite{ostergard} devised an algorithm that incorporated an additional 
 pruning strategy to the one by Carraghan and Pardalos.
 The opportunity for the new pruning strategy is created by {\em reversing} the order in which the search is done by
 the Carraghan-Pardalos algorithm. This allows for an additional pruning with the help of
 some auxiliary book-keeping. 
-Experimental results in \cite{ostergard} showed that the \"{O}sterg{\aa}rd
+Experimental results in \cite{ostergard} showed that the {\bf \"{O}sterg{\aa}rd}
 algorithm is faster than the Carraghan-Pardalos algorithm on random and 
 DIMACS benchmark graphs \cite{dimacs}.
 However, the new pruning strategy used in this algorithm is intimately tied to the order in which vertices are processed, introducing an inherent sequentiality into the algorithm.
@@ -36,7 +36,7 @@ A popular and recent method based on this idea is
 the MCQ algorithm of Tomita and Seki \cite{citeulike:7905505}. 
 More recently, Konc and Jane\v{z}i\v{c} \cite{konc2007improved} presented 
 an improved version of MCQ, known as MaxCliqueDyn (with the variants MCQD and MCQD+CS), that involves the use of tighter, computationally more expensive upper bounds 
-applied on a fraction of the search space. {\bf Another improved version of MCQ is by San Segundo et al. \cite{SanSegundo}, which makes use of bit strings to sort vertices in constant time as well as to compute graph transitions and bounds efficiently.}
+applied on a fraction of the search space. {\bf Another improved version of MCQ is BBMC by San Segundo et al. \cite{SanSegundo}, which makes use of bit strings to sort vertices in constant time as well as to compute graph transitions and bounds efficiently.}
 
 %They present two variations - 1) MCQ with improved 
 %approximate coloring algorithm ColorSort (MCQ+CS) and 2) MCQ with improved coloring and dynamic sorting 

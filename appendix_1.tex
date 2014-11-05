@@ -12,7 +12,7 @@
 \cite{ostergard} ({\it $\tau_{cliquer}$}), \cite{konc2007improved} ({\it $\tau_{MCQD+CS}$}), \cite{prosser2012,citeulike:7905505} ({\it $\tau_{MCQ1}$}), \cite{prosser2012,walcom} ({\it $\tau_{MCSa1}$}), and \cite{prosser2012,SanSegundo} ({\it $\tau_{BBMC1}$}).
 with that of our new exact algorithm ($\tau_{A1}$) for DIMACS graphs. 
 An asterisk (*) indicates that the algorithm did not terminate within 
-7,200 seconds for that instance. $\omega$ denotes the maximum clique size, $\omega_{A2}$ the maximum clique size found by our heuristic and $\tau_{A2}$, its runtime.}
+7,200 seconds for that instance. $\omega$ denotes the maximum clique size, $\omega_{A2}$ the maximum clique size found by our heuristic and $\tau_{A2}$, its runtime. For some of the graphs, none of the algorithms computed the maximum clique size in a reasonable time; the entry for the maximum clique size is marked with N, for ``Not Known''.}
 %$\mu$ denotes the maximum clique size, $\mu_{heu}$ the maximum clique size found by our heuristic.} 
 
 \label{tab:dimacs}
@@ -33,9 +33,9 @@ $G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\omega$	&	$\tau_{CP}$	&	$\tau_{cliq
 {\it brock400\_2}	&	400	&	59,786	&	29	&	*	&	*	&	272.31	&	2848.1	&	2123.73	&	546.84	&	*	&	20	&	$<$0.01	\\
 {\it brock400\_3}	&	400	&	59,681	&	31	&	*	&	*	&	532.77	&	2186.3	&	1523.55	&	431.92	&	*	&	20	&	$<$0.01	\\
 {\it brock400\_4}	&	400	&	59,765	&	33	&	*	&	*	&	266.43	&	1038.33	&	881.31	&	211.29	&	*	&	22	&	$<$0.01	\\
-{\it brock800\_1}	&	800	&	207,505	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	17	&	0.3	\\
-{\it brock800\_2}	&	800	&	208,166	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	18	&	0.4	\\
-{\it brock800\_3}	&	800	&	207,333	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	17	&	0.4	\\
+{\it brock800\_1}	&	800	&	207,505	&	N	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	17	&	0.3	\\
+{\it brock800\_2}	&	800	&	208,166	&	N	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	18	&	0.4	\\
+{\it brock800\_3}	&	800	&	207,333	&	N	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	17	&	0.4	\\
 {\it brock800\_4}	&	800	&	207,643	&	26	&	*	&	*	&	*	&	*	&	*	&	3455.58	&	*	&	17	&	0.4	\\
 {\it c-fat200-1}	&	200	&	1,534	&	12	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	0.02	&	$<$0.01	&	12	&	$<$0.01	\\
 {\it c-fat200-2}	&	200	&	3,235	&	24	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	0.02	&	$<$0.01	&	24	&	$<$0.01	\\
@@ -52,8 +52,8 @@ $G$	&	$\left|V\right|$	&	$\left|E\right|$	&	$\omega$	&	$\tau_{CP}$	&	$\tau_{cliq
 {\it johnson8-4-4}	&	70	&	1,855	&	14	&	0.19	&	$<$0.01	&	$<$0.01	&	0.01	&	0.02	&	0.01	&	0.23	&	14	&	$<$0.01	\\
 {\it johnson16-2-4}	&	120	&	5,460	&	8	&	20.95	&	0.04	&	0.42	&	0.85	&	0.95	&	0.41	&	22.07	&	8	&	$<$0.01	\\
 {\it keller4}	&	171	&	9,435	&	11	&	22.19	&	0.15	&	0.02	&	0.21	&	0.33	&	0.12	&	23.35	&	11	&	$<$0.01	\\
-{\it keller5}	&	776	&	225,990	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	22	&	0.6	\\
-{\it keller6}	&	3361	&	4,619,898	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	45	&	99.21	\\
+{\it keller5}	&	776	&	225,990	&	N	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	22	&	0.6	\\
+{\it keller6}	&	3361	&	4,619,898	&	N	&	*	&	*	&	*	&	*	&	*	&	*	&	*	&	45	&	99.21	\\
 {\it MANN\_a9}	&	45	&	918	&	16	&	1.73	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	$<$0.01	&	2.5	&	16	&	$<$0.01	\\
 {\it MANN\_a27}	&	378	&	70,551	&	126	&	*	&	*	&	3.3	&	5.75	&	6.03	&	0.97	&	*	&	125	&	1.74	\\
 {\it MANN\_a45}	&	1035	&	533,115	&	345	&	*	&	*	&	*	&	4612.29	&	3431.67	&	250.12	&	*	&	341	&	59.96	\\
